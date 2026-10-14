@@ -3,3 +3,6 @@
 
 /* Investigation board v2.1 */
 .clearedstrike{display:block;color:#c13e3e;font-weight:800;letter-spacing:.09em;border-top:3px solid #c13e3e;transform:rotate(-5deg);margin:-7px 0 7px;position:relative;z-index:2;text-shadow:0 1px 2px #fff}.suspectcard select{background:#f5f0e5;color:#25363a;border:1px solid #a1a6a2;border-radius:4px;min-height:38px}.suspectcard select:focus{outline:2px solid #bd7b3a}
+
+/* Raw forensic datasets */
+.rawtable{border-collapse:collapse;width:100%;min-width:560px;font-size:12px;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;background:#f6f1e8;color:#1d3033}.rawtable th,.rawtable td{border:1px solid #c9c5b9;padding:8px 10px;text-align:left;white-space:nowrap}.rawtable th{background:#dcd7ca;position:sticky;top:0}.rawtable tbody tr:nth-child(even){background:#eee9dd}.rawtable tbody tr:hover{background:#e2ddc5}
