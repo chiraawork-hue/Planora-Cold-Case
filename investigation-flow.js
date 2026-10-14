@@ -159,3 +159,23 @@ el.insertAdjacentHTML('beforeend',html);
 };
 const previousRawData=openRawData;
 openRawData=function(kind){previousRawData(kind);if(kind!=='structure')return;const el=document.querySelector('#modalBody .modalcontent');if(!el)return;el.insertAdjacentHTML('beforeend',multiSensorGraph()+forensicTable(['WAKTU','C7 (g)','C8 (g)','C9 (g)'],columnVibration.map(row=>row.map((v,i)=>i===0?v:v.toFixed(2)))))};
+
+/* V14: distinct physical inspection vs synchronized vibration telemetry. */
+docs.motion={name:'STRUCTURAL_VIBRATION_C7-C9.csv',title:'TELEMETRI GETARAN / KANAL C7, C8, C9',meta:'STR-C04 / FACILITY MONITORING / 18 SEP 2018',sections:[['Rekaman','Sampel getaran RMS per menit dari tiga kanal. Nilai menggunakan satuan g dan waktu server fasilitas.'],['Batas Observasi','Ambang pengamatan internal: 0,80 g. Data ini tidak cukup untuk menetapkan penyebab runtuhnya bangunan.'],['Referensi','Bandingkan dengan pengukuran retak pada pemeriksaan fisik terdahulu dan catatan status gateway.']],callout:'Gunakan data tiap kanal untuk membedakan anomali lokal dari kejadian serentak.'};
+const vibrationBaseDocument=openDocument;
+openDocument=function(id){
+vibrationBaseDocument(id);
+if(id!=='motion')return;
+const el=document.querySelector('#modalBody .modalcontent');if(!el)return;
+const plots=el.querySelectorAll('.forensic-plot,.rawdata-scroll');
+plots.forEach(node=>node.remove());
+el.insertAdjacentHTML('beforeend',multiSensorGraph()+forensicTable(['WAKTU WIB','C7 (g)','C8 (g)','C9 (g)'],columnVibration.map(row=>row.map((v,i)=>i===0?v:v.toFixed(2)))));
+};
+const physicalInspectionRaw=openRawData;
+openRawData=function(kind){
+physicalInspectionRaw(kind);
+if(kind!=='structure')return;
+const el=document.querySelector('#modalBody .modalcontent');if(!el)return;
+el.querySelectorAll('.forensic-plot').forEach(node=>node.remove());
+el.querySelectorAll('.forensic-table').forEach(node=>node.closest('.rawdata-scroll')?.remove());
+};
