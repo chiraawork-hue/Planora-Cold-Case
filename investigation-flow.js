@@ -64,3 +64,32 @@ const chart='<div class="forensic-plot"><h3>GRAFIK GETARAN • 02:08–02:17 WIB
 const table='<div class="rawdata-scroll"><table class="rawtable"><thead><tr><th>WAKTU SERVER</th><th>RMS (g)</th><th>MELEBIHI AMBANG?</th></tr></thead><tbody>'+sensorReadings.map(row=>'<tr><td>'+row[0]+'</td><td>'+row[1].toFixed(2)+'</td><td>'+row[2]+'</td></tr>').join('')+'</tbody></table></div>';
 content.insertAdjacentHTML('beforeend',chart+table);
 };
+
+/* Original-style multi-line work order: sign-off trail is evidence, not a verdict. */
+const workOrderRows=[
+['12/09 09:15','ENG-01','Inspeksi visual C7','Retak 2,8 mm dicatat','Dimas Arga','DITERIMA'],
+['12/09 10:42','ENG-02','Pengukuran pembanding C8–C9','C8: 0,4 mm; C9: 0,6 mm','Dimas Arga','DITERIMA'],
+['13/09 08:20','ENG-03','Permintaan uji material C7','Permintaan sampel & uji tambahan','Dimas Arga','DIAJUKAN'],
+['13/09 14:05','OPS-01','Pembukaan tiket kerja','Nomor WO/2018/0917-C7 dibuat','Raka Wijaya','DISETUJUI'],
+['14/09 11:30','OPS-02','Permintaan akses alat uji','Akses ruang mesin dijadwalkan','Raka Wijaya','DISETUJUI'],
+['15/09 16:10','SEC-01','Rencana pembatasan koridor C','Penjagaan dan pita pembatas disiapkan','Siska Arum','DISETUJUI'],
+['16/09 08:55','ENG-04','Pembatasan beban dan evakuasi','Kosongkan Zona C hingga pemeriksaan selesai','Dimas Arga','DIAJUKAN'],
+['16/09 11:20','OPS-03','Kajian dampak penghentian operasi','Akses fasilitas dan jadwal terganggu','Raka Wijaya','CATATAN'],
+['16/09 15:05','SEC-02','Persiapan pengosongan area','Personel keamanan siap setelah otorisasi','Siska Arum','BERSYARAT'],
+['17/09 08:35','ENG-05','Penegasan risiko C7','Rekomendasi evakuasi tetap berlaku','Dimas Arga','TIDAK DICABUT'],
+['17/09 09:40','OPS-04','Eskalasi keputusan ke direksi','Meminta keputusan tertulis atas penutupan','Raka Wijaya','DITERUSKAN'],
+['17/09 13:10','DIR-01','Otorisasi penghentian operasi','Permintaan evakuasi sementara tidak disetujui','Dr. Adrian Putra','DITOLAK'],
+['17/09 13:45','OPS-05','Instruksi operasional sementara','Pemeriksaan terbatas; area belum dikosongkan','Raka Wijaya','DITERIMA'],
+['17/09 16:20','ENG-06','Keberatan atas disposisi DIR-01','Inspeksi terbatas tidak mengganti evakuasi','Dimas Arga','KEBERATAN'],
+['17/09 17:05','SEC-03','Status lapangan','Pembatasan penuh belum dilaksanakan','Siska Arum','TERCATAT']
+];
+const priorWorkOrder=openDocument;
+openDocument=function(id){
+priorWorkOrder(id);
+if(id!=='maintenance')return;
+const el=document.querySelector('#modalBody .modalcontent');if(!el)return;
+el.querySelectorAll('h3,p,.callout').forEach(n=>{if(n.closest('.letterhead'))return;n.remove()});
+const top=document.createElement('div');top.className='wo-register';
+top.innerHTML='<div class="wo-notice"><b>WO/2018/0917-C7 · REV 03</b><span>STATUS AKHIR: PEKERJAAN TERBATAS / PENGOSONGAN TIDAK DIOTORISASI</span></div><h3>REGISTER AKTIVITAS & DISPOSISI</h3><p>Catatan ini merekam pengajuan, persetujuan administratif, keberatan, dan keputusan penghentian operasi. Status administrasi tidak membuktikan pekerjaan fisik telah dilaksanakan.</p><div class="rawdata-scroll"><table class="rawtable wo-table"><thead><tr><th>TANGGAL / JAM</th><th>REF</th><th>URAIAN</th><th>HASIL / CATATAN</th><th>PARAF / PENANGGUNG JAWAB</th><th>STATUS</th></tr></thead><tbody>'+workOrderRows.map(row=>'<tr><td>'+row[0]+'</td><td>'+row[1]+'</td><td>'+row[2]+'</td><td>'+row[3]+'</td><td><span class="wo-signature">'+row[4]+'</span></td><td><span class="wo-status '+(row[5]==='DITOLAK'?'wo-reject':row[5]==='KEBERATAN'?'wo-object':'')+'">'+row[5]+'</span></td></tr>').join('')+'</tbody></table></div><h3>LEMBAR OTORISASI / TANDA TANGAN</h3><div class="wo-sign-grid"><div><small>DIAJUKAN OLEH • ENGINEERING</small><strong class="wo-ink">Dimas Arga</strong><span>16 SEP 2018 / 08:55</span><b>REKOMENDASI EVAKUASI</b></div><div><small>DITERUSKAN OLEH • OPERATIONS</small><strong class="wo-ink">Raka Wijaya</strong><span>17 SEP 2018 / 09:40</span><b>PERLU KEPUTUSAN DIREKSI</b></div><div><small>OTORISASI • DIREKTUR</small><strong class="wo-ink">Adrian Putra</strong><span>17 SEP 2018 / 13:10</span><b class="wo-reject">EVAKUASI TIDAK DISETUJUI</b></div><div><small>CATATAN KEBERATAN • ENGINEERING</small><strong class="wo-ink">Dimas Arga</strong><span>17 SEP 2018 / 16:20</span><b class="wo-object">REKOMENDASI TETAP BERLAKU</b></div></div><p class="small">Nama bertanda tangan merupakan transkripsi pada salinan arsip fiktif. Keaslian tanda tangan dan siapa yang memberi instruksi harus diuji melalui bukti lain.</p>';
+el.appendChild(top);
+};
