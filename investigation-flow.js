@@ -14,9 +14,9 @@ const content=document.querySelector('#modalBody .modalcontent');
 if(!content)return;
 if(i<3){
 const box=document.createElement('section');box.className='next-seal-review';
-const names=['SEGEL 02 — PEMERIKSAAN KRONOLOGI','SEGEL 03 — VERIFIKASI WAKTU ARSIP','SEGEL 04 — REFERENSI SILANG'];
-const prompts=['Catat waktu anomali pertama pada rekaman sensor struktur (HHMM).','Jam kamera arsip menunjukkan 01:59. Cocokkan dengan register sinkronisasi dan tulis waktu sistem sebenarnya (HHMM).','Gabungkan kode elemen teknik yang perlu ditindaklanjuti dan kode proyek klinis dari register.'];
-box.innerHTML='<h3>'+names[i]+'</h3><p>'+prompts[i]+'</p><p class="small">Jawaban berasal dari dokumen dalam amplop ini. Kamu bisa memasukkannya saat membuka segel berikutnya.</p><button class="primary" onclick="openEnvelope('+(i+1)+')">PERIKSA SEGEL AMPLOP '+(i+2)+'</button>';
+const names=['PERTANYAAN INVESTIGASI 01 — AKSES AMPLOP 02','PERTANYAAN INVESTIGASI 02 — AKSES AMPLOP 03','PERTANYAAN INVESTIGASI 03 — AKSES AMPLOP 04'];
+const prompts=['Berdasarkan KRONOLOGI_SISTEM.log, pukul berapa sensor struktur pertama kali mencatat anomali sebelum keruntuhan?','Rekaman CAM-AR03 menunjukkan pintu arsip terbuka pada pukul 01:59. Berdasarkan TIME_SYNC_SERVICE_0918.log, pukul berapa waktu kejadian yang tercatat oleh sistem referensi?','Berdasarkan PERSONNEL_REFERENCE_CARD.pdf, tuliskan gabungan kode elemen struktur yang memerlukan tindak lanjut dan kode proyek klinis yang sedang diteliti.'];
+box.innerHTML='<h3>'+names[i]+'</h3><p class="investigation-question">'+prompts[i]+'</p><p><b>FORMAT JAWABAN:</b> '+(i<2?'HHMM — empat digit tanpa tanda titik atau titik dua.':'Kode elemen + kode proyek, huruf dan angka tanpa spasi atau tanda hubung.')+'</p><label for="chapterAnswer'+i+'">MASUKKAN KODE AKSES AMPLOP '+(i+2)+'</label><div class="answerrow"><input id="chapterAnswer'+i+'" autocomplete="off" placeholder="'+(i<2?'Contoh format: 0130':'Contoh format: A1XY02')+'"><button class="primary" onclick="submitChapterCode('+i+')">VERIFIKASI & BUKA</button></div><p id="chapterAnswerFeedback'+i+'" class="feedback" aria-live="polite"></p><p class="small">Semua data yang dibutuhkan ada di dalam amplop ini. Kamu dapat kembali memeriksa berkas sebelum menjawab.</p>';
 content.appendChild(box);
 }
 if(i===1){
@@ -37,3 +37,5 @@ const p=document.querySelector('.reportbody');if(p){const blocks=p.querySelector
 }
 hidePrematureConclusions();
 const originalRender=render;render=function(){originalRender();hidePrematureConclusions()};
+
+function submitChapterCode(i){const input=document.getElementById('chapterAnswer'+i);const fb=document.getElementById('chapterAnswerFeedback'+i);const value=(input?.value||'').toUpperCase().replace(/[\s:-]/g,'');if(value===envelopes[i+1].code){state.unlocked=Math.max(state.unlocked,i+2);persist();render();openEnvelope(i+1)}else if(fb){fb.textContent='Kode belum sesuai. Periksa kembali berkas yang disebutkan dalam pertanyaan.'}}
