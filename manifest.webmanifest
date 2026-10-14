@@ -1,17 +1,17 @@
 {
-  "name": "Planora Kids — Little Play Club",
-  "short_name": "Planora Kids",
+  "name": "Planora Cold Case — The Collapse",
+  "short_name": "Cold Case",
   "start_url": "./",
   "display": "standalone",
-  "background_color": "#fffbf4",
-  "theme_color": "#fff8ee",
-  "description": "Less Screen, More Wonder — aktivitas offline untuk anak dan orang tua",
+  "background_color": "#120f0e",
+  "theme_color": "#17120f",
+  "description": "An interactive fictional investigation by Planora",
   "icons": [
     {
       "src": "icon.svg",
       "sizes": "any",
       "type": "image/svg+xml",
-      "purpose": "any maskable"
+      "purpose": "any"
     }
   ]
 }
