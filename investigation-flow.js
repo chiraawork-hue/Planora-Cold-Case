@@ -117,3 +117,45 @@ const top=document.createElement('div');top.className='wo-register';
 top.innerHTML='<div class="wo-notice"><b>WO/2018/0917-C7 · REV 03</b><span>STATUS AKHIR: PEKERJAAN TERBATAS / PENGOSONGAN TIDAK DIOTORISASI</span></div><h3>REGISTER AKTIVITAS & DISPOSISI</h3><p>Catatan ini merekam pengajuan, persetujuan administratif, keberatan, dan keputusan penghentian operasi. Status administrasi tidak membuktikan pekerjaan fisik telah dilaksanakan.</p><div class="rawdata-scroll"><table class="rawtable wo-table"><thead><tr><th>TANGGAL / JAM</th><th>REF</th><th>URAIAN</th><th>HASIL / CATATAN</th><th>PARAF / GORESAN</th><th>STATUS</th></tr></thead><tbody>'+workOrderRows.map(row=>'<tr><td>'+row[0]+'</td><td>'+row[1]+'</td><td>'+row[2]+'</td><td>'+row[3]+'</td><td><span class="wo-signature">'+row[4]+'</span></td><td><span class="wo-status '+(row[5]==='DITOLAK'?'wo-reject':row[5]==='KEBERATAN'?'wo-object':'')+'">'+row[5]+'</span></td></tr>').join('')+'</tbody></table></div><h3>LEMBAR OTORISASI / TANDA TANGAN</h3><div class="wo-sign-grid"><div><small>DIAJUKAN OLEH • ENGINEERING</small><div class="wo-ink">'+woScribble('Dimas Arga')+'</div><span>16 SEP 2018 / 08:55</span><b>REKOMENDASI EVAKUASI</b></div><div><small>DITERUSKAN OLEH • OPERATIONS</small><div class="wo-ink">'+woScribble('Raka Wijaya')+'</div><span>17 SEP 2018 / 09:40</span><b>PERLU KEPUTUSAN DIREKSI</b></div><div><small>OTORISASI • DIREKTUR</small><div class="wo-ink">'+woScribble('Dr. Adrian Putra')+'</div><span>17 SEP 2018 / 13:10</span><b class="wo-reject">EVAKUASI TIDAK DISETUJUI</b></div><div><small>CATATAN KEBERATAN • ENGINEERING</small><div class="wo-ink">'+woScribble('Dimas Arga')+'</div><span>17 SEP 2018 / 16:20</span><b class="wo-object">REKOMENDASI TETAP BERLAKU</b></div></div><p class="small">Kolom paraf dan otorisasi menampilkan goresan tanda tangan, bukan nama terbaca. Cocokkan dengan contoh tanda tangan pada berkas personel untuk memeriksa keasliannya.</p>';
 el.appendChild(top);
 };
+
+/* V13 forensic data: the chronology is a register, not a solution sheet. */
+docs.chronology={name:'KRONOLOGI_SISTEM.log',title:'REGISTER PERISTIWA SISTEM / RAW EXPORT',meta:'VRC / FACILITY EVENT BUS / 18 SEP 2018',sections:[['Integritas Data','Gabungan catatan perangkat berbeda. Kolom waktu memakai WIB; event gateway bukan jaminan waktu fisik kejadian.'],['Ruang Lingkup','Event bus menggabungkan status sistem struktur, jaringan gas, akses ruang, dan terminal audit. Data pengukuran sensor disimpan pada berkas terpisah.']],callout:'Status sistem dan alarm adalah catatan perangkat. Penyebab kerusakan fisik memerlukan bukti teknis lain.'};
+docs.gasTelemetry={name:'GAS_DETECTOR_RAW_0918.csv',title:'REKAMAN DETEKTOR GAS / ZONA C',meta:'GAS MONITORING / GZ-C-02 / 18 SEP 2018',sections:[['Skema','Pembacaan dinyatakan dalam %LEL (persen dari batas bawah mudah terbakar). Nilai adalah simulasi untuk cerita fiksi.'],['Batas Interpretasi','Waktu alarm tidak identik dengan waktu kebocoran dimulai. Sensor dapat mengalami jeda, kegagalan, atau perubahan kondisi setelah kerusakan struktur.']],callout:'Bandingkan pembacaan gas dengan data struktur; urutan waktu saja belum menetapkan sebab-akibat.'};
+docs.auditTerminal={name:'AUDIT_TERMINAL_EVENTS.log',title:'AKTIVITAS TERMINAL AUDIT',meta:'IDENTITY & ACCESS SERVICE / EXTRACT',sections:[['Sistem','Catatan berikut merekam akun dan perangkat, bukan verifikasi biometrik pengguna.'],['Validasi','Untuk menetapkan identitas operator, perlu membandingkan terminal, kartu akses, dan kesaksian.']],callout:'Akun milik seseorang tidak membuktikan orang tersebut sedang mengoperasikannya.'};
+envelopes[0].items.push('gasTelemetry','auditTerminal');
+const facilityEvents=[
+['01:32:14','SYS-AUTH','SESSION_OPEN','DIR-ADMIN / WS-DIR-02','OK'],
+['01:38:22','AUDIT-SVC','TASK_HOLD','SESSION 6F2 / VX17-AUDIT','QUEUED'],
+['01:46:10','STR-C04','HEALTH_CHECK','ZONE-C / CHANNEL 01','OK'],
+['01:57:03','GZ-C02','HEALTH_CHECK','ZONE-C / CHANNEL 02','OK'],
+['02:08:00','STR-C04','SAMPLE_WRITE','BATCH 0918-C','OK'],
+['02:10:00','STR-C04','SAMPLE_WRITE','BATCH 0918-C','OK'],
+['02:12:00','STR-C04','SAMPLE_WRITE','BATCH 0918-C','OK'],
+['02:13:00','STR-C04','THRESHOLD_EVENT','CHANNEL 01 / CODE VIB-HI','RAISED'],
+['02:14:00','STR-C04','THRESHOLD_EVENT','CHANNEL 01 / CODE VIB-HI','ACTIVE'],
+['02:16:37','GZ-C02','SAMPLE_WRITE','ZONE-C / CHANNEL 02','OK'],
+['02:17:06','GZ-C02','ALARM_LATCH','ZONE-C / CHANNEL 02','ACTIVE'],
+['02:17:20','FAC-GW','COMMS_LOSS','ZONE-C SUBNET','RETRY'],
+['02:19:11','FAC-GW','COMMS_LOSS','ZONE-C SUBNET','FAILED']
+];
+const gasEvents=[
+['02:08','3','OK'],['02:09','4','OK'],['02:10','4','OK'],['02:11','5','OK'],['02:12','6','OK'],['02:13','8','OK'],['02:14','12','OK'],['02:15','17','OK'],['02:16','23','OK'],['02:17','36','ALARM'],['02:18','—','COMMS LOSS']
+];
+const columnVibration=[
+['02:08',.10,.09,.11],['02:09',.12,.10,.11],['02:10',.11,.12,.13],['02:11',.19,.14,.15],['02:12',.27,.16,.18],['02:13',.91,.20,.19],['02:14',1.22,.26,.23],['02:15',1.34,.31,.29],['02:16',1.46,.39,.35],['02:17',1.58,.62,.59]
+];
+function forensicTable(head,rows){return '<div class="rawdata-scroll"><table class="rawtable forensic-table"><thead><tr>'+head.map(v=>'<th>'+v+'</th>').join('')+'</tr></thead><tbody>'+rows.map(row=>'<tr>'+row.map(v=>'<td>'+v+'</td>').join('')+'</tr>').join('')+'</tbody></table></div>'}
+function multiSensorGraph(){const w=800,h=285,l=58,t=22,pw=710,ph=210;const sets=[{ix:1,color:'#ad483b',label:'C7'},{ix:2,color:'#247a75',label:'C8'},{ix:3,color:'#967e32',label:'C9'}];const y=v=>t+ph-v/1.7*ph;const x=i=>l+i*pw/9;return '<div class="forensic-plot"><h3>STR-C04 / RMS ACCELERATION</h3><p>Ambang pengamatan: 0,80 g. Ketuk titik untuk melihat nilai. Grafik menampilkan tiga kanal pengukuran.</p><svg viewBox="0 0 '+w+' '+h+'" role="img" aria-label="Grafik getaran C7 C8 C9 dari pukul 02:08 sampai 02:17"><line x1="'+l+'" y1="'+(t+ph)+'" x2="'+(l+pw)+'" y2="'+(t+ph)+'" stroke="#53615e"/><line x1="'+l+'" y1="'+y(.8)+'" x2="'+(l+pw)+'" y2="'+y(.8)+'" stroke="#b75c50" stroke-dasharray="5 5"/><text x="60" y="'+(y(.8)-7)+'" font-size="12">0,80 g</text>'+sets.map(set=>'<path fill="none" stroke="'+set.color+'" stroke-width="3" d="'+columnVibration.map((row,i)=>(i?'L':'M')+x(i)+' '+y(row[set.ix])).join(' ')+'"/>'+columnVibration.map((row,i)=>'<circle cx="'+x(i)+'" cy="'+y(row[set.ix])+'" r="4" fill="'+set.color+'"><title>'+set.label+' / '+row[0]+' / '+row[set.ix].toFixed(2)+' g</title></circle>').join('')).join('')+columnVibration.map((row,i)=>'<text x="'+x(i)+'" y="'+(h-22)+'" text-anchor="middle" font-size="12">'+row[0].slice(3)+'</text>').join('')+'<text x="16" y="20" font-size="12">g RMS</text></svg><div class="graph-legend"><span style="color:#ad483b">● C7</span><span style="color:#247a75">● C8</span><span style="color:#967e32">● C9</span></div></div>'}
+const priorForensicDocument=openDocument;
+openDocument=function(id){
+priorForensicDocument(id);
+if(!['chronology','gasTelemetry','auditTerminal'].includes(id))return;
+const el=document.querySelector('#modalBody .modalcontent');if(!el)return;
+let html='';
+if(id==='chronology'){html='<h3>EVENT BUS / PERANGKAT & STATUS</h3>'+forensicTable(['WAKTU WIB','DEVICE','EVENT','DETAIL','STATE'],facilityEvents)+'<p class="small">Urutan di atas adalah hasil penggabungan beberapa perangkat. Nilai sensor dapat dilihat dalam rekaman per kanal.</p>';}
+if(id==='gasTelemetry'){html='<h3>CHANNEL GZ-C02 / PEMBACAAN MENITAN</h3>'+forensicTable(['WAKTU WIB','%LEL','DEVICE STATE'],gasEvents)+'<p class="small">Nilai tidak dapat digunakan sendirian untuk menentukan apakah terjadi ledakan.</p>';}
+if(id==='auditTerminal'){html='<h3>IDENTITY SERVICE / TERMINAL REGISTER</h3>'+forensicTable(['WAKTU','TERMINAL','EVENT','REFERENSI','STATUS'],facilityEvents.slice(0,2))+'<p class="small">Identitas pengguna akun belum terverifikasi.</p>';}
+el.insertAdjacentHTML('beforeend',html);
+};
+const previousRawData=openRawData;
+openRawData=function(kind){previousRawData(kind);if(kind!=='structure')return;const el=document.querySelector('#modalBody .modalcontent');if(!el)return;el.insertAdjacentHTML('beforeend',multiSensorGraph()+forensicTable(['WAKTU','C7 (g)','C8 (g)','C9 (g)'],columnVibration.map(row=>row.map((v,i)=>i===0?v:v.toFixed(2)))))};
