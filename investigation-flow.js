@@ -84,12 +84,29 @@ const workOrderRows=[
 ['17/09 17:05','SEC-03','Status lapangan','Pembatasan penuh belum dilaksanakan','Siska Arum','TERCATAT']
 ];
 const signatureStrokes={
-'Dimas Arga':['M12 42 C16 32 19 12 25 10 C31 8 27 36 32 34 C38 31 45 12 50 16 C57 23 40 42 50 38 C60 33 63 17 69 22 C75 28 65 40 74 35 C83 30 83 16 91 18 C99 20 88 37 99 33 C111 27 116 13 125 19 C132 26 120 37 135 32 C143 29 150 23 156 15','M23 45 C59 41 111 42 159 35','M118 11 C122 5 127 7 128 10'],
-'Raka Wijaya':['M10 38 C18 20 30 13 32 21 C35 29 18 41 28 39 C42 35 46 13 55 14 C67 17 48 39 60 36 C71 33 71 19 81 21 C89 24 78 36 89 34 C101 32 104 12 114 15 C124 18 113 39 126 34 C140 30 145 20 155 12','M42 44 C74 46 113 39 159 40','M104 10 C108 6 112 7 114 10'],
-'Siska Arum':['M13 37 C20 24 24 12 31 14 C37 17 19 39 33 37 C43 36 44 23 53 22 C62 21 54 38 64 36 C76 34 75 15 84 17 C93 20 80 39 94 34 C107 29 116 15 124 19 C130 23 123 32 134 30 C144 28 150 22 158 16','M21 43 C65 40 109 46 157 36'],
-'Dr. Adrian Putra':['M9 40 C17 27 24 11 31 11 C40 12 25 37 39 35 C53 33 56 10 66 12 C75 14 59 38 74 34 C88 30 91 14 101 18 C110 22 96 38 111 33 C123 28 128 13 137 18 C143 22 137 33 154 24','M17 46 C59 40 116 45 160 34','M97 10 C100 6 106 7 109 10']
+'Dimas Arga':[
+'M12 45 C18 30 21 11 30 10 C45 7 43 35 28 38 C21 39 17 39 17 39 M31 39 C42 31 46 24 50 30 C54 38 61 20 65 23 C69 27 60 39 72 34 C81 30 84 18 89 20 C94 24 82 37 96 33 C107 29 109 22 116 27 C124 32 132 21 139 24 C147 26 150 24 156 19',
+'M34 47 C64 43 113 44 161 36',
+'M111 14 C115 10 121 12 123 14'
+],
+'Raka Wijaya':[
+'M10 44 C14 34 20 11 30 9 C45 7 43 27 30 30 C22 33 17 30 17 30 M31 30 C46 28 48 15 53 14 C61 13 57 33 64 36 C70 39 77 24 83 22 C89 19 87 38 95 34 C105 29 112 17 118 19 C126 23 120 38 129 33 C137 28 145 20 156 16',
+'M27 42 C53 40 71 41 91 43',
+'M107 46 C129 39 147 38 160 39',
+'M56 9 C65 3 73 8 72 15'
+],
+'Siska Arum':[
+'M11 35 C21 11 40 12 37 21 C34 30 16 29 20 37 C25 47 49 32 53 27 C60 19 59 35 65 36 C74 36 76 18 84 20 C94 23 79 37 96 33 C106 30 108 24 116 26 C125 28 130 20 142 18',
+'M31 45 C66 48 114 43 151 36'
+],
+'Dr. Adrian Putra':[
+'M12 39 C22 23 28 11 35 12 C42 13 36 35 43 34 C52 32 56 12 63 13 C69 15 60 36 71 33 C83 29 84 17 92 18 C103 20 92 38 105 34 C118 30 118 14 128 17 C139 20 133 31 148 29',
+'M17 47 C62 39 110 47 160 34',
+'M26 11 C38 4 49 8 48 14',
+'M123 10 C129 7 133 9 135 12'
+]
 };
-function woScribble(name){const strokes=signatureStrokes[name]||signatureStrokes['Raka Wijaya'];return '<svg class="wo-scribble" viewBox="0 0 170 56" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Tanda tangan tulisan tangan bergaya kursif">'+strokes.map((d,i)=>'<path d="'+d+'" fill="none" stroke="#263e62" stroke-width="'+(i===0?1.8:i===1?1.1:0.8)+'" stroke-linecap="round" stroke-linejoin="round"/>').join('')+'</svg>'}
+function woScribble(name){const strokes=signatureStrokes[name]||signatureStrokes['Raka Wijaya'];return '<svg class="wo-scribble" viewBox="0 0 170 56" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Tanda tangan pena">'+strokes.map((d,i)=>'<path d="'+d+'" fill="none" stroke="#253b59" stroke-width="'+(i===0?1.9:i===1?1.1:0.9)+'" stroke-linecap="round" stroke-linejoin="round"/>').join('')+'</svg>'}
 const priorWorkOrder=openDocument;
 openDocument=function(id){
 priorWorkOrder(id);
