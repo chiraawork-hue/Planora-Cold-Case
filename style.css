@@ -6,3 +6,5 @@
 
 /* Raw forensic datasets */
 .rawtable{border-collapse:collapse;width:100%;min-width:560px;font-size:12px;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;background:#f6f1e8;color:#1d3033}.rawtable th,.rawtable td{border:1px solid #c9c5b9;padding:8px 10px;text-align:left;white-space:nowrap}.rawtable th{background:#dcd7ca;position:sticky;top:0}.rawtable tbody tr:nth-child(even){background:#eee9dd}.rawtable tbody tr:hover{background:#e2ddc5}
+
+.backfile{display:inline-flex;align-items:center;gap:6px;margin:0 0 17px;padding:8px 12px;border:1px solid #b7ae9e;border-radius:5px;background:#eee7d9;color:#283b3b;font-size:12px;font-weight:700;letter-spacing:.03em}.backfile:hover{background:#e1d4bf}
