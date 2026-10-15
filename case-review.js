@@ -43,7 +43,7 @@ root?.querySelector('.next-seal-review')?.remove();
 if(i===1&&i>=state.unlocked){
 const question=root?.querySelector('.question');
 if(question){
-question.insertAdjacentHTML('afterbegin','<h3>ARSIP TERSEGEL / REKONSTRUKSI TEKNIS</h3><p>Identifikasi elemen struktur yang mendapat rekomendasi pemeriksaan lanjutan. Gabungkan <b>kode elemen</b>, <b>lebar retak maksimum</b> tanpa koma dalam persepuluhan milimeter, dan <b>waktu pertama kali ambang sensor terlampaui</b> dalam format HHMM.</p><p class="small">Format kode: ELEMEN + 2 DIGIT PENGUKURAN + 4 DIGIT WAKTU. Semua bagian dapat ditemukan di Amplop 01.</p>');
+question.insertAdjacentHTML('afterbegin','<h3>ARSIP TERSEGEL / REKONSTRUKSI TEKNIS</h3><p>Identifikasi elemen struktur yang mendapat rekomendasi pemeriksaan lanjutan. Gabungkan <b>kode elemen</b>, <b>lebar retak maksimum</b> tanpa koma dalam persepuluhan milimeter, dan <b>waktu pertama kali ambang sensor terlampaui</b> dalam format HHMM.</p><p class="small">Format arsip: identitas elemen, diikuti dua digit hasil pengukuran, lalu empat digit waktu. Tulis berurutan tanpa pemisah. Semua bagian dapat ditemukan di Amplop 01.</p>');
 }
 }
 };
