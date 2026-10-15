@@ -574,3 +574,53 @@ openDocument=function(id){
  }).join('');
  show('SAFETY_RECONCILIATION.csv','<div class="modalcontent"><button class="backfile" onclick="backModal()">← KEMBALI KE BERKAS SEBELUMNYA</button><article class="archive-ledger"><div class="archive-ledger-head"><div><b>VEYRA RESEARCH CENTER</b><small>UNIT UJI KLINIS / QUALITY ASSURANCE</small></div></div><h2>REKONSILIASI POPULASI KESELAMATAN</h2><div class="archive-ledger-meta"><span>QA/VX17/0904</span><span>EKSPOR 04 SEP 2018</span><span>40 BARIS DATA</span></div><p>Ekstrak tingkat subjek untuk pemeriksaan konsistensi populasi analisis. ID subjek telah dianonimkan. Kolom INKLUSI PUBLIK menunjukkan keanggotaan pada subset laporan yang didistribusikan.</p><div class="archive-ledger-scroll"><table><thead><tr><th>ID SUBJEK</th><th>DOSIS DITERIMA</th><th>KUNJUNGAN AKHIR</th><th>FLAG KEJADIAN</th><th>INKLUSI PUBLIK</th></tr></thead><tbody>'+rows+'</tbody></table></div><p><b>Definisi kolom:</b> SERIOUS = penanda kejadian serius yang memerlukan penelaahan keselamatan; NONE = tidak ada penanda serius pada ekstrak ini. Status kunjungan akhir tidak mengubah status penerimaan dosis. Ekspor ini tidak mencatat operator perubahan dataset.</p><div class="archive-ledger-foot"><span>CLINICAL QA / COPY 01</span><span>END OF EXPORT</span></div></article></div>');
 };
+
+/* v73 — pemeriksaan delapan personel, keterangan awal bukan temuan terbukti */
+const bapTambahan={
+bapAdrian:{name:'BAP_AP_0919.pdf',person:'DR. ADRIAN PUTRA',age:'43',role:'Direktur',unit:'Direksi',initials:'A.P.',number:'BAP-AP-019/2018',qa:[
+['Apa kegiatan Saudara pada giliran malam 17–18 September?','Saya menyelesaikan pekerjaan administrasi di ruang direktur. Saya tidak mencatat setiap perpindahan selama malam itu.'],
+['Apakah Saudara meninggalkan ruang direktur sebelum alarm?','Sepanjang yang saya ingat, saya tetap di area direksi. Waktu tepatnya perlu saya periksa lagi.'],
+['Siapa yang mempunyai kewenangan menggunakan terminal direksi?','Terminal itu ditempatkan untuk pekerjaan direksi. Pengaturan akun dan pendelegasian teknis ditangani sesuai prosedur internal.'],
+['Apakah Saudara mengetahui pekerjaan audit VX-17 pada malam tersebut?','Saya mengetahui ada kegiatan audit yang belum selesai, tetapi tidak mengingat seluruh nomor pekerjaan dalam antreannya.'],
+['Apakah Saudara dapat memastikan siapa yang memakai akun DIR-ADMIN pada 01.38?','Tidak berdasarkan ingatan saya saja. Periksa catatan otorisasi dan sesi perangkat.'],
+['Siapa yang dapat mengonfirmasi keberadaan Saudara?','Petugas yang bertugas di area direksi mungkin mengetahui, tetapi saya tidak dapat memastikan siapa yang melihat saya setiap saat.']]},
+bapRaka:{name:'BAP_RW_0919.pdf',person:'RAKA WIJAYA',age:'',role:'Manajer Operasional',unit:'Operasional',initials:'R.W.',number:'BAP-RW-019/2018',qa:[
+['Apa penugasan Saudara pada malam kejadian?','Saya memeriksa kesiapan operasional fasilitas dan menerima laporan dari beberapa unit.'],
+['Di mana Saudara berada sekitar pukul 02.00?','Di area operasional dan utilitas. Saya berpindah antarpos, jadi tidak bisa menyebut satu ruangan sepanjang periode itu.'],
+['Apakah Saudara menerima laporan mengenai kondisi bangunan?','Ada laporan teknis yang diteruskan melalui jalur operasional. Rincian waktunya tercantum pada register unit.'],
+['Apakah Saudara pernah menggunakan ruang arsip AR-03?','Saya pernah mengurus dokumen operasional, tetapi tidak mengingat memasuki AR-03 pada waktu yang ditanyakan.'],
+['Siapa yang dapat mengonfirmasi rute pemeriksaan Saudara?','Petugas jaga dan buku serah terima pekerjaan dapat diperiksa.'],
+['Apakah Saudara mengubah data penelitian VX-17?','Pengelolaan dataset klinis bukan tugas rutin unit saya.']]},
+bapDimas:{name:'BAP_DA_0919.pdf',person:'DIMAS ARGA',age:'',role:'Insinyur Struktur',unit:'Teknik',initials:'D.A.',number:'BAP-DA-019/2018',qa:[
+['Apa tugas Saudara menjelang 18 September?','Melakukan pemeriksaan kondisi struktur dan menyerahkan catatan pengukuran melalui prosedur teknik.'],
+['Di mana Saudara berada sebelum alarm?','Di area pemantauan struktur, memeriksa pembacaan dan laporan yang tersedia.'],
+['Apakah Saudara membawa salinan laporan ke arsip?','Saya menyerahkan berkas melalui jalur pencatatan yang biasa digunakan. Saya tidak hafal setiap tahap perpindahannya.'],
+['Apakah Saudara mengetahui isi rak B-04/17?','Saya mengetahui kode rujukan pada beberapa berkas teknik, tetapi tidak mengelola inventaris rak.'],
+['Siapa yang dapat memeriksa waktu pekerjaan Saudara?','Register pemeriksaan, sistem pemantauan, dan catatan serah terima.'],
+['Apakah Saudara menyaksikan penyebab runtuhnya struktur?','Tidak. Saya mengetahui peristiwa dari kondisi lapangan dan catatan setelah kejadian.']]},
+bapMaya:{name:'BAP_MK_0919.pdf',person:'DR. MAYA KIRANA',age:'',role:'Direktur Uji Klinis VX-17',unit:'Uji Klinis',initials:'M.K.',number:'BAP-MK-019/2018',qa:[
+['Apa pekerjaan Saudara pada malam 17–18 September?','Saya menelaah dokumen uji klinis di ruang dokumentasi.'],
+['Apa yang Saudara pahami mengenai populasi keselamatan VX-17?','Definisi populasi tercantum dalam protokol dan rencana analisis. Angka dalam satu laporan harus dibaca bersama kriteria inklusinya.'],
+['Apakah Saudara menyusun sendiri seluruh tabel laporan publik?','Penyusunan melibatkan beberapa fungsi. Saya tidak mengoperasikan semua tahapan ekspor data.'],
+['Apakah Saudara melihat perubahan dokumen revisi?','Saya pernah menerima berkas revisi, tetapi perlu melihat nomor dan tanggal revisinya untuk menjawab lebih tepat.'],
+['Siapa yang dapat mengonfirmasi aktivitas Saudara?','Daftar akses dokumen dan catatan penugasan unit klinis.'],
+['Apakah Saudara berada di AR-03?','Saya tidak mengingat ada keperluan memasuki ruang itu pada malam tersebut.']]},
+bapElena:{name:'BAP_EP_0919.pdf',person:'ELENA PRAMESWARI',age:'',role:'Kepala Keuangan',unit:'Keuangan',initials:'E.P.',number:'BAP-EP-019/2018',qa:[
+['Apa kegiatan Saudara menjelang kejadian?','Saya menyelesaikan berkas anggaran dan administrasi pembayaran di unit keuangan.'],
+['Di mana Saudara berada sekitar pukul 02.00?','Di area administrasi keuangan. Saya tidak memeriksa jam secara terus-menerus.'],
+['Apakah Saudara memiliki kewenangan terhadap data klinis?','Saya menangani pembiayaan dan dokumen pengadaan, bukan pencatatan hasil subjek penelitian.'],
+['Apakah Saudara berhubungan dengan bagian direksi malam itu?','Komunikasi administrasi dapat terjadi melalui sistem kantor. Saya perlu melihat arsip pesan untuk memastikan waktunya.'],
+['Siapa yang dapat memeriksa aktivitas kerja Saudara?','Register dokumen keuangan dan log perangkat kantor yang dipakai.'],
+['Apakah Saudara mengakses AR-03?','Tidak ada kunjungan ke ruang itu yang saya ingat pada malam tersebut.']]}
+};
+for(const [id,w] of Object.entries(bapTambahan)){
+ docs[id]={name:w.name,title:'BERITA ACARA PEMERIKSAAN — '+w.person,meta:'UNIT INVESTIGASI INTERNAL / 19 SEP 2018',sections:[],callout:''};
+ if(!envelopes[2].items.includes(id))envelopes[2].items.push(id);
+}
+const beforeExtraBap=openDocument;
+openDocument=function(id){
+ const w=bapTambahan[id];if(!w)return beforeExtraBap(id);
+ if(!state.seen.includes(id))state.seen.push(id);persist();render();
+ const qa=w.qa.map((p,i)=>'<div class="bap-entry"><div class="bap-question"><b>P'+String(i+1).padStart(2,'0')+' / PEMERIKSA</b><p>'+p[0]+'</p></div><div class="bap-answer"><b>J'+String(i+1).padStart(2,'0')+' / '+w.initials+'</b><p>'+p[1]+'</p></div></div>').join('');
+ show(w.name,'<div class="modalcontent"><button class="backfile" onclick="backModal()">← KEMBALI KE BERKAS SEBELUMNYA</button><article class="bap-sheet"><header><strong>VEYRA RESEARCH CENTER</strong><span>UNIT INVESTIGASI INTERNAL / SALINAN</span></header><h2>BERITA ACARA PEMERIKSAAN</h2><p class="bap-subtitle">'+w.number+' / 19 SEPTEMBER 2018</p><div class="bap-person"><div><b>NAMA</b><span>'+w.person+'</span></div><div><b>JABATAN</b><span>'+w.role+'</span></div><div><b>UNIT</b><span>'+w.unit+'</span></div><div><b>STATUS</b><span>PEMBERI KETERANGAN</span></div></div><h3>TRANSKRIP PEMERIKSAAN</h3>'+qa+'<div class="bap-signatures"><div>PEMERIKSA<br>UNIT INVESTIGASI INTERNAL</div><div>PEMBERI KETERANGAN<br>'+w.person+'</div></div><footer>'+w.number+' / SALINAN KERJA</footer></article></div>');
+};
