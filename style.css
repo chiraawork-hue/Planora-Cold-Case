@@ -197,3 +197,6 @@
 .suspect-photo-placeholder b{font-size:36px;margin:0;letter-spacing:.12em}
 .suspect-photo-placeholder small{font-size:9px;letter-spacing:.08em}
 .suspectcard img[src$='/farhan.jpg']{object-position:center 85%;clip-path:inset(6% 0 0 0);transform:scale(1.07);transform-origin:center bottom}
+
+/* v67 — Farhan portrait: show full face without top cropping */
+.suspectcard img[src$='/farhan.jpg']{clip-path:none;transform:none;object-fit:contain;object-position:center top;background:#77736e}
