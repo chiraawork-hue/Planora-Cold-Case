@@ -100,3 +100,7 @@ return;
 }
 previousSubmitReview(i);
 };
+
+/* v60: Amplop 03 memakai hasil rekonstruksi waktu pintu arsip. */
+envelopes[2].code='0206';
+envelopes[2].hint='Cocokkan waktu kamera CAM-AR03 dengan log pintu dan waktu server. Gunakan format HHMM.';
