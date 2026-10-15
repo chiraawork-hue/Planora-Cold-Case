@@ -380,3 +380,51 @@ const rows=events.map((e,i)=>'<tr><td>'+String(i+1).padStart(3,'0')+'</td>'+e.ma
 const html='<div class="modalcontent"><button class="backfile" onclick="backModal()">← KEMBALI KE BERKAS SEBELUMNYA</button><article class="door-controller-log"><header><strong>VEYRA RESEARCH CENTER</strong><span>ACCESS CONTROL / SYSTEM EXPORT</span></header><h2>REGISTER PINTU ARSIP</h2><div class="door-log-meta"><span>CONTROLLER: DC-AR03</span><span>18 SEP 2018</span><span>TIMEBASE: SERVER / NTP LOCKED</span></div><div class="door-log-scroll"><table><thead><tr><th>SEQ</th><th>SERVER TIME</th><th>DEVICE</th><th>CARD ID</th><th>EVENT</th><th>STATUS</th></tr></thead><tbody>'+rows+'</tbody></table></div><footer><span>EXPORT: DC-AR03 / EVT-0918</span><span>RECORD COUNT: 018</span></footer><p class="door-log-note">Rekonstruksi dokumen fiktif untuk Planora Cold Case.</p></article></div>';
 show('AR03_DOOR_EVENTS.csv',html);
 };
+
+/* v44 — witness examination files, released only in Envelope 02 */
+const witnessFiles={
+bapNadia:{name:'BAP_NS_0919.pdf',person:'NADIA SANTOSO',age:'38',role:'Kepala Laboratorium',unit:'Research Division',initials:'N.S.',number:'BAP-NS-019/2018',qa:[
+['Apakah kartu akses 4418 tercatat atas nama Anda?','Ya. Kartu itu terdaftar atas nama saya.'],
+['Apakah kartu tersebut dapat dipakai untuk mengakses ruang arsip?','Sepengetahuan saya, kartu itu memiliki izin akses untuk area laboratorium dan arsip tertentu.'],
+['Di mana kartu itu Anda simpan pada hari sebelum kejadian?','Biasanya saya membawanya bersama identitas kerja. Saya tidak mencatat setiap kali kartu saya letakkan.'],
+['Apakah Anda melihat catatan penggunaan kartu pada malam kejadian?','Belum seluruhnya ketika pemeriksaan ini dimulai.'],
+['Apakah Anda berada di depan pintu AR-03 pukul 02.06?','Saya tidak dapat mengonfirmasi waktu itu berdasarkan ingatan saja.'],
+['Apakah Anda dapat mengenali sosok pada rekaman koridor?','Tidak dari gambar yang diperlihatkan kepada saya.'],
+['Apakah Anda mengetahui isi rak B-04/17?','Saya mengetahui ada dokumen lintas unit yang disimpan sementara, tetapi tidak memeriksa isinya.'],
+['Apakah nomor kartu cukup untuk menentukan siapa yang masuk?','Menurut saya tidak. Perlu bukti lain untuk memastikan orangnya.']
+]},
+bapSiska:{name:'BAP_SA_0919.pdf',person:'SISKA ARUM',age:'29',role:'Petugas Keamanan',unit:'Security Operations',initials:'S.A.',number:'BAP-SA-020/2018',qa:[
+['Apa tugas Anda pada malam 17–18 September?','Memantau area keamanan sesuai penugasan dan mencatat kejadian yang dilaporkan.'],
+['Apakah setiap pintu arsip dijaga langsung?','Tidak. Sebagian akses menggunakan pembaca kartu dan sensor pintu.'],
+['Apakah pembaca kartu merekam wajah pengguna?','Setahu saya tidak. Pembaca mencatat kartu yang digunakan.'],
+['Apakah Anda melihat langsung seseorang membuka AR-03?','Saya tidak menyaksikan pembukaan pintu itu secara langsung.'],
+['Apa yang Anda ketahui tentang kartu 4418?','Nomor tersebut bisa dicocokkan dengan register penugasan kartu.'],
+['Apakah akses yang disetujui selalu berarti pintu dibuka?','Belum tentu. Sensor kontak pintu mencatat perubahan posisi secara terpisah.'],
+['Apakah Anda memeriksa seluruh rekaman kamera malam itu?','Tidak seluruhnya. Pemeriksaan rekaman dilakukan dari salinan yang tersedia.'],
+['Apakah Anda dapat menyebutkan identitas orang pada frame koridor?','Tidak dapat dipastikan dari frame yang saya lihat.']
+]},
+bapFarhan:{name:'BAP_FM_0919.pdf',person:'FARHAN MAHENDRA',age:'33',role:'Teknisi IT / CCTV',unit:'Information Technology',initials:'F.M.',number:'BAP-FM-021/2018',qa:[
+['Sistem apa yang Anda tangani?','Perangkat jaringan, kamera pengawas, dan dukungan pencatatan waktu sistem.'],
+['Apakah jam setiap perangkat selalu identik?','Tidak selalu. Status sinkronisasi harus dilihat pada catatan perangkat.'],
+['Apakah DC-AR03 memakai referensi waktu server?','Log pengendali pintu mencatat status NTP; detailnya ada pada ekspor perangkat.'],
+['Apakah CAM-AR03 menggunakan referensi yang sama?','Saya tidak akan menyamakan kedua jam tanpa membandingkan hasil uji.'],
+['Apa fungsi kejadian SYNC PULSE?','Itu penanda pengujian yang dapat muncul pada lebih dari satu sistem.'],
+['Apakah gambar CCTV cukup untuk mengenali wajah?','Tidak pada semua kondisi. Sudut dan mutu gambar membatasi identifikasi.'],
+['Apakah Anda dapat mengetahui siapa membawa kartu 4418?','Tidak hanya dari log pembaca kartu.'],
+['Apakah Anda mengubah rekaman asli setelah kejadian?','Saya tidak mencatat perubahan terhadap sumber asli dalam pekerjaan pemeriksaan awal saya. Pernyataan ini dapat diperiksa terhadap log pekerjaan.']
+]}
+};
+for(const [id,w] of Object.entries(witnessFiles)){
+docs[id]={name:w.name,title:'BERITA ACARA PEMERIKSAAN — '+w.person,meta:'INTERNAL INVESTIGATION / 19 SEP 2018',sections:[],callout:''};
+if(!envelopes[1].items.includes(id))envelopes[1].items.push(id);
+}
+envelopes[1].items=envelopes[1].items.filter(id=>id!=='sceneNadiaStatement');
+const priorBapOpen=openDocument;
+openDocument=function(id){
+if(!witnessFiles[id]){priorBapOpen(id);return}
+const w=witnessFiles[id];
+if(!state.seen.includes(id))state.seen.push(id);persist();render();
+const qa=w.qa.map((p,i)=>'<div class="bap-entry"><div class="bap-question"><b>P'+String(i+1).padStart(2,'0')+' / PEMERIKSA</b><p>'+p[0]+'</p></div><div class="bap-answer"><b>J'+String(i+1).padStart(2,'0')+' / '+w.initials+'</b><p>'+p[1]+'</p></div></div>').join('');
+const html='<div class="modalcontent"><button class="backfile" onclick="backModal()">← KEMBALI KE BERKAS SEBELUMNYA</button><article class="bap-sheet"><header><strong>VEYRA RESEARCH CENTER</strong><span>INTERNAL INVESTIGATION / WITNESS RECORD</span></header><h2>BERITA ACARA PEMERIKSAAN</h2><p class="bap-subtitle">KETERANGAN SAKSI / '+w.number+'</p><div class="bap-person"><div><b>NAMA</b><span>'+w.person+'</span></div><div><b>USIA</b><span>'+w.age+' TAHUN</span></div><div><b>JABATAN</b><span>'+w.role+'</span></div><div><b>UNIT</b><span>'+w.unit+'</span></div><div><b>TANGGAL</b><span>19 SEPTEMBER 2018</span></div><div><b>STATUS</b><span>SAKSI / KETERANGAN BELUM DIVERIFIKASI</span></div></div><h3>TRANSKRIP PEMERIKSAAN</h3>'+qa+'<div class="bap-signatures"><div>PEMERIKSA<div class="bap-sign-space"></div><b>UNIT INVESTIGASI INTERNAL</b></div><div>PEMBERI KETERANGAN<div class="bap-sign-space"></div><b>'+w.person+'</b></div></div><footer>'+w.number+' / SALINAN TRANSKRIP<br>Dokumen fiktif untuk permainan Planora Cold Case.</footer></article></div>';
+show(w.name,html);
+};
