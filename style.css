@@ -123,3 +123,20 @@
 .archive-ledger tbody tr:nth-child(even){background:#eae4d7}
 .archive-ledger-foot{display:flex;justify-content:space-between;gap:12px;margin-top:28px;border-top:1px solid #918c7d;padding-top:12px;font:11px monospace}
 .archive-ledger-disclaimer{font-size:10px;color:#6e706b;margin-top:25px}
+
+/* v42 CCTV event export */
+.camera-export{background:#eee9dc;color:#27322f;border:1px solid #b2aea2;padding:clamp(14px,3vw,30px);font-family:Arial,sans-serif}
+.camera-export header{display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:2px solid #67726b;padding-bottom:14px;font-size:11px;letter-spacing:.08em}
+.camera-export h2{font-size:19px;letter-spacing:.04em;margin:24px 0 14px}
+.camera-export-meta,.camera-export-footer{display:flex;gap:12px;justify-content:space-between;flex-wrap:wrap;font:11px monospace;padding:10px 0;border-top:1px solid #b4b4a8;border-bottom:1px solid #b4b4a8}
+.camera-export-table{overflow-x:auto;margin:20px 0}
+.camera-export table{border-collapse:collapse;width:100%;min-width:610px;font:12px/1.6 monospace}
+.camera-export th,.camera-export td{border:1px solid #aaa99d;padding:10px;text-align:left}
+.camera-export th{background:#d9d8cd}
+.camera-export tbody tr:nth-child(even){background:#e4e2d7}
+.camera-frame-link{font:inherit;cursor:pointer;color:#175a63;background:transparent;border:0;text-decoration:underline;padding:0}
+.camera-frame-panel{margin-top:22px;border:1px solid #a9aa9f;padding:12px}
+.camera-frame-panel[hidden]{display:none!important}
+.camera-frame-panel h3{font:13px monospace;margin:0 0 12px}
+.camera-frame-panel img{width:100%;max-height:570px;object-fit:contain;background:#101718}
+.camera-frame-panel p,.camera-export-note{font:10px monospace;color:#676c65}
