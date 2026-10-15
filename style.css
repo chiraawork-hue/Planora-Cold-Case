@@ -68,3 +68,23 @@
 .contradiction-panel label{display:block;margin:14px 0 6px;font-size:11px;letter-spacing:.08em}
 .contradiction-panel select,.contradiction-panel textarea{display:block;width:100%;box-sizing:border-box;min-height:42px;padding:10px;border:1px solid #78918a;background:#eae2d2;color:#1c302e;border-radius:4px;font:13px/1.5 inherit}
 .contradiction-panel textarea{min-height:110px;resize:vertical}
+
+/* V35 / printed field examination */
+.scene-field-report{background:#f3efe5;color:#252b29;padding:clamp(16px,3vw,34px);border:1px solid #bcb6a9;font-family:Arial,sans-serif;font-size:13px;line-height:1.65}
+.scene-report-head{display:flex;align-items:center;gap:13px;border-bottom:3px double #626960;padding-bottom:15px}
+.scene-report-head strong{display:block;letter-spacing:.1em;font-size:12px}
+.scene-report-head small{display:block;font-size:10px;letter-spacing:.06em}
+.scene-report-mark{border:2px solid #445951;border-radius:50%;width:38px;height:38px;display:grid;place-items:center;font-size:22px}
+.scene-report-copy{margin-left:auto;border:1px solid #9b534c;color:#9b534c;padding:5px 8px;font:10px monospace;transform:rotate(-5deg)}
+.scene-field-report h2{text-align:center;font-size:19px;line-height:1.4;margin:24px 0 5px;letter-spacing:.03em}
+.scene-report-subtitle{text-align:center;font-size:12px;letter-spacing:.1em;margin-bottom:22px}
+.scene-field-report h3{font-size:13px;letter-spacing:.04em;margin:24px 0 8px;border-bottom:1px solid #bcb6a9;padding-bottom:5px}
+.scene-field-report p{line-height:1.8}
+.scene-report-meta,.scene-report-findings{width:100%;border-collapse:collapse;font-size:12px;margin:12px 0 18px}
+.scene-report-meta td,.scene-report-meta th,.scene-report-findings td,.scene-report-findings th{border:1px solid #bcb6a9;padding:9px;text-align:left;vertical-align:top}
+.scene-report-meta th,.scene-report-findings th{background:#e1ddcf;font-weight:600}
+.scene-report-sign{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:35px 0 25px;text-align:center;font-size:11px}
+.scene-report-sign div{border-top:1px solid #9a978d;padding-top:10px}
+.scene-report-sign strong,.scene-report-sign small{display:block;margin-top:12px}
+.scene-field-report footer{border-top:2px double #7d8178;padding-top:12px;text-align:center;font-size:10px;color:#696b65}
+@media(max-width:600px){.scene-report-meta,.scene-report-findings{font-size:10px}.scene-report-meta td,.scene-report-meta th,.scene-report-findings td,.scene-report-findings th{padding:5px}.scene-report-head{flex-wrap:wrap}.scene-report-copy{margin-left:0}.scene-report-sign{gap:10px}}
