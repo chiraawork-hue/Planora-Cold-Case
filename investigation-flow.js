@@ -249,3 +249,7 @@ show('C:\\VEYRA\\CASE_001\\AUDIT_TERMINAL_EVENTS.log',`<div class="modalcontent"
 };
 
 // Stage two archive cross-reference pending review.
+
+docs.stage2Clock={name:'IT_CLOCK_COMPARISON.csv',title:'REGISTER PEMBANDING WAKTU',meta:'IT / 18 SEP 2018',sections:[['Reference Pulse','SERVER-NTP-01 / 02:10:00 WIB / LIGHT PULSE. CAM-AR03 / 02:03:00 / LIGHT PULSE.'],['Controller','DC-AR03 / 02:10:00 / LIGHT PULSE / NTP LOCKED.']],callout:''};
+docs.stage2Door={name:'AR03_DOOR_EVENTS.csv',title:'REGISTER PINTU ARSIP',meta:'SECURITY / 18 SEP 2018',sections:[['Door Controller','01:48:04 / CARD 3006 / DENIED. 02:06:01 / CARD 4418 / GRANTED. 02:06:03 / DOOR OPEN. 02:06:18 / DOOR CLOSED.'],['Controller Clock','NTP LOCKED / SERVER TIME']],callout:''};
+envelopes[1].items.push('stage2Clock','stage2Door');
