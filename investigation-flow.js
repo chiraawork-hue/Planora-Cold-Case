@@ -305,3 +305,26 @@ article.scrollIntoView({block:'start',behavior:'smooth'});
 
 /* v39: CCTV clock offset must be deduced from independent records, not revealed. */
 for(const envelope of envelopes){envelope.items=envelope.items.filter(id=>id!=='cctv');}
+
+/* v41 — dedicated physical archive register rendering */
+const priorArchiveRegisterOpen=openDocument;
+openDocument=function(id){
+if(id!=='index'){priorArchiveRegisterOpen(id);return}
+if(!state.seen.includes(id))state.seen.push(id);persist();render();
+const entries=[
+['00:11','RC-031','OPS/SHIFT/12','B-02/04','●','RT'],
+['00:18','RC-032','ENG/PLAN/04','B-04/05','▲','HS'],
+['00:27','RC-033','ADM/NOTE/21','A-01/09','◆','RT'],
+['00:35','RC-034','SEC/LOG/08','C-01/03','●','MW'],
+['00:42','RC-035','ENG/STR/07','B-04/17','▲','HS'],
+['00:49','RC-036','OPS/FORM/14','B-02/07','●','RT'],
+['00:57','RC-037','CLN/FORM/11','B-04/10','◆','MW'],
+['01:06','RC-038','CLN/RAW/17','B-04/12','●','HS'],
+['01:13','RC-039','ENG/LOG/03','B-03/02','▲','RT'],
+['01:21','RC-040','FIN/PAY/09','A-02/08','◆','MW'],
+['01:29','RC-041','ADM/MEMO/06','A-01/12','●','RT'],
+['01:36','RC-042','SEC/SHIFT/05','C-01/06','▲','HS']
+];
+const rows=entries.map(row=>'<tr>'+row.map(cell=>'<td>'+cell+'</td>').join('')+'</tr>').join('');
+show('REGISTER_DOKUMEN_2018.pdf','<div class="modalcontent"><button class="backfile" onclick="backModal()">← KEMBALI KE BERKAS SEBELUMNYA</button><article class="archive-ledger"><div class="archive-ledger-head"><div><b>VEYRA RESEARCH CENTER</b><small>RECORDS CONTROL / REGISTER COPY</small></div><span class="archive-ledger-stamp">RECEIVED<br>18 SEP 2018</span></div><h2>REGISTER PERPINDAHAN ARSIP</h2><div class="archive-ledger-meta"><span>NO. RC-0918/03</span><span>18 SEPTEMBER 2018</span><span>LEMBAR 03 / 07</span></div><div class="archive-ledger-scroll"><table><thead><tr><th>WAKTU</th><th>NO. TRANSAKSI</th><th>KODE BERKAS</th><th>LOKASI</th><th>KLAS.</th><th>PARAF</th></tr></thead><tbody>'+rows+'</tbody></table></div><div class="archive-ledger-foot"><span>RC / COPY 03</span><span>RECORDS CONTROL</span></div><p class="archive-ledger-disclaimer">Dokumen rekonstruksi fiktif untuk Planora Cold Case.</p></article></div>');
+};
