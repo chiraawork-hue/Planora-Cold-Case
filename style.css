@@ -183,3 +183,11 @@
 .time-compare th{background:#d9d6cb}
 .time-compare tbody tr:nth-child(even){background:#e4e0d5}
 .time-compare footer{text-align:center;font:10px monospace;color:#6b716a;margin-top:24px}
+
+/* v62: consistent suspect dossier grid */
+.suspectgrid{grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.suspectcard{min-width:0;display:flex;flex-direction:column}
+.suspectcard img{height:auto;aspect-ratio:4/5;object-fit:cover;object-position:center}
+.suspectcard b{font-size:12px;line-height:1.4}
+.suspectcard small{line-height:1.45}
+@media(max-width:650px){.suspectgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
