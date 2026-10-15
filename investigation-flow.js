@@ -803,3 +803,26 @@ openDocument=function(id){
  '<p class="small">Dokumen fiksi untuk permainan Planora Cold Case.</p></div>';
  show('VX17_RISK_REGISTER.pdf',html);
 };
+
+/* v87 — participant-level disposition reconciliation replaces redundant summary */
+const previousTrial87=openDocument;
+openDocument=function(id){
+ if(id!=='trial')return previousTrial87(id);
+ if(!state.seen.includes(id))state.seen.push(id);persist();render();
+ const excluded=new Set([3,7,11,14,18,22,27,31,9,36]);
+ const serious=new Set([3,7,11,14,18,22,27,31,35,39]);
+ const ids=Array.from({length:40},(_,i)=>i+1);
+ const rows=ids.map(n=>{
+ const key='VX17-'+String(n).padStart(3,'0');
+ const status=excluded.has(n)?'TIDAK':'YA';
+ const reason=excluded.has(n)?(serious.has(n)?'TINDAK LANJUT KLINIS':'KUNJUNGAN AKHIR BELUM LENGKAP'):'—';
+ const flag=serious.has(n)?'SAE':'—';
+ const ref=excluded.has(n)?'CLN/FU/'+String(n).padStart(3,'0'):'—';
+ return [key,'YA',flag,status,reason,ref];
+ });
+ const table=(heads,rs)=>'<div style="overflow-x:auto"><table style="border-collapse:collapse;width:100%;font-size:11px"><thead><tr>'+heads.map(h=>'<th style="text-align:left;padding:7px;border:1px solid #b8b09f;background:#d9cfb9">'+h+'</th>').join('')+'</tr></thead><tbody>'+rs.map(row=>'<tr>'+row.map(v=>'<td style="padding:6px;border:1px solid #c6bdac">'+v+'</td>').join('')+'</tr>').join('')+'</tbody></table></div>';
+ const page=(n,title,body)=>'<section style="background:#f4eee0;border:1px solid #c1b7a5;padding:24px;margin:14px 0 24px"><div style="display:flex;justify-content:space-between;border-bottom:2px solid #28474a;padding-bottom:12px;font-size:11px"><span>VEYRA RESEARCH CENTER<br>CLINICAL DATA MANAGEMENT</span><span>VX17/CDM/0918 · '+n+'/2</span></div><h2 style="margin:22px 0 6px">'+title+'</h2><p style="font-size:11px;border-bottom:1px solid #b7ae9d;padding-bottom:14px">EKSPOR REKONSILIASI · 18 SEP 2018 · DATA UJI KLINIS</p>'+body+'</section>';
+ const page1=page('01','REGISTER STATUS PESERTA VX-17','<p><b>1. DAFTAR SUBJEK YANG MENERIMA DOSIS</b></p><p style="font-size:12px">Kolom PUBLIK mencatat keikutsertaan dalam ringkasan REV04. SAE adalah penanda kejadian serius pada dataset keselamatan. Kode rujukan menunjukkan berkas tindak lanjut yang tercatat dalam indeks klinis; keberadaan dan perpindahan fisiknya memerlukan verifikasi arsip terpisah.</p>'+table(['ID SUBJEK','DOSIS','SAE','PUBLIK REV04','STATUS ADMINISTRATIF','RUJUKAN'],rows)+'<p style="font-size:11px">AKHIR REGISTER: 40 SUBJEK · 40 DOSIS · 10 PENANDA SAE · 30 MASUK REV04 · 10 TIDAK MASUK REV04</p>');
+ const page2=page('02','REGISTER REKONSILIASI & JEJAK REVISI','<p><b>2. KONTROL POPULASI</b></p>'+table(['SUMBER','DOSIS','MASUK ANALISIS','PENANDA SAE','REFERENSI'],[['VX17_RAW','40','40','10','VX17-SAF-2018-09'],['VX17_PUBLIC','—','30','2','VX17-SUM-REV04']])+'<p style="font-size:12px">Definisi Safety Population dalam protokol: setiap subjek yang menerima sedikitnya satu dosis. Status kunjungan akhir tidak mengubah status penerimaan dosis.</p><p><b>3. RIWAYAT DOKUMEN YANG TERSEDIA</b></p>'+table(['TANGGAL','REFERENSI','CATATAN','SUMBER'],[['04 SEP 2018','VX17-SAF-2018-09','Ekspor dataset keselamatan','Indeks CDM'],['05 SEP 2018','VRC/CLN/17 REV02','Protokol analisis keselamatan','Register protokol'],['—','VX17-SUM-REV04','Ringkasan publik revisi 04; tanggal perubahan tidak termuat pada ekspor ini','Salinan publik']])+'<p><b>4. KETERBATASAN REKAMAN</b></p><p>Register ini tidak memuat nama pengubah data, identitas pengesah elektronik, atau bukti pemindahan fisik berkas tindak lanjut. Referensi persetujuan cetak N. SANTOSO tercatat pada salinan REV04; log audit terpisah diperlukan untuk menentukan pelaksana perubahan.</p><p style="font-size:11px">VX17/CDM/0918 · AKHIR EKSPOR</p>');
+ show('VX17_SUBJECT_DISPOSITION_2018.csv','<div class="modalcontent"><button class="backdoc" onclick="openEnvelope(3)">← KEMBALI KE BERKAS SEBELUMNYA</button>'+page1+page2+'<p class="small">Dokumen fiksi untuk permainan Planora Cold Case.</p></div>');
+};
