@@ -889,3 +889,26 @@ function saveFinalReport90(){
  data.submitted=true;data.savedAt=new Date().toISOString();localStorage.setItem(finalReportKey90,JSON.stringify(data));
  fb.textContent='LAPORAN FINAL TERSIMPAN. Dua jalur kasus dan bukti pendukung tercatat di perangkat ini. Ini adalah pengajuan hipotesis, bukan penetapan pelaku otomatis.';
 }
+
+/* v91: recovered device */
+function openPhone91(){
+ if(state.unlocked<4)return;
+ if(localStorage.getItem('cc_phone91')==='open')return phoneChat91();
+ show('DEVICE_01','<div class="modalcontent"><span class="overline">DIGITAL FORENSICS</span><h2>HP FARHAN — TERKUNCI</h2><p>PIN enam digit. Empat digit pertama: jam sebenarnya akses arsip yang tampak 01:59 di CCTV (HHMM). Dua digit terakhir: nomor studi pada register klinis.</p><form onsubmit="event.preventDefault();verifyPhone91()"><input id="pin91" inputmode="numeric" maxlength="6" placeholder="6 DIGIT" autocomplete="off"><button class="primary">BUKA PERANGKAT</button></form><p id="pinFeedback91" role="status"></p></div>');
+}
+function verifyPhone91(){
+ if(document.getElementById('pin91').value.trim()!=='020617'){document.getElementById('pinFeedback91').textContent='PIN salah. Cocokkan waktu CCTV dengan log pintu.';return}
+ localStorage.setItem('cc_phone91','open');phoneChat91();
+}
+function phoneChat91(){
+ show('DEVICE_01_CHAT','<div class="modalcontent"><span class="overline">RECOVERED CHAT · DEVICE-01</span><h2>EKSTRAK PERCAKAPAN</h2><p>Kontak M.K. belum terverifikasi sebagai identitas pengirim.</p><div class="question"><p><b>M.K. · 17 SEP 21:16</b><br>Tim audit meminta register asli. Jangan biarkan mereka membandingkan versi publik dengan lembar sumber.</p><p><b>F. · 21:19</b><br>Arsip utama masih di Zona C. Ada pembatasan dari bagian teknik.</p><p><b>M.K. · 21:22</b><br>Pastikan berkas itu tidak sampai ke meja audit. Jangan gunakan permintaan resmi.</p><p><b>F. · 18 SEP 01:46</b><br>Map laporan ada. Lampiran data sumber tidak di rak.</p><p><b>M.K. · 01:49</b><br>Cari salinannya. Kita tidak punya kesempatan kedua.</p><p><b>F. · 02:08</b><br>Ada akses kedua ke ruang arsip. Bukan saya yang mengizinkan.</p><p><b>M.K. · 02:09</b><br>[PESAN TIDAK TERPULIHKAN]</p></div><p>Catatan forensik: isi chat tidak sendirian membuktikan identitas M.K., pemegang kartu 5172, ataupun penyebab keruntuhan.</p><button class="primary" onclick="showVerdict()">LANJUT LAPORAN FINAL</button></div>');
+}
+const oldVerdict91=showVerdict;
+showVerdict=function(){
+ oldVerdict91();
+ if(state.unlocked<4)return;
+ const form=document.getElementById('finalReportForm90');if(!form)return;
+ const box=document.createElement('section');box.className='question';box.innerHTML='<h3>BARANG BUKTI TERAKHIR · DEVICE-01</h3><p>Periksa percakapan pada perangkat Farhan sebelum menyusun kesimpulan.</p><button class="primary" type="button" onclick="openPhone91()">BUKA HP FARHAN</button>';
+ form.parentNode.insertBefore(box,form);
+ if(localStorage.getItem('cc_phone91')!=='open'){form.style.display='none';const note=document.createElement('p');note.textContent='Laporan final tersedia setelah DEVICE-01 diperiksa.';box.appendChild(note)}
+};
