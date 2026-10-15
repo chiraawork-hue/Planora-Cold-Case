@@ -107,3 +107,19 @@
 
 .scene-ink-sign{display:block;width:min(175px,100%);height:68px;margin:8px auto 0;filter:drop-shadow(.3px .5px .3px #89949b)}
 .scene-report-sign>div{min-width:0}
+
+/* v41 archive ledger print sheet */
+.archive-ledger{background:#f2ecdf;color:#29302e;border:1px solid #b9b09d;padding:clamp(12px,3vw,30px);font-family:Arial,sans-serif}
+.archive-ledger-head{display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:2px double #7d8278;padding-bottom:14px}
+.archive-ledger-head b{display:block;font-size:12px;letter-spacing:.08em}
+.archive-ledger-head small{display:block;font-size:10px;margin-top:3px}
+.archive-ledger-stamp{border:2px solid #a35b51;color:#a35b51;transform:rotate(-6deg);padding:7px 12px;font:11px/1.3 monospace;text-align:center}
+.archive-ledger h2{font-size:19px;margin:22px 0;text-align:center}
+.archive-ledger-meta{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border-top:1px solid #bbb3a5;border-bottom:1px solid #bbb3a5;padding:10px 0;margin-bottom:18px;font:11px monospace}
+.archive-ledger-scroll{overflow-x:auto}
+.archive-ledger table{width:100%;min-width:620px;border-collapse:collapse;font:12px/1.6 monospace}
+.archive-ledger th,.archive-ledger td{border:1px solid #b4aa99;padding:9px 7px;text-align:left;white-space:nowrap}
+.archive-ledger th{background:#dcd6c8;font-weight:bold}
+.archive-ledger tbody tr:nth-child(even){background:#eae4d7}
+.archive-ledger-foot{display:flex;justify-content:space-between;gap:12px;margin-top:28px;border-top:1px solid #918c7d;padding-top:12px;font:11px monospace}
+.archive-ledger-disclaimer{font-size:10px;color:#6e706b;margin-top:25px}
