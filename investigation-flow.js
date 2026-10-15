@@ -561,3 +561,16 @@ if(!state.seen.includes(id))state.seen.push(id);persist();render();
 const rows=alibiAwal.map((p,i)=>'<tr><td>'+String(i+1).padStart(2,'0')+'</td>'+p.map(v=>'<td>'+v+'</td>').join('')+'<td>BELUM DIVERIFIKASI</td></tr>').join('');
 show('REGISTER_ALIBI_PERSONEL_0919.pdf','<div class="modalcontent"><button class="backfile" onclick="backModal()">← KEMBALI KE BERKAS SEBELUMNYA</button><article class="archive-ledger"><div class="archive-ledger-head"><div><b>VEYRA RESEARCH CENTER</b><small>UNIT INVESTIGASI INTERNAL / SALINAN KERJA</small></div></div><h2>REGISTER KETERANGAN KEBERADAAN PERSONEL</h2><div class="archive-ledger-meta"><span>INV-019-ALB</span><span>19 SEPTEMBER 2018</span><span>PERIODE 01.00–02.20 WIB</span></div><p>Ringkasan pernyataan awal mengenai keberadaan personel pada malam kejadian. Lokasi dan waktu yang disebutkan merupakan pengakuan, bukan hasil verifikasi independen.</p><div class="archive-ledger-scroll"><table><thead><tr><th>NO.</th><th>PERSONEL</th><th>LOKASI YANG DIAKUI</th><th>KETERANGAN AWAL</th><th>STATUS</th></tr></thead><tbody>'+rows+'</tbody></table></div><p>Verifikasi memerlukan pemeriksaan silang dengan catatan akses, waktu perangkat, kesaksian, dan dokumen pendukung. Ketidaksesuaian catatan tidak dengan sendirinya membuktikan kebohongan atau keterlibatan.</p><div class="archive-ledger-foot"><span>INV / COPY 01</span><span>PEMERIKSAAN LANJUTAN</span></div></article></div>');
 };
+
+/* v72 — tabulasi keselamatan klinis tanpa ringkasan jawaban */
+const priorSafetyDocument=openDocument;
+openDocument=function(id){
+ if(id!=='handover')return priorSafetyDocument(id);
+ if(!state.seen.includes(id))state.seen.push(id);persist();render();
+ const flagged=new Set([4,19,31,32,33,34,35,36,37,38]);
+ const rows=Array.from({length:40},(_,i)=>{
+  const n=i+1,serious=flagged.has(n);
+  return '<tr><td>VX17-'+String(n).padStart(3,'0')+'</td><td>YA</td><td>'+(n<=30?'SELESAI':'BELUM LENGKAP')+'</td><td>'+(serious?'SERIOUS':'NONE')+'</td><td>'+(n<=30?'YA':'TIDAK')+'</td></tr>';
+ }).join('');
+ show('SAFETY_RECONCILIATION.csv','<div class="modalcontent"><button class="backfile" onclick="backModal()">← KEMBALI KE BERKAS SEBELUMNYA</button><article class="archive-ledger"><div class="archive-ledger-head"><div><b>VEYRA RESEARCH CENTER</b><small>UNIT UJI KLINIS / QUALITY ASSURANCE</small></div></div><h2>REKONSILIASI POPULASI KESELAMATAN</h2><div class="archive-ledger-meta"><span>QA/VX17/0904</span><span>EKSPOR 04 SEP 2018</span><span>40 BARIS DATA</span></div><p>Ekstrak tingkat subjek untuk pemeriksaan konsistensi populasi analisis. ID subjek telah dianonimkan. Kolom INKLUSI PUBLIK menunjukkan keanggotaan pada subset laporan yang didistribusikan.</p><div class="archive-ledger-scroll"><table><thead><tr><th>ID SUBJEK</th><th>DOSIS DITERIMA</th><th>KUNJUNGAN AKHIR</th><th>FLAG KEJADIAN</th><th>INKLUSI PUBLIK</th></tr></thead><tbody>'+rows+'</tbody></table></div><p><b>Definisi kolom:</b> SERIOUS = penanda kejadian serius yang memerlukan penelaahan keselamatan; NONE = tidak ada penanda serius pada ekstrak ini. Status kunjungan akhir tidak mengubah status penerimaan dosis. Ekspor ini tidak mencatat operator perubahan dataset.</p><div class="archive-ledger-foot"><span>CLINICAL QA / COPY 01</span><span>END OF EXPORT</span></div></article></div>');
+};
