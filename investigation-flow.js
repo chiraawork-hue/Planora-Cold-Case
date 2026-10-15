@@ -664,9 +664,11 @@ const bapSignaturePaths={
 'Nadia Santoso':['M13 49 C21 22 28 9 31 11 C37 15 25 43 37 37 C47 32 43 15 52 17 C59 20 48 40 61 35 C72 29 68 20 78 24 C88 29 77 40 94 34 C108 26 117 22 132 18','M22 48 C58 43 110 43 157 35'],
 'Maya Kirana':['M16 47 Q25 11 32 16 Q39 22 29 40 M43 40 Q52 18 60 28 Q66 42 77 28 Q87 14 92 31 Q97 42 110 29 Q121 20 126 35 Q138 42 154 27','M20 52 Q59 45 90 47','M117 13 Q128 7 137 17'],
 'Farhan Mahendra':['M16 49 C22 29 24 10 34 13 C47 17 31 31 23 34 C47 33 53 18 60 24 C65 31 53 40 70 34 C82 28 83 16 93 21 C103 26 89 39 109 34 C125 28 132 18 152 20','M27 46 C68 44 114 43 163 35'],
-'Elena Prameswari':[''Elena Prameswari': [
+'Elena Prameswari': [
   'M12 43 Q23 17 38 13 Q48 11 42 24 Q37 32 21 39 Q43 37 53 31 M55 44 L74 17 L67 43 Q82 34 93 26 Q101 19 102 31 Q105 42 121 29 Q132 20 141 29 Q147 36 163 26',
-  'M19 52 Q55 49 83 48 M109 49 L165 43']
+  'M19 52 Q55 49 83 48 M109 49 L165 43'
+]
+
 };
 const examinerSignature=['M10 44 L24 15 Q30 8 34 19 L28 39 Q46 34 55 24 Q61 19 62 35 Q67 43 81 30 L96 17 Q99 14 102 25 L97 39 Q117 30 130 32 L161 24','M18 53 Q70 56 113 48 L156 43'];
 function signatureInk74(paths){return '<svg class="bap-ink bap-signature-v74" viewBox="0 0 180 62" role="img" aria-label="Goresan tanda tangan fiktif">'+paths.map((d,i)=>'<path d="'+d+'" fill="none" stroke="#283d54" stroke-width="'+(i?1.25:1.85)+'" stroke-linecap="round" stroke-linejoin="round"/>').join('')+'</svg>'}
