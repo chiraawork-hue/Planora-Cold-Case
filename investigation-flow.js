@@ -537,3 +537,27 @@ show('SECURITY_CARD_ASSIGNMENT_2018.csv','<div class="modalcontent"><button clas
 const urutanBerkasAmplop02=['archiveExaminationOrder','scene','map','index','personnelIndex','sceneCardRegistry','stage2Door','cctvMovement','stage2Clock','camConfigAudit','bapNadia','bapSiska','bapFarhan'];
 const daftarAmplop02=envelopes[1].items;
 envelopes[1].items=[...urutanBerkasAmplop02.filter(id=>daftarAmplop02.includes(id)),...daftarAmplop02.filter(id=>!urutanBerkasAmplop02.includes(id))];
+
+/* v58 — pernyataan awal di Amplop 02; BAP untuk verifikasi di Amplop 03 */
+docs.personnelAlibiRegister={name:'REGISTER_ALIBI_PERSONEL_0919.pdf',title:'REGISTER KETERANGAN KEBERADAAN PERSONEL',meta:'INVESTIGASI INTERNAL / 19 SEP 2018 / INV-019-ALB',sections:[],callout:''};
+const alibiAwal=[
+['ADRIAN PUTRA','Ruang direktur','Mengaku tetap berada di ruang kerja sebelum alarm'],
+['NADIA SANTOSO','Area administrasi','Mengaku meninggalkan laboratorium menuju administrasi; waktu perpindahan belum dipastikan'],
+['RAKA WIJAYA','Area operasional dan utilitas','Mengaku melakukan pemeriksaan fasilitas'],
+['DIMAS ARGA','Area pemantauan struktur','Mengaku memeriksa kondisi struktur dan laporan sensor'],
+['SISKA ARUM','Pos keamanan','Mengaku menjalankan tugas pemantauan keamanan'],
+['MAYA KIRANA','Ruang dokumentasi klinis','Mengaku memeriksa dokumen penelitian'],
+['FARHAN MAHENDRA','Ruang perangkat jaringan','Mengaku menangani perangkat jaringan dan kamera'],
+['ELENA PRAMESWARI','Ruang administrasi keuangan','Mengaku berada di ruang kerja keuangan']
+];
+envelopes[1].items=envelopes[1].items.filter(id=>!['bapNadia','bapSiska','bapFarhan','personnelAlibiRegister'].includes(id));
+const posisiAlibi=envelopes[1].items.indexOf('sceneCardRegistry');
+envelopes[1].items.splice(posisiAlibi<0?envelopes[1].items.length:posisiAlibi+1,0,'personnelAlibiRegister');
+for(const id of ['bapNadia','bapSiska','bapFarhan'])if(!envelopes[2].items.includes(id))envelopes[2].items.push(id);
+const sebelumAlibi=openDocument;
+openDocument=function(id){
+if(id!=='personnelAlibiRegister')return sebelumAlibi(id);
+if(!state.seen.includes(id))state.seen.push(id);persist();render();
+const rows=alibiAwal.map((p,i)=>'<tr><td>'+String(i+1).padStart(2,'0')+'</td>'+p.map(v=>'<td>'+v+'</td>').join('')+'<td>BELUM DIVERIFIKASI</td></tr>').join('');
+show('REGISTER_ALIBI_PERSONEL_0919.pdf','<div class="modalcontent"><button class="backfile" onclick="backModal()">← KEMBALI KE BERKAS SEBELUMNYA</button><article class="archive-ledger"><div class="archive-ledger-head"><div><b>VEYRA RESEARCH CENTER</b><small>UNIT INVESTIGASI INTERNAL / SALINAN KERJA</small></div></div><h2>REGISTER KETERANGAN KEBERADAAN PERSONEL</h2><div class="archive-ledger-meta"><span>INV-019-ALB</span><span>19 SEPTEMBER 2018</span><span>PERIODE 01.00–02.20 WIB</span></div><p>Ringkasan pernyataan awal mengenai keberadaan personel pada malam kejadian. Lokasi dan waktu yang disebutkan merupakan pengakuan, bukan hasil verifikasi independen.</p><div class="archive-ledger-scroll"><table><thead><tr><th>NO.</th><th>PERSONEL</th><th>LOKASI YANG DIAKUI</th><th>KETERANGAN AWAL</th><th>STATUS</th></tr></thead><tbody>'+rows+'</tbody></table></div><p>Verifikasi memerlukan pemeriksaan silang dengan catatan akses, waktu perangkat, kesaksian, dan dokumen pendukung. Ketidaksesuaian catatan tidak dengan sendirinya membuktikan kebohongan atau keterlibatan.</p><div class="archive-ledger-foot"><span>INV / COPY 01</span><span>PEMERIKSAAN LANJUTAN</span></div></article></div>');
+};
