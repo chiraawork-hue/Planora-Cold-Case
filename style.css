@@ -219,3 +219,10 @@
 
 /* v76 — adjust only Farhan's portrait framing in personnel grid */
 .suspectcard img[src$='/farhan.jpg']{object-fit:cover;object-position:center 12%;transform:none;clip-path:none}
+
+/* v77 — tidy assessment person selection cards */
+.assessment-sheet .assessment-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:16px 0}
+.assessment-sheet .assessment-person{display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:12px;min-width:0;min-height:56px;box-sizing:border-box;padding:12px 16px;margin:0;border:1px solid #c0b398;background:#f2ead9;text-align:left;font-size:13px;line-height:1.45;white-space:normal;cursor:pointer}
+.assessment-sheet .assessment-person input[type="checkbox"]{position:static;display:block;flex:0 0 auto;width:16px;height:16px;margin:0;accent-color:#244a4b}
+.assessment-sheet .assessment-person:has(input:checked){border-color:#476c67;background:#e4e9df}
+@media(max-width:540px){.assessment-sheet .assessment-grid{grid-template-columns:1fr}}
