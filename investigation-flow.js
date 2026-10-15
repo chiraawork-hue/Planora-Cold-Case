@@ -689,3 +689,24 @@ openDocument=function(id){
  const existingInk=el.querySelector('.bap-ink');
  if(existingInk){const section=existingInk.closest('.bap-signatures')||existingInk.parentElement.parentElement; if(section)section.innerHTML=block}
 };
+
+/* v80 — original security event extract, not an investigator's interpretation */
+const beforeArchiveAccess80=openDocument;
+openDocument=function(id){
+ if(id!=='access')return beforeArchiveAccess80(id);
+ if(!state.seen.includes(id))state.seen.push(id);persist();render();
+ const rows=[
+ ['01:18:04','AR-03','3006','ACCESS_DENIED','INVALID_ZONE','AR03-0918-018'],
+ ['01:18:09','AR-03','3006','ACCESS_DENIED','INVALID_ZONE','AR03-0918-019'],
+ ['01:41:26','AR-03','5172','ACCESS_GRANTED','VALID','AR03-0918-026'],
+ ['01:41:29','AR-03','—','CONTACT_OPEN','DOOR','AR03-0918-027'],
+ ['01:41:46','AR-03','—','CONTACT_CLOSED','DOOR','AR03-0918-028'],
+ ['01:48:04','AR-03','3006','ACCESS_DENIED','INVALID_ZONE','AR03-0918-031'],
+ ['02:06:01','AR-03','4418','ACCESS_GRANTED','VALID','AR03-0918-044'],
+ ['02:06:03','AR-03','—','CONTACT_OPEN','DOOR','AR03-0918-045'],
+ ['02:06:18','AR-03','—','CONTACT_CLOSED','DOOR','AR03-0918-046'],
+ ['02:10:00','SYS','—','SYNC_PULSE','NTP_LOCKED','SYS-0918-210']
+ ];
+ const table=rows.map(row=>'<tr>'+row.map(v=>'<td>'+v+'</td>').join('')+'</tr>').join('');
+ show('ACCESS_4418.log','<div class="modalcontent"><button class="backfile" onclick="backModal()">← KEMBALI KE BERKAS SEBELUMNYA</button><article class="archive-ledger"><div class="archive-ledger-head"><div><b>VEYRA RESEARCH CENTER / SECURITY OPERATIONS</b><small>EKSPOR PENCATAT PINTU · SALINAN FORENSIK</small></div><span>INTERNAL</span></div><h2>LOG AKSES RUANG ARSIP</h2><div class="archive-ledger-meta"><span>18 SEP 2018 / WIB</span><span>READER AR-03</span><span>SERVER TIME / NTP</span></div><div class="rawdata-scroll"><table class="rawtable"><thead><tr><th>WAKTU</th><th>READER</th><th>KARTU</th><th>EVENT</th><th>HASIL</th><th>REFERENSI</th></tr></thead><tbody>'+table+'</tbody></table></div><h3>REFERENSI KARTU</h3><div class="archive-ledger-meta"><span>4418 / NADIA SANTOSO</span><span>3006 / KARTU TAMU</span><span>5172 / BELUM TERVERIFIKASI</span></div><p class="assessment-status">Sumber: ekspor pembaca AR-03. Waktu menggunakan jam server. Nomor kartu menunjukkan kredensial yang dibaca perangkat.</p><div class="archive-ledger-foot"><span>SEC-AR03 / COPY 01</span><span>END OF EXTRACT</span></div></article></div>');
+};
