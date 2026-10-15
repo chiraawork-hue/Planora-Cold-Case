@@ -140,3 +140,15 @@
 .camera-frame-panel h3{font:13px monospace;margin:0 0 12px}
 .camera-frame-panel img{width:100%;max-height:570px;object-fit:contain;background:#101718}
 .camera-frame-panel p,.camera-export-note{font:10px monospace;color:#676c65}
+
+/* v43 / AR-03 controller raw event export */
+.door-controller-log{background:#eee9dd;color:#26312f;border:1px solid #b5b1a5;padding:clamp(14px,3vw,30px);font-family:Arial,sans-serif}
+.door-controller-log header{display:flex;justify-content:space-between;gap:12px;border-bottom:2px solid #64736d;padding-bottom:14px;font-size:11px;letter-spacing:.06em}
+.door-controller-log h2{font-size:19px;margin:22px 0 16px}
+.door-log-meta,.door-controller-log footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;padding:10px 0;border-top:1px solid #b2afa2;border-bottom:1px solid #b2afa2;font:11px monospace}
+.door-log-scroll{overflow-x:auto;margin:20px 0}
+.door-controller-log table{border-collapse:collapse;width:100%;min-width:740px;font:11px/1.6 monospace}
+.door-controller-log th,.door-controller-log td{border:1px solid #b4b1a5;padding:8px 9px;text-align:left;white-space:nowrap}
+.door-controller-log th{background:#d8d6ca}
+.door-controller-log tbody tr:nth-child(even){background:#e5e2d7}
+.door-log-note{font:10px monospace;color:#69716c;margin-top:24px}
