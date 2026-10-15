@@ -14,7 +14,7 @@ const suspect=[
 {id:'elena',name:'Elena Prameswari',age:39,job:'Kepala Keuangan',access:'Pembayaran vendor / anggaran fasilitas',fact:'Mengetahui pengeluaran fasilitas dan pembayaran kepada kontraktor sebelum insiden. Beberapa pembayaran perlu dicocokkan dengan dokumen pekerjaan, bukan langsung dianggap penyelewengan.',question:'Apakah pembayaran terkait perbaikan kolom C7 benar-benar diikuti pekerjaan di lapangan?'}
 ];
 const photos=[
-{id:'tkp-eksterior',name:'TKP_001 — Tampak Depan',caption:'Ilustrasi rekonstruksi kondisi gedung sesudah keruntuhan. Tidak untuk menentukan penyebab tanpa laporan teknis.'},
+{id:'tkp-eksterior',name:'TKP_001 — Jalur Pipa Gas',caption:'Foto ilustrasi jalur pipa gas. Tanggal yang tercetak pada gambar tidak sesuai dengan kronologi 18 September 2018; gambar ini bukan bukti foto asli TKP dan tidak dapat digunakan untuk menetapkan waktu maupun penyebab keruntuhan.'},
 {id:'tkp-laboratorium',name:'TKP_002 — Laboratorium',caption:'Area laboratorium yang terdampak. Kerusakan yang terlihat tidak otomatis menunjukkan sumber awal kegagalan.'},
 {id:'tkp-struktur',name:'TKP_003 — Struktur',caption:'Rekonstruksi kerusakan elemen struktur. Cocokkan dengan laporan retakan kolom C7.'},
 {id:'tkp-koridor',name:'TKP_004 — Koridor',caption:'Koridor yang terhubung ke jalur arsip. Rekaman kamera memiliki selisih waktu tujuh menit.'}
