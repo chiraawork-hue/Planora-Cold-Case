@@ -88,3 +88,17 @@
 .scene-report-sign strong,.scene-report-sign small{display:block;margin-top:12px}
 .scene-field-report footer{border-top:2px double #7d8178;padding-top:12px;text-align:center;font-size:10px;color:#696b65}
 @media(max-width:600px){.scene-report-meta,.scene-report-findings{font-size:10px}.scene-report-meta td,.scene-report-meta th,.scene-report-findings td,.scene-report-findings th{padding:5px}.scene-report-head{flex-wrap:wrap}.scene-report-copy{margin-left:0}.scene-report-sign{gap:10px}}
+
+.scene-page-content[hidden]{display:none!important}
+.scene-page-nav{display:flex;align-items:center;justify-content:space-between;gap:10px;border-top:1px solid #a8a195;margin-top:24px;padding-top:18px;font:11px monospace}
+.scene-page-nav button{padding:10px 12px;background:#d9d0bd;color:#263632;border:1px solid #9a9386;cursor:pointer}
+.scene-page-nav button:disabled{opacity:.35;cursor:default}
+.scene-evidence-plate{background:#d5d1c6;border:1px solid #99978c;padding:14px;margin:12px 0;text-align:center}
+.scene-evidence-plate small{display:block;font:10px monospace;margin-top:10px;color:#675f54}
+.scene-evidence-door{height:250px;max-width:360px;margin:auto;background:linear-gradient(110deg,#35413e,#1b2929);border:10px solid #6b726c;position:relative;display:flex;align-items:flex-start;justify-content:center;padding-top:40px;box-sizing:border-box;color:#d4d5c9;letter-spacing:4px}
+.scene-evidence-door i{position:absolute;right:20px;top:120px;width:56px;height:8px;background:#b5b7ac;border-radius:5px}
+.scene-evidence-lock{height:160px;max-width:360px;margin:auto;background:linear-gradient(115deg,#59605b,#252c2a);position:relative;color:#e1e0d3;display:grid;place-items:center;font:11px monospace}
+.scene-evidence-lock i{position:absolute;top:45px;left:30%;width:65px;height:75px;border:3px solid #a9aaa0;background:repeating-linear-gradient(160deg,transparent 0 8px,#8b8c82 9px 10px)}
+.scene-evidence-shelf{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;max-width:440px;margin:auto;background:#4d5551;padding:12px}
+.scene-evidence-shelf span{background:#a38c6d;padding:30px 8px;font:12px monospace;color:#292b28;border:2px solid #665b4c}
+.scene-evidence-shelf .empty{background:#343b38;color:#e4ddcd;border:2px dashed #b2a994}
