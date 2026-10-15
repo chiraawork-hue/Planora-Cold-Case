@@ -247,3 +247,24 @@ const table='<div style="overflow-x:auto"><table class="rawtable"><thead><tr><th
 if(!state.seen.includes(id))state.seen.push(id);persist();render();
 show(d.name,'<div class="modalcontent"><button class="backfile" onclick="backModal()">← KEMBALI KE BERKAS SEBELUMNYA</button><div class="letterhead"><b>VEYRA RESEARCH CENTER / DATA EXPORT</b></div><h2>'+d.title+'</h2><div class="meta">'+d.meta+'</div>'+table+'</div>');
 };
+
+/* v34 / Envelope 02: suspect-led investigation without asserting identity. */
+docs.scene={name:'SCENE_EXAMINATION_AR03.pdf',title:'BERITA ACARA PEMERIKSAAN ARSIP AR-03',meta:'FIELD EXAMINATION / 19 SEP 2018 / INSPECTION COPY',sections:[
+['AR-03 / ENTRY','Pintu ruang arsip ditemukan tertutup saat pemeriksaan pagi. Pelat pengunci memiliki goresan permukaan. Asal dan usia goresan tidak dapat ditentukan dari pengamatan visual.'],
+['B-04 / STORAGE','Posisi B-04/17 tercatat pada inventaris sebagai lokasi penyimpanan sementara ENG/STR/07. Kondisi isi boks belum dapat dipastikan dari dokumentasi foto yang tersedia.'],
+['CAM-AR03 / CORRIDOR','Kamera menghadap koridor timur. Wajah sosok yang terekam tidak teridentifikasi pada indeks frame yang tersedia.'],
+['EVIDENCE INDEX','AR03-01 / kondisi pintu; AR03-02 / pelat pengunci; B04-01 / rak penyimpanan; CAM-AR03 / indeks frame. Dokumentasi visual bersifat rekonstruksi fiktif.']
+],callout:''};
+docs.sceneCardRegistry={name:'SECURITY_CARD_ASSIGNMENT_2018.csv',title:'REGISTER PENUGASAN KARTU',meta:'SECURITY / PERSONNEL ACCESS / 17 SEP 2018',sections:[
+['CARD / 4418','REGISTERED HOLDER: NADIA SANTOSO / LABORATORY HEAD / ACCESS CLASS: LAB-ARCHIVE'],
+['CARD / 3006','REGISTERED HOLDER: FACILITY VISITOR POOL / ACCESS CLASS: ESCORT REQUIRED'],
+['AUDIT FIELDS','ASSIGNED HOLDER adalah pemilik kartu dalam sistem. Pembaca pintu tidak memverifikasi wajah, sidik jari, atau identitas orang yang membawa kartu.']
+],callout:''};
+docs.sceneNadiaStatement={name:'INTERVIEW_NS_0919_EXTRACT.pdf',title:'PETIKAN WAWANCARA PERSONEL',meta:'SECURITY INTERVIEW / 19 SEP 2018 / SUBJECT: N.S.',sections:[
+['QUESTION / CARD 4418','Pemeriksa: Apakah kartu akses 4418 tercatat atas nama Anda?'],
+['RESPONSE / N.S.','N.S.: Kartu itu memang terdaftar atas nama saya. Saya belum memeriksa seluruh catatan akses malam itu.'],
+['QUESTION / AR-03','Pemeriksa: Apakah Anda dapat memastikan siapa yang memakai kartu tersebut pada pukul 02.06?'],
+['RESPONSE / N.S.','N.S.: Tidak. Saya tidak dapat memastikan identitas orang hanya dari nomor kartu.'],
+['RECORD STATUS','Keterangan ini belum diverifikasi dengan bukti lokasi independen.']
+],callout:''};
+['sceneCardRegistry','sceneNadiaStatement'].forEach(id=>{if(!envelopes[1].items.includes(id))envelopes[1].items.push(id)});
