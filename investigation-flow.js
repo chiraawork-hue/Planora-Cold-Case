@@ -328,3 +328,25 @@ const entries=[
 const rows=entries.map(row=>'<tr>'+row.map(cell=>'<td>'+cell+'</td>').join('')+'</tr>').join('');
 show('REGISTER_DOKUMEN_2018.pdf','<div class="modalcontent"><button class="backfile" onclick="backModal()">← KEMBALI KE BERKAS SEBELUMNYA</button><article class="archive-ledger"><div class="archive-ledger-head"><div><b>VEYRA RESEARCH CENTER</b><small>RECORDS CONTROL / REGISTER COPY</small></div><span class="archive-ledger-stamp">RECEIVED<br>18 SEP 2018</span></div><h2>REGISTER PERPINDAHAN ARSIP</h2><div class="archive-ledger-meta"><span>NO. RC-0918/03</span><span>18 SEPTEMBER 2018</span><span>LEMBAR 03 / 07</span></div><div class="archive-ledger-scroll"><table><thead><tr><th>WAKTU</th><th>NO. TRANSAKSI</th><th>KODE BERKAS</th><th>LOKASI</th><th>KLAS.</th><th>PARAF</th></tr></thead><tbody>'+rows+'</tbody></table></div><div class="archive-ledger-foot"><span>RC / COPY 03</span><span>RECORDS CONTROL</span></div><p class="archive-ledger-disclaimer">Dokumen rekonstruksi fiktif untuk Planora Cold Case.</p></article></div>');
 };
+
+/* v42 — camera event export with linked evidence frame */
+const priorCameraIndexOpen=openDocument;
+openDocument=function(id){
+if(id!=='cctvMovement'){priorCameraIndexOpen(id);return;}
+if(!state.seen.includes(id))state.seen.push(id);persist();render();
+const events=[
+['01:56:00','FRAME','CORRIDOR EMPTY','CAM-AR03/015600'],
+['01:58:12','MOTION','CORRIDOR EAST','CAM-AR03/015812'],
+['01:59:00','DOOR','AR-03 OPEN','CAM-AR03/015900'],
+['02:03:00','LIGHT','PULSE DETECTED','CAM-AR03/020300'],
+['02:04:16','MOTION','STAIR DIRECTION','CAM-AR03/020416']
+];
+const rows=events.map((e,i)=>'<tr><td>'+e[0]+'</td><td>'+e[1]+'</td><td>'+e[2]+'</td><td>'+(i===2?'<button class="camera-frame-link" type="button" onclick="showCameraFrame()">VIEW FRAME ↗</button>':e[3])+'</td></tr>').join('');
+const html='<div class="modalcontent"><button class="backfile" onclick="backModal()">← KEMBALI KE BERKAS SEBELUMNYA</button><article class="camera-export"><header><strong>VEYRA RESEARCH CENTER</strong><span>SECURITY SYSTEM / EXPORT</span></header><h2>CAM-AR03 EVENT LOG</h2><div class="camera-export-meta"><span>18 SEP 2018</span><span>DEVICE: CAM-AR03</span><span>TIMEBASE: CAMERA LOCAL</span></div><div class="camera-export-table"><table><thead><tr><th>CAM TIME</th><th>EVENT</th><th>DETECTION</th><th>RECORD / FRAME</th></tr></thead><tbody>'+rows+'</tbody></table></div><div class="camera-export-footer"><span>EXPORT REF: AR03-EVT-0918</span><span>TIME SYNC: UNVERIFIED</span></div><section id="cameraFramePanel" class="camera-frame-panel" hidden><h3>CAM-AR03 / FRAME 01:59:00</h3><img src="Planora_Cold_Case_TKP_Photos/CAM-AR03.png" alt="Rekonstruksi frame CCTV koridor timur pada waktu kamera 01:59"><p>VISUAL RECONSTRUCTION / FICTIONAL CASE EVIDENCE</p></section><p class="camera-export-note">Dokumen rekonstruksi fiktif untuk permainan Planora Cold Case.</p></article></div>';
+show('CAM_AR03_ACTIVITY_INDEX.csv',html);
+};
+function showCameraFrame(){
+const p=document.getElementById('cameraFramePanel');if(!p)return;
+p.hidden=!p.hidden;
+if(!p.hidden)p.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
