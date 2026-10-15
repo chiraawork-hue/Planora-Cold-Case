@@ -488,3 +488,15 @@ const rows=records.map(r=>'<tr>'+r.map(v=>'<td>'+v+'</td>').join('')+'</tr>').jo
 const html='<div class="modalcontent"><button class="backfile" onclick="backModal()">← KEMBALI KE BERKAS SEBELUMNYA</button><article class="time-compare"><header><strong>VEYRA RESEARCH CENTER / INFORMATION TECHNOLOGY</strong><span>SYSTEM AUDIT EXPORT</span></header><h2>LAPORAN SINKRONISASI WAKTU PERANGKAT</h2><div class="time-meta"><span>REF: IT-TIME-0918/04</span><span>DATE: 18 SEP 2018</span><span>TECHNICAL COPY</span></div><h3>I. PERANGKAT PEMBANDING</h3><div class="time-scroll"><table><thead><tr><th>DEVICE ID</th><th>FUNCTION</th><th>TIME SOURCE</th><th>SYNC STATUS</th></tr></thead><tbody><tr><td>SERVER-NTP-01</td><td>REFERENCE SERVER</td><td>NTP / WIB</td><td>LOCKED</td></tr><tr><td>DC-AR03</td><td>DOOR CONTROLLER</td><td>SERVER-NTP-01</td><td>LOCKED</td></tr><tr><td>CAM-AR03</td><td>CORRIDOR CAMERA</td><td>LOCAL CLOCK</td><td>SERVICE PENDING</td></tr></tbody></table></div><h3>II. HASIL PENGUJIAN</h3><div class="time-scroll"><table><thead><tr><th>SEQ</th><th>SERVER WIB</th><th>DC-AR03</th><th>CAM-AR03</th><th>TEST MARKER</th><th>REMARK</th></tr></thead><tbody>'+rows+'</tbody></table></div><h3>III. STATUS PEMERIKSAAN</h3><p>Ekspor diagnostik memuat sampel pembacaan perangkat dan penanda uji. Koreksi jam kamera belum tercatat pada salinan ini. Identitas orang pada rekaman tidak diperiksa dalam dokumen pengujian waktu.</p><div class="time-approval"><span>PREPARED: IT SYSTEMS</span><span>EXPORT ID: IT-TIME-0918/04</span></div><footer>CONTROLLED TECHNICAL COPY / REKONSTRUKSI FIKTIF</footer></article></div>';
 show('IT_CLOCK_COMPARISON.csv',html);
 };
+
+/* v50: additional camera clock service record */
+docs.camConfigAudit={name:'CAM_AR03_CLOCK_SERVICE.log',title:'RIWAYAT LAYANAN JAM CAM-AR03',meta:'IT SYSTEMS / 18 SEP 2018',sections:[
+['17 SEP / 21:14','CAM-AR03 / BOOT COMPLETE / TIME SOURCE: LOCAL RTC'],
+['17 SEP / 21:16','CAM-AR03 / TIME SERVICE CHECK / NTP REQUEST: TIMEOUT'],
+['17 SEP / 23:09','CAM-AR03 / MAINTENANCE REVIEW / TIME SETTINGS: VIEWED'],
+['18 SEP / 01:45','CAM-AR03 / TIME CHECK / STATUS: UNSYNCHRONIZED'],
+['18 SEP / 02:03','CAM-AR03 / LIGHT PULSE / FRAME MARKER CAPTURED'],
+['18 SEP / 02:05','CAM-AR03 / TIME CHECK / STATUS: UNSYNCHRONIZED'],
+['18 SEP / 02:16','CAM-AR03 / TIME SERVICE CHECK / NTP REQUEST: TIMEOUT']
+],callout:''};
+if(!envelopes[1].items.includes('camConfigAudit'))envelopes[1].items.push('camConfigAudit');
