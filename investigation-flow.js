@@ -525,6 +525,7 @@ openDocument=function(id){
 if(id!=='sceneCardRegistry')return priorSecurityCardOpen(id);
 if(!state.seen.includes(id))state.seen.push(id);persist();render();
 const data=[['4418','NADIA SANTOSO','LABORATORY HEAD','LAB-ARCHIVE','ACTIVE','PERSONNEL'],['3006','VISITOR POOL','FACILITY VISITOR','ESCORT REQUIRED','ACTIVE','POOL'],['5172','UNVERIFIED / REFER TO CARD FILE','NOT RECORDED','AR-03 ACCESS LOG','RECONCILIATION PENDING','AUDIT ENTRY']];
+data.push(['4102','ADRIAN PUTRA','DIREKTUR','EKSEKUTIF','AKTIF','PERSONEL']);
 const rows=data.map((r,i)=>'<tr><td>'+String(i+1).padStart(2,'0')+'</td>'+r.map(v=>'<td>'+v+'</td>').join('')+'</tr>').join('');
 show('SECURITY_CARD_ASSIGNMENT_2018.csv','<div class="modalcontent"><button class="backfile" onclick="backModal()">← KEMBALI KE BERKAS SEBELUMNYA</button><article class="time-compare"><header><strong>VEYRA RESEARCH CENTER / SECURITY SYSTEMS</strong><span>SEC-AC-0917 / EXPORT</span></header><h2>REGISTER INVENTARIS KARTU AKSES</h2><div class="time-meta"><span>SNAPSHOT: 17 SEP 2018</span><span>ACCESS CONTROL</span></div><div class="time-scroll"><table><thead><tr><th>NO</th><th>CARD ID</th><th>ASSIGNED HOLDER</th><th>ROLE</th><th>ACCESS CLASS</th><th>STATUS</th><th>TYPE</th></tr></thead><tbody>'+rows+'</tbody></table></div><p>ASSIGNED HOLDER adalah data registrasi kartu. Log pembaca pintu tidak memuat verifikasi identitas fisik pengguna.</p><footer>SEC-AC-0917 / CONTROLLED COPY</footer></article></div>');
 };
