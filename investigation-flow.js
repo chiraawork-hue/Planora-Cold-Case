@@ -253,3 +253,16 @@ show('C:\\VEYRA\\CASE_001\\AUDIT_TERMINAL_EVENTS.log',`<div class="modalcontent"
 docs.stage2Clock={name:'IT_CLOCK_COMPARISON.csv',title:'REGISTER PEMBANDING WAKTU',meta:'IT / 18 SEP 2018',sections:[['Reference Pulse','SERVER-NTP-01 / 02:10:00 WIB / LIGHT PULSE. CAM-AR03 / 02:03:00 / LIGHT PULSE.'],['Controller','DC-AR03 / 02:10:00 / LIGHT PULSE / NTP LOCKED.']],callout:''};
 docs.stage2Door={name:'AR03_DOOR_EVENTS.csv',title:'REGISTER PINTU ARSIP',meta:'SECURITY / 18 SEP 2018',sections:[['Door Controller','01:48:04 / CARD 3006 / DENIED. 02:06:01 / CARD 4418 / GRANTED. 02:06:03 / DOOR OPEN. 02:06:18 / DOOR CLOSED.'],['Controller Clock','NTP LOCKED / SERVER TIME']],callout:''};
 envelopes[1].items.push('stage2Clock','stage2Door');
+
+const stage2Rows={
+stage2Clock:[['SERVER-NTP-01','02:10:00','LIGHT PULSE'],['CAM-AR03','02:03:00','LIGHT PULSE'],['DC-AR03','02:10:00','LIGHT PULSE']],
+stage2Door:[['01:48:04','3006','DENIED'],['02:06:01','4418','GRANTED'],['02:06:03','DOOR CONTACT','OPEN'],['02:06:18','DOOR CONTACT','CLOSED']]
+};
+const stage2OldOpen=openDocument;
+openDocument=function(id){
+if(!stage2Rows[id]){stage2OldOpen(id);return}
+const d=docs[id];
+const table='<div style="overflow-x:auto"><table class="rawtable"><thead><tr><th>REFERENCE / TIME</th><th>DEVICE / CARD</th><th>EVENT</th></tr></thead><tbody>'+stage2Rows[id].map(row=>'<tr>'+row.map(v=>'<td>'+v+'</td>').join('')+'</tr>').join('')+'</tbody></table></div>';
+if(!state.seen.includes(id))state.seen.push(id);persist();render();
+show(d.name,'<div class="modalcontent"><button class="backfile" onclick="backModal()">← KEMBALI KE BERKAS SEBELUMNYA</button><div class="letterhead"><b>VEYRA RESEARCH CENTER / DATA EXPORT</b></div><h2>'+d.title+'</h2><div class="meta">'+d.meta+'</div>'+table+'</div>');
+};
