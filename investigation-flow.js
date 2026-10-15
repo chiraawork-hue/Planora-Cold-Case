@@ -717,3 +717,34 @@ if(!envelopes[3].items.includes('financialExposure80'))envelopes[3].items.push('
 
 const priorRiskDoc80=openDocument;
 openDocument=function(id){priorRiskDoc80(id);if(id==='financialExposure80'){const callout=document.querySelector('#modalBody .callout');if(callout)callout.remove();}};
+
+/* v82 — controlled clinical protocol, four archival pages */
+const previousProtocol82=openDocument;
+openDocument=function(id){
+ if(id!=='labmemo')return previousProtocol82(id);
+ if(!state.seen.includes(id))state.seen.push(id);persist();render();
+ const header=(num,sub)=>'<div style="display:flex;justify-content:space-between;gap:12px;border-bottom:2px solid #304748;padding-bottom:12px;font-size:11px;letter-spacing:.06em"><span>VEYRA RESEARCH CENTER<br>UNIT TATA KELOLA KLINIS</span><span style="text-align:right">VRC/CLN/VX17/SAP-02<br>HALAMAN '+num+' / 4</span></div><p style="font-size:11px;letter-spacing:.09em;color:#56676a">DOKUMEN TERKENDALI · REVISI 02 · 05 SEPTEMBER 2018</p><h2 style="font-size:21px;margin:12px 0">PROTOKOL ANALISIS KESELAMATAN VX-17</h2><p style="font-size:12px;border-bottom:1px solid #aaa;padding-bottom:12px">'+sub+'</p>';
+ const page=(body)=>'<section style="background:#f5f0e3;border:1px solid #bcb4a2;padding:26px 28px;margin:18px 0 24px;min-height:450px;box-sizing:border-box">'+body+'</section>';
+ const tbl=(heads,rows)=>'<div style="overflow-x:auto"><table style="border-collapse:collapse;width:100%;font-size:12px;margin:16px 0"><thead><tr>'+heads.map(h=>'<th style="border:1px solid #b5b0a4;background:#ded6c5;text-align:left;padding:9px">'+h+'</th>').join('')+'</tr></thead><tbody>'+rows.map(r=>'<tr>'+r.map(v=>'<td style="border:1px solid #b5b0a4;padding:9px;vertical-align:top">'+v+'</td>').join('')+'</tr>').join('')+'</tbody></table></div>';
+ const sign=(label,name,path)=>'<div style="flex:1;min-width:170px"><div style="font-size:11px">'+label+'</div><svg viewBox="0 0 210 65" width="185" height="67" aria-label="Contoh paraf pada salinan dokumen"><path d="'+path+'" fill="none" stroke="#304d68" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 54 L191 52" stroke="#304d68" stroke-width="1"/></svg><div style="border-top:1px solid #aaa;padding-top:7px;font-size:12px"><b>'+name+'</b></div></div>';
+ const html='<div class="modalcontent"><button class="backfile" onclick="backModal()">← KEMBALI KE BERKAS SEBELUMNYA</button>'+
+ page(header('01','Rencana analisis statistik (SAP) · Salinan terdistribusi')+
+ '<h3>1. TUJUAN DAN CAKUPAN</h3><p>Dokumen ini menetapkan aturan pembentukan populasi keselamatan, pengelompokan kejadian tidak diinginkan, dan pengendalian perubahan tabel untuk studi VX-17. Aturan berlaku sebelum pembekuan data dan penyusunan ringkasan eksternal.</p>'+
+ '<h3>2. KENDALI DOKUMEN</h3>'+tbl(['Revisi','Tanggal','Perubahan','Status'],[['00','20 AGU 2018','Rancangan awal definisi populasi','ARSIP'],['01','29 AGU 2018','Penegasan kriteria kejadian serius','DIGANTIKAN'],['02','05 SEP 2018','Pengendalian revisi dan tabel ringkasan','BERLAKU']])+
+ '<p><b>Distribusi:</b> Kepala Uji Klinis; Kepala Laboratorium; Pengelola Data; Audit Internal. <b>Dokumen terkait:</b> VX17-CRF, VX17-AE, VX17-DATA-LOCK.</p>')+
+ page(header('02','Ketentuan analisis · Bab 3')+
+ '<h3>3.1 DEFINISI POPULASI</h3><p><b>Safety Population</b> meliputi seluruh subjek yang telah menerima sedikitnya satu dosis produk investigasi. Subjek yang menghentikan terapi, mengundurkan diri, atau tidak menyelesaikan kunjungan akhir tetap dihitung apabila telah menerima dosis.</p>'+
+ '<h3>3.2 KLASIFIKASI KEJADIAN</h3>'+tbl(['Kode','Kategori','Kriteria pencatatan'],[['AE','Kejadian tidak diinginkan','Seluruh kejadian medis setelah pemberian dosis'],['SAE','Kejadian serius','Kematian, ancaman jiwa, rawat inap, kecacatan bermakna, atau kejadian penting menurut penilaian klinis'],['FOLLOW-UP','Tindak lanjut','Perkembangan status dicatat tanpa menghapus kejadian awal']])+
+ '<h3>3.3 DASAR PERHITUNGAN</h3><p>Proporsi subjek dengan SAE dihitung menggunakan jumlah subjek unik yang mengalami sedikitnya satu SAE sebagai pembilang dan seluruh subjek dalam Safety Population sebagai penyebut. Jumlah kejadian dan jumlah subjek terdampak disimpan sebagai variabel berbeda.</p>')+
+ page(header('03','Pemrosesan dan pemeriksaan mutu · Bab 4')+
+ '<h3>4.1 ALUR PEMROSESAN</h3><p>Data sumber dari formulir klinis diekspor ke dataset kerja. Pemutakhiran status subjek dan klasifikasi SAE harus dapat ditelusuri ke formulir sumber, tanggal entri, dan petugas yang berwenang.</p>'+
+ '<h3>4.2 REKONSILIASI</h3>'+tbl(['Tahap','Penanggung jawab fungsi','Rekaman wajib'],[['Ekspor data','Pengelola data','Nomor ekspor, waktu, checksum'],['Pemeriksaan SAE','Peninjau klinis','Daftar ketidaksesuaian dan disposisi'],['Tabel ringkasan','Analis data','Skrip/versi dan populasi terpilih'],['Persetujuan rilis','Peninjau independen','Versi, tanggal, nomor persetujuan']])+
+ '<h3>4.4 KENDALI REVISI</h3><p>Setiap perubahan pada tabel keluaran setelah pemeriksaan awal wajib memiliki alasan, identitas akun editor, waktu sistem, nilai sebelum/sesudah, serta persetujuan peninjau. Paraf pada salinan cetak hanya menandakan penelaahan dokumen; rekaman perubahan elektronik tetap menjadi sumber jejak edit.</p>')+
+ page(header('04','Pengesahan dokumen · Rekaman distribusi')+
+ '<h3>5. PENGESAHAN REVISI 02</h3><p>Kolom di bawah merupakan reproduksi tanda tangan pada salinan kerja yang didistribusikan tanggal 05 September 2018. Pengesahan protokol tidak sekaligus mengesahkan perubahan dataset berikutnya.</p>'+
+ '<div style="display:flex;flex-wrap:wrap;gap:26px;margin:32px 0">'+sign('DISUSUN / TATA KELOLA KLINIS','Dr. Maya Kirana','M15 45 Q25 6 31 20 T40 39 Q49 10 56 36 T74 30 Q82 16 90 36 T111 30 Q124 11 135 30 T163 24 Q172 17 189 21')+sign('DITINJAU / LABORATORIUM','Nadia Santoso','M18 43 Q29 14 37 38 Q42 51 50 26 T62 34 Q69 11 75 30 Q84 44 96 27 T122 30 Q132 21 145 25 T190 24')+'</div>'+
+ '<h3>6. REGISTER DISTRIBUSI</h3>'+tbl(['Salinan','Unit penerima','Tanggal'],[['01','Tata Kelola Klinis','05 SEP 2018'],['02','Laboratorium','05 SEP 2018'],['03','Pengelola Data','06 SEP 2018'],['04','Audit Internal','06 SEP 2018']])+
+ '<p style="font-size:11px;color:#777;margin-top:28px">SALINAN KERJA · VRC/CLN/VX17/SAP-02 · AKHIR DOKUMEN</p>')+
+ '<p class="small">Dokumen fiksi untuk permainan Planora Cold Case.</p></div>';
+ show('VX17_PROTOKOL_ANALISIS.pdf',html);
+};
