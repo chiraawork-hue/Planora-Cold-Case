@@ -500,3 +500,14 @@ docs.camConfigAudit={name:'CAM_AR03_CLOCK_SERVICE.log',title:'RIWAYAT LAYANAN JA
 ['18 SEP / 02:16','CAM-AR03 / TIME SERVICE CHECK / NTP REQUEST: TIMEOUT']
 ],callout:''};
 if(!envelopes[1].items.includes('camConfigAudit'))envelopes[1].items.push('camConfigAudit');
+
+/* v51 camera service table */
+const beforeCameraService=openDocument;
+openDocument=function(id){
+ if(id!=='camConfigAudit'){return beforeCameraService(id);}
+ if(!state.seen.includes(id))state.seen.push(id);persist();render();
+ const entries=[['17/09 21:14','SERVER','BOOT_COMPLETE','LOCAL_RTC','OK'],['17/09 21:16','SERVER','NTP_CHECK','SERVER-NTP-01','TIMEOUT'],['17/09 23:09','SERVER','MAINTENANCE_REVIEW','TIME_SETTINGS','VIEW ONLY'],['18/09 01:45','CAMERA','TIME_CHECK','LOCAL_RTC','UNSYNC'],['18/09 02:03','CAMERA','LIGHT_PULSE','FRAME_MARKER','CAPTURED'],['18/09 02:05','CAMERA','TIME_CHECK','LOCAL_RTC','UNSYNC'],['18/09 02:16','SERVER','NTP_CHECK','SERVER-NTP-01','TIMEOUT']];
+ const rows=entries.map((r,i)=>'<tr><td>'+String(i+1).padStart(2,'0')+'</td>'+r.map(v=>'<td>'+v+'</td>').join('')+'</tr>').join('');
+ const html='<div class="modalcontent"><button class="backfile" onclick="backModal()">← KEMBALI KE BERKAS SEBELUMNYA</button><article class="time-compare"><header><strong>VEYRA RESEARCH CENTER / IT SYSTEMS</strong><span>SERVICE HISTORY EXPORT</span></header><h2>RIWAYAT LAYANAN JAM CAM-AR03</h2><div class="time-meta"><span>IT-CAM03-0918</span><span>17–18 SEP 2018</span><span>TIMEBASE PER ROW</span></div><div class="time-scroll"><table><thead><tr><th>SEQ</th><th>TIME</th><th>CLOCK</th><th>EVENT</th><th>PARAMETER</th><th>RESULT</th></tr></thead><tbody>'+rows+'</tbody></table></div><p>SERVER = waktu log server; CAMERA = waktu lokal yang tertulis pada frame kamera. Catatan ini tidak menetapkan identitas operator atau membuktikan perubahan konfigurasi.</p><footer>IT-CAM03-0918 / FICTIONAL TECHNICAL RECORD</footer></article></div>';
+ show('CAM_AR03_CLOCK_SERVICE.log',html);
+};
