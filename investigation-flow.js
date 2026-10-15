@@ -470,3 +470,21 @@ const rows=records.map((r,i)=>'<tr><td>'+String(i+1).padStart(2,'0')+'</td>'+r.m
 const html='<div class="modalcontent"><button class="backfile" onclick="backModal()">← KEMBALI KE BERKAS SEBELUMNYA</button><article class="master-register"><header><strong>VEYRA RESEARCH CENTER / RECORDS CONTROL</strong><span>CONTROLLED COPY · RC-MR-03</span></header><h2>REGISTER REFERENSI UNIT & PROYEK</h2><div class="master-meta"><span>REVISION: 03</span><span>EFFECTIVE: 17 SEP 2018</span><span>PAGE: 01 / 01</span></div><div class="master-scroll"><table><thead><tr><th>NO</th><th>CODE</th><th>CLASS</th><th>REFERENCE</th><th>OWNER UNIT</th><th>STATUS</th><th>REV. DATE</th></tr></thead><tbody>'+rows+'</tbody></table></div><div class="master-approval"><span>PREPARED BY: RECORDS CONTROL</span><span>APPROVED: RC / 17 SEP 2018</span></div><footer>VRC / RC-MR-03 / CONTROLLED REFERENCE REGISTER<br>Rekonstruksi fiktif untuk Planora Cold Case.</footer></article></div>';
 show('VRC_MASTER_REFERENCE_REGISTER_REV03.pdf',html);
 };
+
+/* v49 — technical clock comparison report, multiple synchronized test records */
+docs.stage2Clock={name:'IT_CLOCK_COMPARISON.csv',title:'LAPORAN SINKRONISASI WAKTU PERANGKAT',meta:'IT SYSTEMS / 18 SEP 2018 / CALIBRATION EXPORT',sections:[],callout:''};
+const priorTimeComparisonOpen=openDocument;
+openDocument=function(id){
+if(id!=='stage2Clock'){priorTimeComparisonOpen(id);return;}
+if(!state.seen.includes(id))state.seen.push(id);persist();render();
+const records=[
+['01','01:30:00','01:30:00','01:23:00','NTP HEARTBEAT','CAM: LOCAL'],
+['02','01:45:00','01:45:00','01:38:00','TIME CHECK','CAM: LOCAL'],
+['03','02:00:00','02:00:00','01:53:00','TIME CHECK','CAM: LOCAL'],
+['04','02:10:00','02:10:00','02:03:00','LIGHT / SYNC PULSE','CAM: LOCAL'],
+['05','02:12:00','02:12:00','02:05:00','POST-PULSE SAMPLE','CAM: LOCAL']
+];
+const rows=records.map(r=>'<tr>'+r.map(v=>'<td>'+v+'</td>').join('')+'</tr>').join('');
+const html='<div class="modalcontent"><button class="backfile" onclick="backModal()">← KEMBALI KE BERKAS SEBELUMNYA</button><article class="time-compare"><header><strong>VEYRA RESEARCH CENTER / INFORMATION TECHNOLOGY</strong><span>SYSTEM AUDIT EXPORT</span></header><h2>LAPORAN SINKRONISASI WAKTU PERANGKAT</h2><div class="time-meta"><span>REF: IT-TIME-0918/04</span><span>DATE: 18 SEP 2018</span><span>TECHNICAL COPY</span></div><h3>I. PERANGKAT PEMBANDING</h3><div class="time-scroll"><table><thead><tr><th>DEVICE ID</th><th>FUNCTION</th><th>TIME SOURCE</th><th>SYNC STATUS</th></tr></thead><tbody><tr><td>SERVER-NTP-01</td><td>REFERENCE SERVER</td><td>NTP / WIB</td><td>LOCKED</td></tr><tr><td>DC-AR03</td><td>DOOR CONTROLLER</td><td>SERVER-NTP-01</td><td>LOCKED</td></tr><tr><td>CAM-AR03</td><td>CORRIDOR CAMERA</td><td>LOCAL CLOCK</td><td>SERVICE PENDING</td></tr></tbody></table></div><h3>II. HASIL PENGUJIAN</h3><div class="time-scroll"><table><thead><tr><th>SEQ</th><th>SERVER WIB</th><th>DC-AR03</th><th>CAM-AR03</th><th>TEST MARKER</th><th>REMARK</th></tr></thead><tbody>'+rows+'</tbody></table></div><h3>III. STATUS PEMERIKSAAN</h3><p>Ekspor diagnostik memuat sampel pembacaan perangkat dan penanda uji. Koreksi jam kamera belum tercatat pada salinan ini. Identitas orang pada rekaman tidak diperiksa dalam dokumen pengujian waktu.</p><div class="time-approval"><span>PREPARED: IT SYSTEMS</span><span>EXPORT ID: IT-TIME-0918/04</span></div><footer>CONTROLLED TECHNICAL COPY / REKONSTRUKSI FIKTIF</footer></article></div>';
+show('IT_CLOCK_COMPARISON.csv',html);
+};
