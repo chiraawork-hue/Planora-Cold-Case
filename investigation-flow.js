@@ -768,3 +768,38 @@ openEnvelope=function(i){
  const question=document.querySelector('#modalBody .question p');
  if(question)question.textContent='PERTANYAAN AMPLOP 04: Pada AUDIT_TERMINAL_EVENTS.log, cari SESSION untuk TASK_HOLD pukul 01.38.22 WIB. Lalu buka AUDIT_JOB_QUEUE_0918.csv dan temukan nomor JOB dengan ACTION AUDIT_HOLD yang diakui pada 01.38.27 WIB. Gabungkan ID SESSION dan tiga digit nomor JOB, tanpa spasi atau tanda baca.';
 };
+
+/* v85 — risk register with auditable scoring and 5×5 heat map */
+const priorRisk85=openDocument;
+openDocument=function(id){
+ if(id!=='financialExposure80')return priorRisk85(id);
+ if(!state.seen.includes(id))state.seen.push(id);persist();render();
+ const risks=[
+ ['R-01','Ketidaksesuaian populasi keselamatan','Klinis',4,5,'Terbuka','Rekonsiliasi sumber data'],
+ ['R-02','Penundaan pencairan tahap lanjut','Keuangan',3,4,'Dalam telaah','Verifikasi syarat pembayaran'],
+ ['R-03','Ketidakpatuhan pengendalian revisi','Audit Internal',4,4,'Terbuka','Uji log perubahan dan persetujuan'],
+ ['R-04','Gangguan operasional laboratorium','Operasional',2,3,'Dipantau','Rencana kesinambungan operasi'],
+ ['R-05','Biaya kontrak akibat penundaan','Keuangan',3,3,'Dalam telaah','Kajian klausul dan proyeksi biaya']
+ ];
+ const level=n=>n>=20?'KRITIS':n>=12?'TINGGI':n>=6?'SEDANG':'RENDAH';
+ const color=n=>n>=20?'#c87870':n>=12?'#e8a779':n>=6?'#efdb9f':'#d4e2cc';
+ const table=(heads,rows)=>'<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:12px;margin:16px 0"><thead><tr>'+heads.map(h=>'<th style="padding:8px;border:1px solid #aaa;background:#d9cfb9;text-align:left">'+h+'</th>').join('')+'</tr></thead><tbody>'+rows.map(row=>'<tr>'+row.map(c=>'<td style="padding:8px;border:1px solid #b6ae9e;vertical-align:top">'+c+'</td>').join('')+'</tr>').join('')+'</tbody></table></div>';
+ const head=(page,subtitle)=>'<div style="display:flex;justify-content:space-between;border-bottom:2px solid #294448;padding-bottom:12px;font-size:11px"><span>VEYRA RESEARCH CENTER<br>DIREKTORAT KEUANGAN / TATA KELOLA KLINIS</span><span style="text-align:right">VRC/RISK/VX17/014<br>HALAMAN '+page+' / 3</span></div><p style="font-size:11px;color:#53696b">SALINAN TERKENDALI · 14 SEPTEMBER 2018 · REV 01</p><h2 style="font-size:21px">REGISTER RISIKO PROGRAM VX-17</h2><p style="font-size:12px;border-bottom:1px solid #b7b0a0;padding-bottom:12px">'+subtitle+'</p>';
+ const page=body=>'<section style="background:#f5f0e3;border:1px solid #bdb4a1;padding:24px 26px;margin:16px 0 24px;box-sizing:border-box">'+body+'</section>';
+ const grid='<div style="overflow-x:auto"><div style="display:grid;grid-template-columns:48px repeat(5,minmax(68px,1fr));gap:3px;min-width:420px">'+[5,4,3,2,1].map(y=>'<div style="display:contents"><div style="display:flex;align-items:center;justify-content:center;font-size:12px">'+y+'</div>'+[1,2,3,4,5].map(x=>{const matches=risks.filter(r=>r[3]===x&&r[4]===y);return '<div style="background:'+color(x*y)+';min-height:65px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:3px;color:#302b25;font-size:11px;font-weight:700">'+matches.map(r=>'<span>'+r[0]+'</span>').join('')+'</div>'}).join('')+'</div>').join('')+'<div></div>'+[1,2,3,4,5].map(x=>'<div style="text-align:center;font-size:12px">'+x+'</div>').join('')+'</div></div>';
+ const html='<div class="modalcontent"><button class="backdoc" onclick="openEnvelope(3)">← KEMBALI KE BERKAS SEBELUMNYA</button>'+
+ page(head(1,'DAFTAR PENILAIAN RISIKO · KEMUNGKINAN × DAMPAK')+
+ '<p><b>1. TUJUAN</b></p><p>Register ini mendokumentasikan penilaian risiko program pada tanggal peninjauan. Skor mencerminkan estimasi sebelum tindakan mitigasi, bukan bukti bahwa suatu kejadian telah terjadi.</p>'+
+ table(['ID','Uraian risiko','Pemilik risiko','K','D','Skor','Kategori','Status'],risks.map(r=>[r[0],r[1],r[2],r[3],r[4],r[3]*r[4],level(r[3]*r[4]),r[5]]))+
+ '<p style="font-size:12px">K = kemungkinan; D = dampak; skala masing-masing 1–5. Skor = K × D. Rentang: 1–5 rendah, 6–11 sedang, 12–19 tinggi, 20–25 kritis.</p>')+
+ page(head(2,'MATRIKS PENILAIAN 5 × 5 · POSISI RISIKO PER 14 SEP 2018')+
+ '<h3>2. PETA PANAS RISIKO</h3><p style="font-size:12px">Sumbu vertikal: dampak (meningkat ke atas). Sumbu horizontal: kemungkinan (meningkat ke kanan).</p>'+grid+
+ '<p style="text-align:center;font-size:12px">KEMUNGKINAN →</p><p style="font-size:12px">Warna menunjukkan kelas skor. Posisi kode sesuai angka K dan D pada register halaman 1.</p>'+
+ table(['Kelas','Skor','Ketentuan eskalasi'],[['RENDAH','1–5','Pemantauan rutin'],['SEDANG','6–11','Rencana pengendalian unit'],['TINGGI','12–19','Tinjauan komite risiko'],['KRITIS','20–25','Eskalasi kepada direksi dan audit']]))+
+ page(head(3,'TINDAK LANJUT, REFERENSI, DAN RIWAYAT PENILAIAN')+
+ '<h3>3. REGISTER TINDAK LANJUT</h3>'+table(['ID','Tindakan yang diminta','Batas telaah','Referensi'],risks.map((r,i)=>[r[0],r[6],['17 SEP','18 SEP','17 SEP','21 SEP','20 SEP'][i]+' 2018',['VX17/SAFETY/RECON','FIN/VX17/DISB','VX17/REV/04','OPS/BCP/09','FIN/CONTRACT/12'][i]]))+
+ '<h3>4. RIWAYAT PENILAIAN</h3>'+table(['Tanggal','Revisi','Keterangan','Unit'],[['05 SEP 2018','00','Pembukaan register risiko program','Tata Kelola Klinis'],['14 SEP 2018','01','Penilaian ulang atas ketidaksesuaian pelaporan dan status pencairan','Keuangan / Klinis']])+
+ '<h3>5. DISTRIBUSI DAN BATASAN</h3><p>Salinan: Direksi, Keuangan, Tata Kelola Klinis, Audit Internal. Kepemilikan risiko menunjukkan unit yang wajib menindaklanjuti, bukan identitas pembuat perubahan data atau pelaksana instruksi.</p><p style="font-size:11px;color:#716e66">VRC/RISK/VX17/014 · AKHIR REGISTER</p>')+
+ '<p class="small">Dokumen fiksi untuk permainan Planora Cold Case.</p></div>';
+ show('VX17_RISK_REGISTER.pdf',html);
+};
