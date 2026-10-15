@@ -158,3 +158,15 @@
 .bap-ink{display:block;width:min(180px,95%);height:62px;margin:0 auto;filter:drop-shadow(.3px .5px .3px #a2a9ad)}.bap-sign-space{display:flex;align-items:end;justify-content:center}
 
 .facility-sheet{background:#f0eadc;color:#263630;padding:clamp(14px,3vw,30px);border:1px solid #b9b2a4;font:13px/1.6 Arial,sans-serif}.facility-sheet header{display:flex;justify-content:space-between;gap:12px;border-bottom:2px solid #66756c;padding-bottom:12px;font:11px monospace}.facility-sheet h2{font-size:20px}.facility-sheet h3{font-size:14px;border-bottom:1px solid #b5b2a7;margin-top:26px}.facility-plan svg{display:block;width:100%;height:auto;border:1px solid #b9b2a4}.facility-table{overflow-x:auto}.facility-table table{border-collapse:collapse;width:100%;min-width:450px;font:12px monospace}.facility-table th,.facility-table td{border:1px solid #b5b2a7;padding:10px;text-align:left}.facility-table th{background:#ded8ca}.facility-note{font-size:12px;color:#5b675f}.facility-sheet footer{border-top:1px solid #aaa;margin-top:30px;padding-top:12px;font:10px monospace}
+
+/* v48 master records register */
+.master-register{background:#eee8db;color:#26342e;border:1px solid #b5b0a4;padding:clamp(14px,3vw,30px);font:12px/1.6 Arial,sans-serif}
+.master-register header,.master-meta,.master-approval{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;border-bottom:1px solid #aaa99d;padding:10px 0;font:11px monospace}
+.master-register header{border-bottom:2px solid #5f7069}
+.master-register h2{font-size:19px;letter-spacing:.02em;margin:20px 0}
+.master-scroll{overflow-x:auto;margin:22px 0}
+.master-register table{border-collapse:collapse;width:100%;min-width:830px;font:11px/1.5 monospace}
+.master-register th,.master-register td{border:1px solid #aaa99d;padding:9px 8px;text-align:left;white-space:nowrap}
+.master-register th{background:#d6d4c8}
+.master-register tbody tr:nth-child(even){background:#e5e1d6}
+.master-register footer{border-top:2px solid #88928a;text-align:center;padding-top:12px;margin-top:25px;font:10px monospace;color:#657069}
