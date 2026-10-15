@@ -532,3 +532,8 @@ data.push(['3011','KARTU KONTRAKTOR','TAMU PEMELIHARAAN','WAJIB PENDAMPING','AKT
 const rows=data.map((r,i)=>'<tr><td>'+String(i+1).padStart(2,'0')+'</td>'+r.map(v=>'<td>'+v+'</td>').join('')+'</tr>').join('');
 show('SECURITY_CARD_ASSIGNMENT_2018.csv','<div class="modalcontent"><button class="backfile" onclick="backModal()">← KEMBALI KE BERKAS SEBELUMNYA</button><article class="time-compare"><header><strong>VEYRA RESEARCH CENTER / SISTEM KEAMANAN</strong><span>SEC-AC-0917 / EKSPOR</span></header><h2>REGISTER INVENTARIS KARTU AKSES</h2><div class="time-meta"><span>DATA PER: 17 SEP 2018</span><span>KONTROL AKSES</span></div><div class="time-scroll"><table><thead><tr><th>NO</th><th>NOMOR KARTU</th><th>PEMEGANG TERDAFTAR</th><th>JABATAN</th><th>HAK AKSES</th><th>STATUS</th><th>JENIS</th></tr></thead><tbody>'+rows+'</tbody></table></div><p>PEMEGANG TERDAFTAR adalah data registrasi kartu. Log pembaca pintu tidak memuat verifikasi identitas fisik pengguna.</p><footer>SEC-AC-0917 / SALINAN TERKENDALI</footer></article></div>');
 };
+
+/* v56 — susunan bacaan Amplop 02: alasan pemeriksaan → TKP → arsip → akses → waktu → kesaksian */
+const urutanBerkasAmplop02=['archiveExaminationOrder','scene','map','index','personnelIndex','sceneCardRegistry','stage2Door','cctvMovement','stage2Clock','camConfigAudit','bapNadia','bapSiska','bapFarhan'];
+const daftarAmplop02=envelopes[1].items;
+envelopes[1].items=[...urutanBerkasAmplop02.filter(id=>daftarAmplop02.includes(id)),...daftarAmplop02.filter(id=>!urutanBerkasAmplop02.includes(id))];
