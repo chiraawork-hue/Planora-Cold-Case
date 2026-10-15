@@ -714,3 +714,6 @@ openDocument=function(id){
 /* v80: risk register */
 docs.financialExposure80={name:'VX17_RISK_REGISTER.pdf',title:'REGISTER RISIKO PROGRAM VX-17',meta:'FINANCE / CLINICAL GOVERNANCE · 14 SEP 2018',sections:[['Pencairan Tahap Lanjut','Status: ditahan sementara sampai persyaratan pelaporan terpenuhi.'],['Kewajiban Pelaporan','Perbedaan populasi keselamatan antara data internal dan laporan publik memerlukan rekonsiliasi dan jejak persetujuan revisi.'],['Risiko Kontrak','Penundaan atau penghentian program dapat mengubah jadwal pembayaran dan meningkatkan biaya operasional.'],['Distribusi','Salinan untuk Direksi, Keuangan, Tata Kelola Klinis, dan Audit Internal.']],callout:''};
 if(!envelopes[3].items.includes('financialExposure80'))envelopes[3].items.push('financialExposure80');
+
+const priorRiskDoc80=openDocument;
+openDocument=function(id){priorRiskDoc80(id);if(id==='financialExposure80'){const callout=document.querySelector('#modalBody .callout');if(callout)callout.remove();}};
