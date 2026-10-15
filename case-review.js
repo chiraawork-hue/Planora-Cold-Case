@@ -58,3 +58,42 @@ return;
 }
 priorCodeCheck(i);
 };
+
+/* V31 — Evidence Contradiction: compare two records before submitting stage 2. */
+const contradictionFiles=[
+['cctvMovement','CCTV / rekaman pergerakan'],
+['stage2Clock','IT / pembanding waktu'],
+['stage2Door','SECURITY / log pintu'],
+['personnelIndex','PERSONNEL / data personel'],
+['initial','INSPECTION / laporan awal']
+];
+const previousReviewSection=reviewSection;
+reviewSection=function(i){
+const base=previousReviewSection(i);
+if(i!==1)return base;
+const saved=reviews[i]||{};
+const safe=v=>String(v||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]));
+const options=selected=>'<option value="">— PILIH BERKAS —</option>'+contradictionFiles.map(([id,name])=>'<option value="'+id+'" '+(selected===id?'selected':'')+'>'+name+'</option>').join('');
+const panel='<div class="contradiction-panel"><h3>EVIDENCE CONTRADICTION / BABAK 02</h3><p>Pilih dua sumber bukti, lalu jelaskan ketidaksesuaian atau batas kesimpulan yang kamu temukan. Dua catatan yang tampak bertentangan belum tentu benar-benar saling membantah.</p><label>BERKAS A</label><select id="contradictionA">'+options(saved.contradictionA)+'</select><label>BERKAS B</label><select id="contradictionB">'+options(saved.contradictionB)+'</select><label>ANALISIS KAMU</label><textarea id="contradictionReason" placeholder="Catat waktu, kejadian, dan apa yang dapat atau belum dapat dibuktikan...">'+safe(saved.contradictionReason)+'</textarea></div>';
+return base.replace('<button class="primary" onclick="submitReview('+i+')">',panel+'<button class="primary" onclick="submitReview('+i+')">');
+};
+const previousSubmitReview=submitReview;
+submitReview=function(i){
+if(i===1){
+const a=document.getElementById('contradictionA')?.value;
+const b=document.getElementById('contradictionB')?.value;
+const reason=document.getElementById('contradictionReason')?.value.trim()||'';
+if(!a||!b||a===b||reason.length<25){
+const msg=document.getElementById('reviewStatus');
+if(msg)msg.textContent='Pilih dua berkas berbeda dan tulis analisis minimal 25 karakter.';
+return;
+}
+previousSubmitReview(i);
+if(reviews[i]?.id&&reviews[i]?.evidence&&reviews[i]?.reason){
+reviews[i].contradictionA=a;reviews[i].contradictionB=b;reviews[i].contradictionReason=reason;
+localStorage.setItem(REVIEW_KEY,JSON.stringify(reviews));
+}
+return;
+}
+previousSubmitReview(i);
+};
