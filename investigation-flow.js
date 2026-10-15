@@ -624,3 +624,33 @@ openDocument=function(id){
  const qa=w.qa.map((p,i)=>'<div class="bap-entry"><div class="bap-question"><b>P'+String(i+1).padStart(2,'0')+' / PEMERIKSA</b><p>'+p[0]+'</p></div><div class="bap-answer"><b>J'+String(i+1).padStart(2,'0')+' / '+w.initials+'</b><p>'+p[1]+'</p></div></div>').join('');
  show(w.name,'<div class="modalcontent"><button class="backfile" onclick="backModal()">← KEMBALI KE BERKAS SEBELUMNYA</button><article class="bap-sheet"><header><strong>VEYRA RESEARCH CENTER</strong><span>UNIT INVESTIGASI INTERNAL / SALINAN</span></header><h2>BERITA ACARA PEMERIKSAAN</h2><p class="bap-subtitle">'+w.number+' / 19 SEPTEMBER 2018</p><div class="bap-person"><div><b>NAMA</b><span>'+w.person+'</span></div><div><b>JABATAN</b><span>'+w.role+'</span></div><div><b>UNIT</b><span>'+w.unit+'</span></div><div><b>STATUS</b><span>PEMBERI KETERANGAN</span></div></div><h3>TRANSKRIP PEMERIKSAAN</h3>'+qa+'<div class="bap-signatures"><div>PEMERIKSA<br>UNIT INVESTIGASI INTERNAL</div><div>PEMBERI KETERANGAN<br>'+w.person+'</div></div><footer>'+w.number+' / SALINAN KERJA</footer></article></div>');
 };
+
+/* v73 — lembar penilaian sementara, tanpa kunci pelaku sebelum Amplop 04 */
+function openAssessment03(){
+ const key='veyra_assessment_03';
+ let saved={people:[],basis:'alibi',reason:''};
+ try{saved=Object.assign(saved,JSON.parse(localStorage.getItem(key)||'{}'))}catch(e){}
+ const names=suspect.map(p=>({id:p.id,name:p.name}));
+ const cards=names.map(p=>'<label class="assessment-person"><input type="checkbox" name="assessmentPerson" value="'+p.id+'" '+(saved.people.includes(p.id)?'checked':'')+' onchange="assessmentSelection03(this)"> '+p.name+'</label>').join('');
+ const opts=[['alibi','Keterangan keberadaan'],['akses','Kewenangan dan akses'],['dokumen','Perbedaan catatan administratif'],['lainnya','Temuan lain yang dapat diuji']].map(x=>'<option value="'+x[0]+'" '+(saved.basis===x[0]?'selected':'')+'>'+x[1]+'</option>').join('');
+ show('ASSESSMENT_03_PERSONNEL.pdf','<div class="modalcontent"><button class="backfile" onclick="backModal()">← KEMBALI KE BERKAS SEBELUMNYA</button><article class="archive-ledger assessment-sheet"><div class="archive-ledger-head"><div><b>VEYRA RESEARCH CENTER</b><small>UNIT INVESTIGASI INTERNAL / SALINAN KERJA</small></div></div><h2>LEMBAR PENILAIAN PERSONEL</h2><div class="archive-ledger-meta"><span>INV-019-AS03</span><span>TAHAP PEMERIKSAAN 03</span><span>BUKAN PENETAPAN KESALAHAN</span></div><p>Tetapkan dua personel untuk pemeriksaan lanjutan berdasarkan dokumen yang telah diperoleh. Penilaian bersifat sementara dan dapat direvisi.</p><h3>PERSONEL YANG DIPERIKSA LANJUT</h3><div class="assessment-grid">'+cards+'</div><p id="assessmentCount03" class="assessment-status">Pilih tepat dua personel.</p><label class="assessment-label" for="assessmentBasis03">DASAR PEMERIKSAAN</label><select id="assessmentBasis03">'+opts+'</select><label class="assessment-label" for="assessmentReason03">REFERENSI BERKAS DAN URAIAN</label><textarea id="assessmentReason03" rows="6" placeholder="Cantumkan sedikitnya dua sumber dokumen, waktu atau peristiwa terkait, dan batas kesimpulan..."></textarea><button class="assessment-save" onclick="saveAssessment03()">SIMPAN PENILAIAN SEMENTARA</button><p id="assessmentStatus03" role="status" class="assessment-status"></p><div class="archive-ledger-foot"><span>INV / COPY 01</span><span>ASSESSMENT 03</span></div></article></div>');
+ document.getElementById('assessmentReason03').value=saved.reason||'';
+ assessmentSelection03();
+}
+function assessmentSelection03(el){
+ const checked=[...document.querySelectorAll('input[name="assessmentPerson"]:checked')];
+ if(el&&checked.length>2){el.checked=false}
+ const count=document.querySelectorAll('input[name="assessmentPerson"]:checked').length;
+ const elCount=document.getElementById('assessmentCount03');if(elCount)elCount.textContent=count+' dari 2 personel dipilih.';
+}
+function saveAssessment03(){
+ const people=[...document.querySelectorAll('input[name="assessmentPerson"]:checked')].map(e=>e.value);
+ const basis=document.getElementById('assessmentBasis03').value;
+ const reason=document.getElementById('assessmentReason03').value.trim();
+ const status=document.getElementById('assessmentStatus03');
+ const citations=reason.match(/(?:BAP[-_]|\.csv|\.log|\.pdf|AR-03|VX17|VX-17|ENG\/STR)/gi)||[];
+ if(people.length!==2){status.textContent='Pilih tepat dua personel.';return}
+ if(reason.length<70||citations.length<2){status.textContent='Uraian minimal 70 karakter dan sertakan sekurangnya dua rujukan dokumen atau catatan yang dapat diuji.';return}
+ localStorage.setItem('veyra_assessment_03',JSON.stringify({people,basis,reason,savedAt:new Date().toISOString()}));
+ status.textContent='PENILAIAN SEMENTARA TERSIMPAN DI PERANGKAT INI. Kamu dapat merevisi pilihan setelah memeriksa barang bukti. Penilaian ini belum menetapkan siapa yang bersalah.';
+}
