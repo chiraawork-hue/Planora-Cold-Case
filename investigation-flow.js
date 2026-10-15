@@ -666,7 +666,7 @@ const bapSignaturePaths={
 'Farhan Mahendra':['M16 49 C22 29 24 10 34 13 C47 17 31 31 23 34 C47 33 53 18 60 24 C65 31 53 40 70 34 C82 28 83 16 93 21 C103 26 89 39 109 34 C125 28 132 18 152 20','M27 46 C68 44 114 43 163 35'],
 'Elena Prameswari':['M16 38 C28 16 45 7 50 15 C55 23 31 31 27 40 C37 47 62 33 68 25 C75 16 79 30 88 30 C100 30 103 18 111 23 C120 29 109 38 129 30 C140 26 147 21 158 18','M34 48 C77 44 117 42 162 36']
 };
-const examinerSignature=['M12 44 C20 20 30 11 37 16 C43 21 26 42 43 38 C55 33 58 20 65 25 C72 31 60 42 79 35 C92 27 93 19 102 25 C112 32 101 40 121 32 C133 27 146 23 161 20','M26 49 C74 42 119 43 165 34'];
+const examinerSignature=['M10 44 L24 15 Q30 8 34 19 L28 39 Q46 34 55 24 Q61 19 62 35 Q67 43 81 30 L96 17 Q99 14 102 25 L97 39 Q117 30 130 32 L161 24','M18 53 Q70 56 113 48 L156 43'];
 function signatureInk74(paths){return '<svg class="bap-ink bap-signature-v74" viewBox="0 0 180 62" role="img" aria-label="Goresan tanda tangan fiktif">'+paths.map((d,i)=>'<path d="'+d+'" fill="none" stroke="#283d54" stroke-width="'+(i?1.25:1.85)+'" stroke-linecap="round" stroke-linejoin="round"/>').join('')+'</svg>'}
 const previousBapSignatureOpen=openDocument;
 openDocument=function(id){
