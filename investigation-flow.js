@@ -748,3 +748,23 @@ openDocument=function(id){
  '<p class="small">Dokumen fiksi untuk permainan Planora Cold Case.</p></div>';
  show('VX17_PROTOKOL_ANALISIS.pdf',html);
 };
+
+/* v84 — cross-document transition, envelope 03 → 04 */
+docs.auditQueue84={name:'AUDIT_JOB_QUEUE_0918.csv',title:'REGISTER ANTRIAN TUGAS AUDIT',meta:'AUDIT-SVC / JOB SCHEDULER · 18 SEP 2018 · WIB',sections:[
+['SUMBER','HOST: AUD-SRV-01 | SERVICE: AUDIT-SVC | EXPORT: Q-0918-02 | WAKTU: WIB'],
+['01:38:27 | JOB-118','EVENT: QUEUE_ACK | ACTION: AUDIT_HOLD | TARGET: VX17-AUDIT | STATUS: ACCEPTED'],
+['01:42:11 | JOB-119','EVENT: QUEUE_ACK | ACTION: REPORT_EXPORT | TARGET: VX17-SUM | STATUS: ACCEPTED'],
+['01:53:08 | JOB-120','EVENT: QUEUE_ACK | ACTION: INDEX_REFRESH | TARGET: DOC-ARCHIVE | STATUS: ACCEPTED'],
+['02:04:18 | JOB-118','EVENT: REMOTE_REQ | ACTION: AUDIT_HOLD | TARGET: VX17-AUDIT | STATUS: PENDING'],
+['02:12:44 | JOB-121','EVENT: QUEUE_ACK | ACTION: SENSOR_EXPORT | TARGET: STR-C04 | STATUS: ACCEPTED']
+],callout:''};
+if(!envelopes[2].items.includes('auditQueue84'))envelopes[2].items.push('auditQueue84');
+envelopes[3].code='6F2118';
+envelopes[3].hint='Hubungkan sesi TASK_HOLD pada log terminal dengan nomor pekerjaan AUDIT_HOLD pada register antrean audit.';
+const priorEnvelope84=openEnvelope;
+openEnvelope=function(i){
+ priorEnvelope84(i);
+ if(i!==3||i<state.unlocked||i>state.unlocked)return;
+ const question=document.querySelector('#modalBody .question p');
+ if(question)question.textContent='PERTANYAAN AMPLOP 04: Pada AUDIT_TERMINAL_EVENTS.log, cari SESSION untuk TASK_HOLD pukul 01.38.22 WIB. Lalu buka AUDIT_JOB_QUEUE_0918.csv dan temukan nomor JOB dengan ACTION AUDIT_HOLD yang diakui pada 01.38.27 WIB. Gabungkan ID SESSION dan tiga digit nomor JOB, tanpa spasi atau tanda baca.';
+};
