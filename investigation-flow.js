@@ -742,7 +742,7 @@ openDocument=function(id){
  '<h3>4.4 KENDALI REVISI</h3><p>Setiap perubahan pada tabel keluaran setelah pemeriksaan awal wajib memiliki alasan, identitas akun editor, waktu sistem, nilai sebelum/sesudah, serta persetujuan peninjau. Paraf pada salinan cetak hanya menandakan penelaahan dokumen; rekaman perubahan elektronik tetap menjadi sumber jejak edit.</p>')+
  page(header('04','Pengesahan dokumen · Rekaman distribusi')+
  '<h3>5. PENGESAHAN REVISI 02</h3><p>Kolom di bawah merupakan reproduksi tanda tangan pada salinan kerja yang didistribusikan tanggal 05 September 2018. Pengesahan protokol tidak sekaligus mengesahkan perubahan dataset berikutnya.</p>'+
- '<div style="display:flex;flex-wrap:wrap;gap:26px;margin:32px 0">'+sign('DISUSUN / TATA KELOLA KLINIS','Dr. Maya Kirana','M15 45 Q25 6 31 20 T40 39 Q49 10 56 36 T74 30 Q82 16 90 36 T111 30 Q124 11 135 30 T163 24 Q172 17 189 21')+sign('DITINJAU / LABORATORIUM','Nadia Santoso','M18 43 Q29 14 37 38 Q42 51 50 26 T62 34 Q69 11 75 30 Q84 44 96 27 T122 30 Q132 21 145 25 T190 24')+'</div>'+
+ '<div style="display:flex;flex-wrap:wrap;gap:26px;margin:32px 0">'+sign('DISUSUN / TATA KELOLA KLINIS','Dr. Maya Kirana',bapSignaturePaths['Maya Kirana'])+sign('DITINJAU / LABORATORIUM','Nadia Santoso',bapSignaturePaths['Nadia Santoso'])+'</div>'+
  '<h3>6. REGISTER DISTRIBUSI</h3>'+tbl(['Salinan','Unit penerima','Tanggal'],[['01','Tata Kelola Klinis','05 SEP 2018'],['02','Laboratorium','05 SEP 2018'],['03','Pengelola Data','06 SEP 2018'],['04','Audit Internal','06 SEP 2018']])+
  '<p style="font-size:11px;color:#777;margin-top:28px">SALINAN KERJA · VRC/CLN/VX17/SAP-02 · AKHIR DOKUMEN</p>')+
  '<p class="small">Dokumen fiksi untuk permainan Planora Cold Case.</p></div>';
