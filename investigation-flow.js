@@ -302,3 +302,6 @@ article.querySelectorAll('.scene-page-nav button')[0].disabled=n===0;
 article.querySelectorAll('.scene-page-nav button')[1].disabled=n===2;
 article.scrollIntoView({block:'start',behavior:'smooth'});
 }
+
+/* v39: CCTV clock offset must be deduced from independent records, not revealed. */
+for(const envelope of envelopes){envelope.items=envelope.items.filter(id=>id!=='cctv');}
