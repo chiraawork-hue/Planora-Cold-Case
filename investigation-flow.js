@@ -19,11 +19,7 @@ const prompts=['Pada malam kejadian, pukul berapa sinyal getaran pertama kali me
 box.innerHTML='<h3>'+names[i]+'</h3><p class="investigation-question">'+prompts[i]+'</p><p><b>FORMAT JAWABAN:</b> '+(i<2?'HHMM — empat digit tanpa tanda titik atau titik dua.':'Kode elemen + kode proyek, huruf dan angka tanpa spasi atau tanda hubung.')+'</p><label for="chapterAnswer'+i+'">MASUKKAN KODE AKSES AMPLOP '+(i+2)+'</label><div class="answerrow"><input id="chapterAnswer'+i+'" autocomplete="off" placeholder="'+(i<2?'Contoh format: 0130':'Contoh format: A1XY02')+'"><button class="primary" onclick="submitChapterCode('+i+')">VERIFIKASI & BUKA</button></div><p id="chapterAnswerFeedback'+i+'" class="feedback" aria-live="polite"></p><p class="small">Semua data yang dibutuhkan ada di dalam amplop ini. Kamu dapat kembali memeriksa berkas sebelum menjawab.</p>';
 content.appendChild(box);
 }
-if(i===1){
-const visual=document.createElement('div');visual.className='clock-comparison';
-visual.innerHTML='<h3>REKONSTRUKSI FRAME / CAM-AR03</h3><div class="cctv-monitor"><div class="cctv-top">● REC &nbsp; CAM-AR03 / ARCHIVE CORRIDOR</div><div class="cctv-scene"><div class="cctv-door">ARSIP<br>AR-03</div><div class="cctv-floor"></div></div><div class="cctv-stamp">18/09/2018 &nbsp; 01:59:00</div></div><div class="clock-device"><div class="clock-label">SERVER-NTP-01 / SYSTEM LOG</div><div class="digital-clock">02:06:00</div><small>18 SEP 2018 • WIB</small></div><p class="small">Visualisasi rekonstruksi berdasarkan dua sumber waktu. Kedua timestamp tidak membuktikan siapa yang memasuki ruang arsip.</p>';
-content.insertBefore(visual,content.querySelector('.gallery'));
-}
+
 };
 const oldShowHint=showHint;
 showHint=function(i){const h=document.getElementById('hint');if(!h)return;const hints=[['Periksa log sensor dalam Amplop 01.','Urutkan alarm dan getaran; gunakan format HHMM.'],['Bandingkan dua sumber waktu dalam Amplop 02.','Jam kamera dan jam server tidak menunjukkan waktu yang sama.'],['Baca register kode elemen dan kode proyek di Amplop 03.','Gunakan dua kode referensi tanpa tanda pemisah.']];const n=Number(state.hints[i]||0);h.textContent=(hints[i-1]||['Periksa berkas sebelumnya.'])[Math.min(n,1)];state.hints[i]=n+1;persist()};
