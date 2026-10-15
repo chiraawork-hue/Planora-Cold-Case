@@ -442,3 +442,31 @@ const page1='<h3>I. DENAH LANTAI 01 — SEKTOR TIMUR</h3><div class="facility-pl
 const page2='<h3>II. REFERENSI PENGUKURAN</h3><div class="facility-table"><table><thead><tr><th>SEGMEN</th><th>JARAK SKEMATIS</th><th>KONDISI</th></tr></thead><tbody><tr><td>SEC-01 → J-01</td><td>18 m</td><td>Koridor umum</td></tr><tr><td>J-01 → AR-03</td><td>24 m</td><td>Pintu akses kartu</td></tr><tr><td>STAIR-E → J-01</td><td>12 m</td><td>Koridor umum</td></tr><tr><td>LAB-C → AR-03</td><td>31 m</td><td>Melalui koridor timur</td></tr></tbody></table></div><p class="facility-note">Jarak merupakan estimasi rekonstruksi; tidak termasuk waktu tunggu, interaksi pintu, atau perubahan kecepatan berjalan. Jalur aktual seseorang tidak dapat ditentukan hanya dari denah.</p>';
 show('DENAH_AKSES.pdf','<div class="modalcontent"><button class="backfile" onclick="backModal()">← KEMBALI KE BERKAS SEBELUMNYA</button><article class="facility-sheet"><header><strong>VEYRA RESEARCH CENTER / FACILITY RECORDS</strong><span>VRC-FAC-01 · REV 02</span></header><h2>DENAH & JALUR AKSES</h2><p>18 SEPTEMBER 2018 / SEKTOR TIMUR</p>'+page1+page2+'<footer>REKONSTRUKSI FIKTIF / PLANORA COLD CASE</footer></article></div>');
 };
+
+/* v48 — departmental master reference register, not an investigator's explanation */
+docs.personnelIndex={name:'VRC_MASTER_REFERENCE_REGISTER_REV03.pdf',title:'REGISTER REFERENSI UNIT & PROYEK',meta:'RECORDS CONTROL / REV.03 / 17 SEP 2018',sections:[],callout:''};
+const previousMasterRegisterOpen=openDocument;
+openDocument=function(id){
+if(id!=='personnelIndex'){previousMasterRegisterOpen(id);return;}
+if(!state.seen.includes(id))state.seen.push(id);persist();render();
+const records=[
+['STR','STRUCTURAL','Structural Engineering','ENGINEERING','ACTIVE','12/09/18'],
+['STR/C7','ELEMENT','Kolom C7','ENGINEERING','FOLLOW-UP','16/09/18'],
+['STR/C8','ELEMENT','Kolom C8','ENGINEERING','ROUTINE','12/09/18'],
+['STR/C9','ELEMENT','Kolom C9','ENGINEERING','ROUTINE','12/09/18'],
+['ENG/STR/07','FILE','Pemeriksaan elemen struktur','ENGINEERING','RESTRICTED','16/09/18'],
+['CLN','CLINICAL','Clinical Research','RESEARCH','ACTIVE','01/09/18'],
+['CLN/VX17','STUDY','Neural recovery study','CLINICAL','ACTIVE','04/09/18'],
+['CLN/VX09','ARCHIVE','Studi pendahulu','CLINICAL','ARCHIVED','30/08/18'],
+['CLN/RAW/17','FILE','Primary data register','CLINICAL','RESTRICTED','04/09/18'],
+['OPS','OPERATIONS','Facility Operations','OPERATIONS','ACTIVE','01/09/18'],
+['SEC','SECURITY','Security Operations','SECURITY','ACTIVE','01/09/18'],
+['IT','SYSTEMS','Information Technology','IT','ACTIVE','01/09/18'],
+['AR-03','LOCATION','Ruang arsip timur','RECORDS','ACTIVE','17/09/18'],
+['B-04/17','LOCATION','Rak penyimpanan sementara','RECORDS','ACTIVE','17/09/18'],
+['FIN','FINANCE','Finance & Procurement','FINANCE','ACTIVE','01/09/18']
+];
+const rows=records.map((r,i)=>'<tr><td>'+String(i+1).padStart(2,'0')+'</td>'+r.map(v=>'<td>'+v+'</td>').join('')+'</tr>').join('');
+const html='<div class="modalcontent"><button class="backfile" onclick="backModal()">← KEMBALI KE BERKAS SEBELUMNYA</button><article class="master-register"><header><strong>VEYRA RESEARCH CENTER / RECORDS CONTROL</strong><span>CONTROLLED COPY · RC-MR-03</span></header><h2>REGISTER REFERENSI UNIT & PROYEK</h2><div class="master-meta"><span>REVISION: 03</span><span>EFFECTIVE: 17 SEP 2018</span><span>PAGE: 01 / 01</span></div><div class="master-scroll"><table><thead><tr><th>NO</th><th>CODE</th><th>CLASS</th><th>REFERENCE</th><th>OWNER UNIT</th><th>STATUS</th><th>REV. DATE</th></tr></thead><tbody>'+rows+'</tbody></table></div><div class="master-approval"><span>PREPARED BY: RECORDS CONTROL</span><span>APPROVED: RC / 17 SEP 2018</span></div><footer>VRC / RC-MR-03 / CONTROLLED REFERENCE REGISTER<br>Rekonstruksi fiktif untuk Planora Cold Case.</footer></article></div>';
+show('VRC_MASTER_REFERENCE_REGISTER_REV03.pdf',html);
+};
