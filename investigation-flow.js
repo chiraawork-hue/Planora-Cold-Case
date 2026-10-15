@@ -6,21 +6,6 @@ envelopes[2].items.push('handover');
 docs.clockAudit={name:'TIME_SYNC_SERVICE_0918.log',title:'REGISTER SINKRONISASI JAM',meta:'FACILITY IT • 18 SEP 2018 • EXTRACT',sections:[['Sumber Referensi','SERVER-NTP-01 • 02:10:00 WIB • pengujian lampu koridor / SYNC PULSE.'],['Perangkat Kamera','CAM-AR03 • 02:03:00 • pengujian lampu koridor / SYNC PULSE. Status: CLOCK OFFSET / SERVICE PENDING.'],['Perangkat Pembanding','Kamera koridor dan server menggunakan sumber waktu yang berbeda. Log ini tidak mencatat identitas pemegang kartu.']],callout:'Angka waktu berasal dari perangkat berbeda. Cocokkan dengan catatan pintu arsip.'};
 docs.personnelIndex={name:'PERSONNEL_REFERENCE_CARD.pdf',title:'REGISTER KODE PERSONEL DAN PROYEK',meta:'RECORDS CONTROL • 17 SEP 2018',sections:[['Elemen','STR / C7 — tindak lanjut teknik; STR / C8 — inspeksi rutin; STR / C9 — inspeksi rutin.'],['Penelitian','CLN / VX17 — studi neural recovery. CLN / VX09 — arsip terdahulu.'],['Catatan','Referensi silang antara laporan teknik dan arsip klinis hanya menunjukkan keterkaitan dokumen, bukan kesalahan individu.']],callout:'Bandingkan penanda yang berulang dalam dua jalur penyelidikan.'};
 docs.handover={name:'SAFETY_RECONCILIATION.csv',title:'REKONSILIASI POPULASI KESELAMATAN',meta:'CLINICAL QA • EXPORT 04 SEP 2018',sections:[['Ekspor','Dosed participants: 40. Serious event flags: 10. Public report subset: 30. Serious event flags in public subset: 2.'],['Metode','Analisis keselamatan menggunakan seluruh subjek yang menerima dosis, terlepas dari kelengkapan kunjungan akhir.'],['Kontrol','Catatan ini tidak menunjukkan editor yang mengubah dataset.']],callout:'Bandingkan pembilang dan penyebut dari kedua sumber.'};
-const previousOpenEnvelope=openEnvelope;
-openEnvelope=function(i){
-previousOpenEnvelope(i);
-if(i>=state.unlocked)return;
-const content=document.querySelector('#modalBody .modalcontent');
-if(!content)return;
-if(i<3){
-const box=document.createElement('section');box.className='next-seal-review';
-const names=['PERTANYAAN INVESTIGASI 01 — AKSES AMPLOP 02','PERTANYAAN INVESTIGASI 02 — AKSES AMPLOP 03','PERTANYAAN INVESTIGASI 03 — AKSES AMPLOP 04'];
-const prompts=['Pada malam kejadian, pukul berapa sinyal getaran pertama kali melampaui ambang pengamatan pada sensor struktur?','Pada pukul berapa waktu sebenarnya pintu ruang arsip terbuka? Selaraskan dua sumber waktu yang digunakan sistem pengawasan.','Gabungkan kode elemen struktur yang memerlukan pemeriksaan lanjutan dan kode proyek penelitian yang tercantum pada register personel.'];
-box.innerHTML='<h3>'+names[i]+'</h3><p class="investigation-question">'+prompts[i]+'</p><p><b>FORMAT JAWABAN:</b> '+(i<2?'HHMM — empat digit tanpa tanda titik atau titik dua.':'Kode elemen + kode proyek, huruf dan angka tanpa spasi atau tanda hubung.')+'</p><label for="chapterAnswer'+i+'">MASUKKAN KODE AKSES AMPLOP '+(i+2)+'</label><div class="answerrow"><input id="chapterAnswer'+i+'" autocomplete="off" placeholder="'+(i<2?'Contoh format: 0130':'Contoh format: A1XY02')+'"><button class="primary" onclick="submitChapterCode('+i+')">VERIFIKASI & BUKA</button></div><p id="chapterAnswerFeedback'+i+'" class="feedback" aria-live="polite"></p><p class="small">Semua data yang dibutuhkan ada di dalam amplop ini. Kamu dapat kembali memeriksa berkas sebelum menjawab.</p>';
-content.appendChild(box);
-}
-
-};
 const oldShowHint=showHint;
 showHint=function(i){const h=document.getElementById('hint');if(!h)return;const hints=[['Periksa log sensor dalam Amplop 01.','Urutkan alarm dan getaran; gunakan format HHMM.'],['Bandingkan dua sumber waktu dalam Amplop 02.','Jam kamera dan jam server tidak menunjukkan waktu yang sama.'],['Baca register kode elemen dan kode proyek di Amplop 03.','Gunakan dua kode referensi tanpa tanda pemisah.']];const n=Number(state.hints[i]||0);h.textContent=(hints[i-1]||['Periksa berkas sebelumnya.'])[Math.min(n,1)];state.hints[i]=n+1;persist()};
 
