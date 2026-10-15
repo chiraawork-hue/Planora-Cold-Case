@@ -350,3 +350,33 @@ const p=document.getElementById('cameraFramePanel');if(!p)return;
 p.hidden=!p.hidden;
 if(!p.hidden)p.scrollIntoView({behavior:'smooth',block:'nearest'});
 }
+
+/* v43 — expanded access-controller export; preserve canonical 4418 event */
+const previousDoorLogOpen=openDocument;
+openDocument=function(id){
+if(id!=='stage2Door'){previousDoorLogOpen(id);return}
+if(!state.seen.includes(id))state.seen.push(id);persist();render();
+const events=[
+['01:17:42','DC-AR03','SYSTEM','HEARTBEAT','OK'],
+['01:18:04','AR03-RDR','3006','ACCESS_DENIED','INVALID_ZONE'],
+['01:18:09','AR03-RDR','3006','ACCESS_DENIED','INVALID_ZONE'],
+['01:22:41','AR03-DCT','—','CONTACT_CLOSED','OK'],
+['01:30:00','DC-AR03','SYSTEM','HEARTBEAT','OK'],
+['01:41:26','AR03-RDR','5172','ACCESS_GRANTED','VALID'],
+['01:41:29','AR03-DCT','—','CONTACT_OPEN','OK'],
+['01:41:46','AR03-DCT','—','CONTACT_CLOSED','OK'],
+['01:48:04','AR03-RDR','3006','ACCESS_DENIED','INVALID_ZONE'],
+['01:52:30','DC-AR03','SYSTEM','HEARTBEAT','OK'],
+['01:58:00','DC-AR03','SYSTEM','NTP_SYNC','LOCKED'],
+['02:00:00','DC-AR03','SYSTEM','HEARTBEAT','OK'],
+['02:06:01','AR03-RDR','4418','ACCESS_GRANTED','VALID'],
+['02:06:03','AR03-DCT','—','CONTACT_OPEN','OK'],
+['02:06:18','AR03-DCT','—','CONTACT_CLOSED','OK'],
+['02:10:00','DC-AR03','SYSTEM','SYNC_PULSE','NTP_LOCKED'],
+['02:12:00','DC-AR03','SYSTEM','HEARTBEAT','OK'],
+['02:15:00','DC-AR03','SYSTEM','HEARTBEAT','OK']
+];
+const rows=events.map((e,i)=>'<tr><td>'+String(i+1).padStart(3,'0')+'</td>'+e.map(v=>'<td>'+v+'</td>').join('')+'</tr>').join('');
+const html='<div class="modalcontent"><button class="backfile" onclick="backModal()">← KEMBALI KE BERKAS SEBELUMNYA</button><article class="door-controller-log"><header><strong>VEYRA RESEARCH CENTER</strong><span>ACCESS CONTROL / SYSTEM EXPORT</span></header><h2>REGISTER PINTU ARSIP</h2><div class="door-log-meta"><span>CONTROLLER: DC-AR03</span><span>18 SEP 2018</span><span>TIMEBASE: SERVER / NTP LOCKED</span></div><div class="door-log-scroll"><table><thead><tr><th>SEQ</th><th>SERVER TIME</th><th>DEVICE</th><th>CARD ID</th><th>EVENT</th><th>STATUS</th></tr></thead><tbody>'+rows+'</tbody></table></div><footer><span>EXPORT: DC-AR03 / EVT-0918</span><span>RECORD COUNT: 018</span></footer><p class="door-log-note">Rekonstruksi dokumen fiktif untuk Planora Cold Case.</p></article></div>';
+show('AR03_DOOR_EVENTS.csv',html);
+};
