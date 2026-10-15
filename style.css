@@ -170,3 +170,16 @@
 .master-register th{background:#d6d4c8}
 .master-register tbody tr:nth-child(even){background:#e5e1d6}
 .master-register footer{border-top:2px solid #88928a;text-align:center;padding-top:12px;margin-top:25px;font:10px monospace;color:#657069}
+
+/* v49 time synchronization audit */
+.time-compare{background:#eee8dc;color:#283630;border:1px solid #b7b0a4;padding:clamp(14px,3vw,30px);font:12px/1.6 Arial,sans-serif}
+.time-compare header,.time-meta,.time-approval{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;border-bottom:1px solid #aaa99d;padding:10px 0;font:11px monospace}
+.time-compare header{border-bottom:2px solid #586b65}
+.time-compare h2{font-size:19px;margin:20px 0}
+.time-compare h3{font-size:13px;border-bottom:1px solid #b3afa4;padding-bottom:8px;margin-top:25px}
+.time-scroll{overflow-x:auto;margin:12px 0 22px}
+.time-compare table{border-collapse:collapse;width:100%;min-width:680px;font:11px/1.5 monospace}
+.time-compare th,.time-compare td{border:1px solid #b3b0a4;padding:9px;text-align:left;white-space:nowrap}
+.time-compare th{background:#d9d6cb}
+.time-compare tbody tr:nth-child(even){background:#e4e0d5}
+.time-compare footer{text-align:center;font:10px monospace;color:#6b716a;margin-top:24px}
