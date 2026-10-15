@@ -29,3 +29,32 @@ const panel=document.createElement('div');
 panel.innerHTML=reviewSection(i);
 body.querySelector('.modalcontent')?.appendChild(panel);
 };
+
+/* v28 — Suspect submission closes the stage; access codes belong on the next sealed envelope. */
+envelopes[1].code='C7280213';
+envelopes[1].hint='Gunakan lembar pengukuran fisik dan ekspor sensor struktur. Satukan kode elemen, lebar retak maksimum dalam satuan persepuluhan milimeter, dan waktu anomali pertama (HHMM).';
+const priorEnvelopeForSeal=openEnvelope;
+openEnvelope=function(i){
+priorEnvelopeForSeal(i);
+const root=document.getElementById('modalBody');
+if(i===0&&i<state.unlocked){
+root?.querySelector('.next-seal-review')?.remove();
+}
+if(i===1&&i>=state.unlocked){
+const question=root?.querySelector('.question');
+if(question){
+question.insertAdjacentHTML('afterbegin','<h3>ARSIP TERSEGEL / REKONSTRUKSI TEKNIS</h3><p>Identifikasi elemen struktur yang mendapat rekomendasi pemeriksaan lanjutan. Gabungkan <b>kode elemen</b>, <b>lebar retak maksimum</b> tanpa koma dalam persepuluhan milimeter, dan <b>waktu pertama kali ambang sensor terlampaui</b> dalam format HHMM.</p><p class="small">Format kode: ELEMEN + 2 DIGIT PENGUKURAN + 4 DIGIT WAKTU. Semua bagian dapat ditemukan di Amplop 01.</p>');
+}
+}
+};
+const priorCodeCheck=checkCode;
+checkCode=function(i){
+if(i===1){
+const fb=document.getElementById('codeFeedback');
+if(!reviews[0]?.id||!reviews[0]?.evidence||String(reviews[0]?.reason||'').trim().length<15){
+if(fb)fb.textContent='Selesaikan CASE REVIEW di Amplop 01: pilih tersangka, tulis bukti dan alasan, lalu simpan keputusan babak.';
+return;
+}
+}
+priorCodeCheck(i);
+};
