@@ -255,11 +255,7 @@ docs.scene={name:'SCENE_EXAMINATION_AR03.pdf',title:'BERITA ACARA PEMERIKSAAN AR
 ['CAM-AR03 / CORRIDOR','Kamera menghadap koridor timur. Wajah sosok yang terekam tidak teridentifikasi pada indeks frame yang tersedia.'],
 ['EVIDENCE INDEX','AR03-01 / kondisi pintu; AR03-02 / pelat pengunci; B04-01 / rak penyimpanan; CAM-AR03 / indeks frame. Dokumentasi visual bersifat rekonstruksi fiktif.']
 ],callout:''};
-docs.sceneCardRegistry={name:'SECURITY_CARD_ASSIGNMENT_2018.csv',title:'REGISTER PENUGASAN KARTU',meta:'SECURITY / PERSONNEL ACCESS / 17 SEP 2018',sections:[
-['CARD / 4418','REGISTERED HOLDER: NADIA SANTOSO / LABORATORY HEAD / ACCESS CLASS: LAB-ARCHIVE'],
-['CARD / 3006','REGISTERED HOLDER: FACILITY VISITOR POOL / ACCESS CLASS: ESCORT REQUIRED'],
-['AUDIT FIELDS','ASSIGNED HOLDER adalah pemilik kartu dalam sistem. Pembaca pintu tidak memverifikasi wajah, sidik jari, atau identitas orang yang membawa kartu.']
-],callout:''};
+docs.sceneCardRegistry={name:'SECURITY_CARD_ASSIGNMENT_2018.csv',title:'REGISTER INVENTARIS KARTU AKSES',meta:'SECURITY SYSTEMS / 17 SEP 2018 / SEC-AC-0917',sections:[],callout:''};
 docs.sceneNadiaStatement={name:'INTERVIEW_NS_0919_EXTRACT.pdf',title:'PETIKAN WAWANCARA PERSONEL',meta:'SECURITY INTERVIEW / 19 SEP 2018 / SUBJECT: N.S.',sections:[
 ['QUESTION / CARD 4418','Pemeriksa: Apakah kartu akses 4418 tercatat atas nama Anda?'],
 ['RESPONSE / N.S.','N.S.: Kartu itu memang terdaftar atas nama saya. Saya belum memeriksa seluruh catatan akses malam itu.'],
@@ -522,4 +518,13 @@ openDocument=function(id){
  if(!state.seen.includes(id))state.seen.push(id);persist();render();
  const html='<div class="modalcontent"><button class="backfile" onclick="backModal()">← KEMBALI KE BERKAS SEBELUMNYA</button><article class="time-compare"><header><strong>VEYRA RESEARCH CENTER / UNIT INVESTIGASI INTERNAL</strong><span>SALINAN TERKENDALI · SP-INV-019/2018</span></header><h2>SURAT PERINTAH PEMERIKSAAN LANJUTAN</h2><div class="time-meta"><span>TANGGAL: 19 SEP 2018</span><span>PERIHAL: VERIFIKASI DOKUMEN STRUKTUR</span><span>STATUS: TERBUKA</span></div><h3>I. DASAR PEMERIKSAAN</h3><p>Sehubungan dengan pemeriksaan pascainsiden 18 September 2018, Unit Investigasi Internal menerima rujukan laporan inspeksi struktur <strong>ENG/STR/07</strong> dan catatan rekomendasi tindak lanjut terhadap elemen C7. Pemeriksaan salinan laporan, distribusi, dan pencatatan penerimaannya diperlukan untuk merekonstruksi alur administrasi sebelum insiden.</p><h3>II. RUANG LINGKUP</h3><p>Petugas Records Control diminta mencocokkan nomor berkas ENG/STR/07 dengan register perpindahan, memverifikasi lokasi penyimpanan sementara <strong>B-04/17</strong>, serta memeriksa apakah berkas yang dirujuk tersedia dalam inventaris ruang arsip <strong>AR-03</strong>. Hubungan antara kode rak dan lokasi ruang harus diverifikasi melalui register fasilitas, bukan diasumsikan.</p><h3>III. PELAKSANAAN</h3><p>Setiap pemeriksaan fisik harus disertai dokumentasi kondisi pintu, rak, dan segel; catatan akses elektronik serta rekaman pengawasan hanya digunakan untuk mencocokkan waktu dan riwayat pergerakan dokumen. Salinan asli dan hasil pencocokan dicatat secara terpisah.</p><h3>IV. BATAS PENUGASAN</h3><p>Surat ini merupakan dasar pemeriksaan administratif. Tidak ada penetapan kehilangan dokumen, perubahan berkas, pelanggaran akses, ataupun keterlibatan personel berdasarkan surat ini.</p><div class="time-approval"><span>DITERBITKAN: UNIT INVESTIGASI INTERNAL</span><span>REGISTRASI: RECORDS CONTROL / 19 SEP 2018</span></div><footer>SP-INV-019/2018 · HALAMAN 01 / 01 · REKONSTRUKSI FIKTIF</footer></article></div>';
  show('SP_INV_019_2018.pdf',html);
+};
+
+const priorSecurityCardOpen=openDocument;
+openDocument=function(id){
+if(id!=='sceneCardRegistry')return priorSecurityCardOpen(id);
+if(!state.seen.includes(id))state.seen.push(id);persist();render();
+const data=[['4418','NADIA SANTOSO','LABORATORY HEAD','LAB-ARCHIVE','ACTIVE','PERSONNEL'],['3006','VISITOR POOL','FACILITY VISITOR','ESCORT REQUIRED','ACTIVE','POOL']];
+const rows=data.map((r,i)=>'<tr><td>'+String(i+1).padStart(2,'0')+'</td>'+r.map(v=>'<td>'+v+'</td>').join('')+'</tr>').join('');
+show('SECURITY_CARD_ASSIGNMENT_2018.csv','<div class="modalcontent"><button class="backfile" onclick="backModal()">← KEMBALI KE BERKAS SEBELUMNYA</button><article class="time-compare"><header><strong>VEYRA RESEARCH CENTER / SECURITY SYSTEMS</strong><span>SEC-AC-0917 / EXPORT</span></header><h2>REGISTER INVENTARIS KARTU AKSES</h2><div class="time-meta"><span>SNAPSHOT: 17 SEP 2018</span><span>ACCESS CONTROL</span></div><div class="time-scroll"><table><thead><tr><th>NO</th><th>CARD ID</th><th>ASSIGNED HOLDER</th><th>ROLE</th><th>ACCESS CLASS</th><th>STATUS</th><th>TYPE</th></tr></thead><tbody>'+rows+'</tbody></table></div><p>ASSIGNED HOLDER adalah data registrasi kartu. Log pembaca pintu tidak memuat verifikasi identitas fisik pengguna.</p><footer>SEC-AC-0917 / CONTROLLED COPY</footer></article></div>');
 };
