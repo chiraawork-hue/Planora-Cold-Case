@@ -654,3 +654,34 @@ function saveAssessment03(){
  localStorage.setItem('veyra_assessment_03',JSON.stringify({people,basis,reason,savedAt:new Date().toISOString()}));
  status.textContent='PENILAIAN SEMENTARA TERSIMPAN DI PERANGKAT INI. Kamu dapat merevisi pilihan setelah memeriksa barang bukti. Penilaian ini belum menetapkan siapa yang bersalah.';
 }
+
+/* v74 — signature sheet; preserve original signature evidence in envelope 01 */
+const bapSignaturePaths={
+'Adrian Putra':signatureStrokes['Dr. Adrian Putra'],
+'Raka Wijaya':signatureStrokes['Raka Wijaya'],
+'Dimas Arga':signatureStrokes['Dimas Arga'],
+'Siska Arum':signatureStrokes['Siska Arum'],
+'Nadia Santoso':['M13 49 C21 22 28 9 31 11 C37 15 25 43 37 37 C47 32 43 15 52 17 C59 20 48 40 61 35 C72 29 68 20 78 24 C88 29 77 40 94 34 C108 26 117 22 132 18','M22 48 C58 43 110 43 157 35'],
+'Maya Kirana':['M12 46 C20 28 21 8 31 12 C39 18 24 39 39 36 C50 33 51 16 60 18 C68 22 54 42 72 34 C85 26 85 18 96 22 C107 27 93 39 110 33 C122 28 129 22 151 25','M26 50 C65 43 108 43 158 34'],
+'Farhan Mahendra':['M16 49 C22 29 24 10 34 13 C47 17 31 31 23 34 C47 33 53 18 60 24 C65 31 53 40 70 34 C82 28 83 16 93 21 C103 26 89 39 109 34 C125 28 132 18 152 20','M27 46 C68 44 114 43 163 35'],
+'Elena Prameswari':['M16 38 C28 16 45 7 50 15 C55 23 31 31 27 40 C37 47 62 33 68 25 C75 16 79 30 88 30 C100 30 103 18 111 23 C120 29 109 38 129 30 C140 26 147 21 158 18','M34 48 C77 44 117 42 162 36']
+};
+const examinerSignature=['M12 44 C20 20 30 11 37 16 C43 21 26 42 43 38 C55 33 58 20 65 25 C72 31 60 42 79 35 C92 27 93 19 102 25 C112 32 101 40 121 32 C133 27 146 23 161 20','M26 49 C74 42 119 43 165 34'];
+function signatureInk74(paths){return '<svg class="bap-ink bap-signature-v74" viewBox="0 0 180 62" role="img" aria-label="Goresan tanda tangan fiktif">'+paths.map((d,i)=>'<path d="'+d+'" fill="none" stroke="#283d54" stroke-width="'+(i?1.25:1.85)+'" stroke-linecap="round" stroke-linejoin="round"/>').join('')+'</svg>'}
+const previousBapSignatureOpen=openDocument;
+openDocument=function(id){
+ previousBapSignatureOpen(id);
+ const all=Object.assign({},witnessFiles,bapTambahan);
+ if(!all[id])return;
+ const w=all[id], el=document.querySelector('#modalBody .bap-sheet');
+ if(!el)return;
+ const name=w.person.replace(/^DR\.\s*/,'').toLowerCase();
+ const canonical=Object.keys(bapSignaturePaths).find(n=>n.toLowerCase()===name);
+ const sig=signatureInk74(bapSignaturePaths[canonical]||examinerSignature);
+ const inspector=signatureInk74(examinerSignature);
+ const block='<div class="bap-signature-pair"><div><small>PEMBERI KETERANGAN</small>'+sig+'<b>'+w.person+'</b></div><div><small>PEMERIKSA</small>'+inspector+'<b>R. Hadi Pratama</b><span>ID INV-0147</span></div></div><p class="bap-signature-place">19 SEPTEMBER 2018 · RUANG PEMERIKSAAN 2 · VEYRA RESEARCH CENTER</p>';
+ const existing=el.querySelector('.bap-signatures');
+ if(existing){existing.innerHTML=block;return}
+ const existingInk=el.querySelector('.bap-ink');
+ if(existingInk){const section=existingInk.closest('.bap-signatures')||existingInk.parentElement.parentElement; if(section)section.innerHTML=block}
+};
