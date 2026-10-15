@@ -104,3 +104,13 @@ previousSubmitReview(i);
 /* v60: Amplop 03 memakai hasil rekonstruksi waktu pintu arsip. */
 envelopes[2].code='0206';
 envelopes[2].hint='Cocokkan waktu kamera CAM-AR03 dengan log pintu dan waktu server. Gunakan format HHMM.';
+
+/* v84: two-source hint for envelope 04 */
+const previousHint84=showHint;
+showHint=function(i){
+ if(i!==3)return previousHint84(i);
+ const h=document.getElementById('hint');if(!h)return;
+ const n=Number(state.hints[i]||0);
+ h.textContent=n===0?'Cari peristiwa TASK_HOLD di log terminal, lalu cocokkan waktunya dengan antrean tugas audit.':'SESSION berasal dari AUDIT_TERMINAL_EVENTS.log; nomor JOB berasal dari AUDIT_JOB_QUEUE_0918.csv. Susun SESSION di depan nomor JOB.';
+ state.hints[i]=n+1;persist();
+};
