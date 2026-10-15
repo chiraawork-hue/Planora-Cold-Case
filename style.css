@@ -152,3 +152,5 @@
 .door-controller-log th{background:#d8d6ca}
 .door-controller-log tbody tr:nth-child(even){background:#e5e2d7}
 .door-log-note{font:10px monospace;color:#69716c;margin-top:24px}
+
+.bap-sheet{background:#f1ebdf;border:1px solid #b7b0a2;padding:24px;color:#28312e;font:13px/1.65 Arial,sans-serif}.bap-sheet header,.bap-person,.bap-signatures{display:grid;grid-template-columns:1fr 1fr;gap:12px}.bap-sheet h2{text-align:center;font-size:19px}.bap-subtitle{text-align:center;font:11px monospace}.bap-person>div{border:1px solid #b5b1a7;padding:8px;display:grid}.bap-person b,.bap-entry b{font:10px monospace}.bap-sheet h3{border-bottom:1px solid #aaa;padding:10px 0}.bap-entry{border-bottom:1px solid #cbc4b8;padding:10px 0}.bap-answer{margin-left:18px}.bap-signatures{text-align:center;margin:30px 0}.bap-sign-space{height:65px;border-bottom:1px solid #999}.bap-sheet footer{text-align:center;font:10px monospace;border-top:1px solid #aaa;padding-top:15px}
