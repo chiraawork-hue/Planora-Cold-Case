@@ -277,3 +277,28 @@ if(!state.seen.includes(id))state.seen.push(id);persist();render();
 const body='<div class="modalcontent"><button class="backfile" onclick="backModal()">← KEMBALI KE BERKAS SEBELUMNYA</button><article class="scene-field-report"><header class="scene-report-head"><div class="scene-report-mark">◇</div><div><strong>VEYRA RESEARCH CENTER</strong><small>SECURITY & FORENSIC DOCUMENTATION UNIT</small></div><span class="scene-report-copy">SALINAN ARSIP</span></header><h2>BERITA ACARA PEMERIKSAAN TEMPAT KEJADIAN</h2><div class="scene-report-subtitle">RUANG ARSIP AR-03 / BLOK B</div><table class="scene-report-meta"><tbody><tr><th>NO. BERKAS</th><td>VRC / SEC / TKP / 0919-03</td><th>KLASIFIKASI</th><td>INTERNAL</td></tr><tr><th>TANGGAL</th><td>19 SEPTEMBER 2018</td><th>LOKASI</th><td>AR-03, BLOK B</td></tr><tr><th>OBJEK</th><td colspan="3">Pintu arsip, koridor timur, rak penyimpanan B-04</td></tr></tbody></table><h3>I. RUANG LINGKUP PEMERIKSAAN</h3><p>Pemeriksaan visual awal dilakukan pada akses ruang arsip AR-03, koridor timur, dan rak penyimpanan B-04 setelah kejadian 18 September 2018. Temuan dicatat berdasarkan kondisi yang dapat diamati dan register yang tersedia.</p><h3>II. HASIL OBSERVASI</h3><table class="scene-report-findings"><thead><tr><th>NO.</th><th>OBJEK</th><th>HASIL PEMERIKSAAN</th><th>REFERENSI</th></tr></thead><tbody><tr><td>01</td><td>Pintu AR-03</td><td>Pintu tertutup saat pemeriksaan. Terdapat goresan permukaan pada pelat pengunci; usia dan asalnya belum ditentukan.</td><td>AR03-01 / AR03-02</td></tr><tr><td>02</td><td>Rak B-04</td><td>Register mencatat lokasi B-04/17 sebagai penyimpanan sementara ENG/STR/07. Kelengkapan isi boks belum diverifikasi.</td><td>B04-01 / REGISTER</td></tr><tr><td>03</td><td>Koridor timur</td><td>Kamera CAM-AR03 menghadap akses arsip. Indeks frame tidak menyediakan identifikasi wajah yang meyakinkan.</td><td>CAM-AR03</td></tr></tbody></table><h3>III. DAFTAR LAMPIRAN</h3><p>AR03-01 — Kondisi pintu; AR03-02 — Pelat pengunci; B04-01 — Rak penyimpanan; CAM-AR03 — Indeks rekaman koridor.</p><h3>IV. BATAS PEMERIKSAAN</h3><p>Temuan visual tidak menetapkan waktu terjadinya goresan, identitas pengguna kartu, maupun waktu perpindahan berkas. Verifikasi memerlukan pemeriksaan silang terhadap catatan sistem dan inventaris.</p><div class="scene-report-sign"><div>DISUSUN OLEH<br><strong>UNIT DOKUMENTASI TKP</strong><small>Salinan arsip / tanda tangan tidak tersedia</small></div><div>DIPERIKSA OLEH<br><strong>RECORDS CONTROL</strong><small>Registrasi dokumen</small></div></div><footer>VRC / SEC / TKP / 0919-03 &nbsp; • &nbsp; HALAMAN 1 / 1<br>Dokumen rekonstruksi fiktif untuk permainan Planora Cold Case.</footer></article></div>';
 show('VRC_SEC_TKP_0919-03.pdf',body);
 };
+
+/* v36 / printed report pages with separate evidence attachments */
+const priorScenePages=openDocument;
+openDocument=function(id){
+priorScenePages(id);
+if(id!=='scene')return;
+const article=document.querySelector('#modalBody .scene-field-report');
+if(!article)return;
+const first=article.innerHTML;
+const attachments=[
+'<h2>LAMPIRAN FOTO TKP</h2><div class="scene-report-subtitle">ARSIP AR-03 / HALAMAN 2 DARI 3</div><h3>AR03-01 — PINTU ARSIP</h3><div class="scene-evidence-plate"><div class="scene-evidence-door"><span>AR-03<br>ARCHIVE</span><i></i></div><small>ILUSTRASI REKONSTRUKSI / BUKAN FOTO ASLI</small></div><p>Lokasi: Koridor timur, pintu ruang arsip AR-03. Kondisi pemeriksaan: pintu tertutup.</p><h3>AR03-02 — DETAIL PELAT PENGUNCI</h3><div class="scene-evidence-plate"><div class="scene-evidence-lock"><i></i><span>AR03-02 / DETAIL</span></div><small>ILUSTRASI REKONSTRUKSI / BUKAN FOTO ASLI</small></div><p>Pengamatan: goresan permukaan terlihat pada pelat pengunci. Waktu dan penyebab belum diketahui.</p>',
+'<h2>LAMPIRAN FOTO TKP</h2><div class="scene-report-subtitle">ARSIP AR-03 / HALAMAN 3 DARI 3</div><h3>B04-01 — RAK PENYIMPANAN</h3><div class="scene-evidence-plate"><div class="scene-evidence-shelf"><span>B-04/15</span><span>B-04/16</span><span class="empty">B-04/17</span><span>B-04/18</span></div><small>ILUSTRASI REKONSTRUKSI / POSISI BOKS BELUM TERVERIFIKASI</small></div><p>Register mencatat B-04/17 sebagai lokasi penyimpanan sementara. Ilustrasi tidak menetapkan kondisi aktual isi boks.</p><h3>CAM-AR03 — KORIDOR TIMUR</h3><p>Rekaman kamera dan indeks frame tersedia sebagai berkas terpisah pada Amplop 02. Waktu kamera tidak identik dengan waktu server.</p>'
+];
+article.innerHTML='<div class="scene-page-content">'+first+'</div><div class="scene-page-content" hidden>'+attachments[0]+'</div><div class="scene-page-content" hidden>'+attachments[1]+'</div><nav class="scene-page-nav"><button type="button" onclick="sceneGoPage(-1)">← SEBELUMNYA</button><span id="scenePageCount">HALAMAN 1 / 3</span><button type="button" onclick="sceneGoPage(1)">BERIKUTNYA →</button></nav>';
+article.dataset.page='0';
+};
+function sceneGoPage(delta){
+const article=document.querySelector('#modalBody .scene-field-report');if(!article)return;
+const pages=[...article.querySelectorAll('.scene-page-content')];const n=Math.max(0,Math.min(2,Number(article.dataset.page||0)+delta));
+article.dataset.page=String(n);pages.forEach((p,i)=>p.hidden=i!==n);
+document.getElementById('scenePageCount').textContent='HALAMAN '+(n+1)+' / 3';
+article.querySelectorAll('.scene-page-nav button')[0].disabled=n===0;
+article.querySelectorAll('.scene-page-nav button')[1].disabled=n===2;
+article.scrollIntoView({block:'start',behavior:'smooth'});
+}
