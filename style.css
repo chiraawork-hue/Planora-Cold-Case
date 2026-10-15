@@ -102,3 +102,5 @@
 .scene-evidence-shelf{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;max-width:440px;margin:auto;background:#4d5551;padding:12px}
 .scene-evidence-shelf span{background:#a38c6d;padding:30px 8px;font:12px monospace;color:#292b28;border:2px solid #665b4c}
 .scene-evidence-shelf .empty{background:#343b38;color:#e4ddcd;border:2px dashed #b2a994}
+
+.scene-evidence-photo{display:block;width:100%;max-height:540px;object-fit:contain;background:#222b29;border:1px solid #b3aea3}
