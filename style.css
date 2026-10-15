@@ -60,3 +60,11 @@
 .field-sign-row small,.field-sign-row span{display:block;font:11px/1.5 monospace}.field-sign-row strong{font:700 14px/1.5 monospace;margin:12px 0}
 .field-sign-row svg{display:block;width:180px;max-width:100%;height:62px}.field-footer{margin-top:25px;border-top:1px solid #b9ae9b;padding-top:12px;font:10px/1.5 monospace;color:#776b58}
 @media(max-width:600px){.field-sign-row{grid-template-columns:1fr}.field-table{font-size:10px}.field-table th,.field-table td{padding:8px}.field-inspection h2{font-size:21px}}
+
+/* Stage 2 deduction workspace */
+.contradiction-panel{margin:22px 0;padding:18px;border:1px solid #62736f;background:rgba(17,43,45,.56);border-radius:8px}
+.contradiction-panel h3{margin:0 0 10px;font-size:15px;letter-spacing:.05em}
+.contradiction-panel p{font-size:13px;line-height:1.6;opacity:.82}
+.contradiction-panel label{display:block;margin:14px 0 6px;font-size:11px;letter-spacing:.08em}
+.contradiction-panel select,.contradiction-panel textarea{display:block;width:100%;box-sizing:border-box;min-height:42px;padding:10px;border:1px solid #78918a;background:#eae2d2;color:#1c302e;border-radius:4px;font:13px/1.5 inherit}
+.contradiction-panel textarea{min-height:110px;resize:vertical}
