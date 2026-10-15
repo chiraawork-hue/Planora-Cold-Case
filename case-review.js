@@ -64,6 +64,9 @@ const contradictionFiles=[
 ['cctvMovement','CCTV / rekaman pergerakan'],
 ['stage2Clock','IT / pembanding waktu'],
 ['stage2Door','SECURITY / log pintu'],
+['sceneCardRegistry','SECURITY / pemegang kartu'],
+['sceneNadiaStatement','INTERVIEW / kesaksian N.S.'],
+['scene','TKP / pemeriksaan AR-03'],
 ['personnelIndex','PERSONNEL / data personel'],
 ['initial','INSPECTION / laporan awal']
 ];
