@@ -71,11 +71,53 @@ for (const [id,record] of Object.entries(records)) {
 const css=document.createElement('style');
 css.textContent='.modalcontent.archive-v94 h3{font-size:12px;letter-spacing:.09em;border-bottom:1px solid #9bb0a8;padding-bottom:7px;margin-top:22px}.modalcontent.archive-v94 h3+p{white-space:pre-wrap;overflow-wrap:anywhere;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12px;line-height:1.85;background:#f7f5ec;border:1px solid #c2c7b9;padding:12px;border-radius:3px}.modalcontent.archive-v94 .letterhead{border-bottom:2px solid #55796c}.modalcontent.archive-v94 .meta{letter-spacing:.04em}@media(max-width:600px){.modalcontent.archive-v94 h3+p{font-size:11px;padding:9px}}';
 document.head.appendChild(css);
+function formatStructuralReport(root){
+ const headings=[...root.querySelectorAll('h3')];
+ const section=headings.find(h=>h.textContent.includes('01 / IDENTITAS'));
+ if(!section)return;
+ const first=section;
+ const last=headings.find(h=>h.textContent.includes('08 / TINDAK LANJUT'));
+ if(!last)return;
+ let end=last.nextElementSibling;
+ if(!end)return;
+ const report=document.createElement('div');
+ report.className='structural-report';
+ report.innerHTML=`<div class="sr-banner"><span>VEYRA RESEARCH CENTER · UNIT REKAYASA STRUKTUR</span><strong>SALINAN PEMERIKSAAN TEKNIS</strong></div>
+ <p class="sr-intro">Pemeriksaan ini disusun berdasarkan dokumentasi inspeksi sebelum kejadian, pengamatan material pascakejadian, serta rekaman instrumen di Zona C. Penilaian masih bersifat sementara karena sebagian material telah dipindahkan dan pengujian laboratorium belum selesai.</p>
+ <h3>I. Identitas pemeriksaan</h3>
+ <table><tbody><tr><th>Nomor laporan</th><td>STR-FR/0927</td><th>Tanggal pemeriksaan</th><td>19–27 September 2018</td></tr><tr><th>Lokasi</th><td>Gedung Riset Utama, Zona C</td><th>Elemen</th><td>Kolom C7</td></tr><tr><th>Metode</th><td colspan="3">Inspeksi visual, telaah foto, inventarisasi fragmen dan rekonsiliasi rekaman sensor.</td></tr></tbody></table>
+ <h3>II. Pemeriksaan fisik dan barang bukti</h3>
+ <p>Pengamatan dilakukan terhadap area kolom C7 dan fragmen yang tersedia. Posisi asal sebagian material belum dapat dipastikan akibat pemindahan puing setelah kejadian.</p>
+ <table><thead><tr><th>Nomor</th><th>Objek</th><th>Hasil pemeriksaan</th><th>Status</th></tr></thead><tbody>
+ <tr><td>F-01</td><td>Kolom C7, sisi timur</td><td>Catatan inspeksi 12 September menunjukkan retak selebar 2,8 mm sebelum keruntuhan.</td><td>Terdokumentasi</td></tr>
+ <tr><td>F-02</td><td>Zona C</td><td>Deformasi dan patahan ditemukan setelah kejadian; urutan terbentuknya belum dapat dipastikan.</td><td>Observasi visual</td></tr>
+ <tr><td>F-03</td><td>Fragmen sambungan C7-A/B</td><td>Permukaan patahan memerlukan pemeriksaan material dan sambungan.</td><td>Uji lanjutan</td></tr>
+ <tr><td>F-04</td><td>Rantai barang bukti</td><td>Posisi asal sebagian fragmen tidak lengkap.</td><td>Terbatas</td></tr></tbody></table>
+ <p class="sr-note"><b>Catatan pengukuran.</b> Angka 2,8 mm berasal dari laporan inspeksi prakejadian, bukan pengukuran ulang pada puing. Lebar retak saja tidak cukup untuk menghitung kapasitas sisa kolom.</p>
+ <h3>III. Telaah rekaman instrumen</h3>
+ <p>Rekaman perangkat STR-C04 memperlihatkan peningkatan indeks getaran pada rentang 02.11–02.17 WIB. Nilai berikut merupakan indeks pembacaan sistem, bukan simpangan kolom dalam milimeter.</p>
+ <table><thead><tr><th>Waktu (WIB)</th><th>Indeks kanal 01</th><th>Keterangan</th></tr></thead><tbody>
+ <tr><td>02.08</td><td>0,10</td><td>Terekam</td></tr><tr><td>02.10</td><td>0,11</td><td>Terekam</td></tr><tr><td>02.12</td><td>0,27</td><td>Terekam</td></tr><tr><td>02.13</td><td>0,91</td><td>Ambang terlampaui</td></tr><tr><td>02.14</td><td>1,22</td><td>Ambang aktif</td></tr><tr><td>02.17</td><td>1,58</td><td>Ambang aktif</td></tr></tbody></table>
+ <p>Perangkat gas GZ-C02 mencatat alarm aktif pada 02.17.06 WIB. Urutan waktu kedua perangkat tidak dengan sendirinya membuktikan hubungan sebab-akibat.</p>
+ <h3>IV. Penelaahan riwayat teknis</h3>
+ <p>Nota pemeriksaan tanggal 12 September memuat catatan retak C7. Rekomendasi pembatasan area dan evakuasi sementara tercatat pada 16 September. Dokumen disposisi tanggal 17 September perlu dicocokkan untuk menilai tindak lanjut administratif terhadap rekomendasi tersebut.</p>
+ <h3>V. Pendapat sementara pemeriksa</h3>
+ <p>Indikasi kerusakan pada elemen C7 telah terdokumentasi sebelum peristiwa 18 September. Rekaman sensor menunjukkan peningkatan aktivitas pada malam kejadian. Namun, titik awal kegagalan, urutan kerusakan antarelemen, serta hubungan kerusakan sambungan dengan keruntuhan belum dapat ditetapkan dari bukti yang tersedia.</p>
+ <p><b>Kesimpulan sementara:</b> diperlukan rekonstruksi mekanisme kegagalan dan verifikasi riwayat penanganan peringatan struktur. Dokumen ini tidak menetapkan pihak yang bertanggung jawab atas keputusan operasional.</p>
+ <h3>VI. Pemeriksaan lanjutan dan pengesahan</h3>
+ <p>Foto dan fragmen C7 perlu diamankan, pengukuran prakejadian diverifikasi, dan dokumen pemeliharaan serta disposisi direkonsiliasi. Pengujian material dan rekonstruksi mekanisme kegagalan masih tertunda.</p>
+ <div class="sr-sign"><div><span>Disusun oleh</span><b>Pemeriksa Struktur</b><i>______________________</i></div><div><span>Ditinjau oleh</span><b>Peninjau Teknis</b><i>______________________</i></div></div>
+ <p class="sr-status">STATUS: DRAF PEMERIKSAAN · BELUM MERUPAKAN KESIMPULAN AKHIR</p>`;
+ let node=first;
+ while(node){const next=node.nextElementSibling;node.remove();if(node===end)break;node=next;}
+ const meta=root.querySelector('.meta');if(meta)meta.insertAdjacentElement('afterend',report);else root.appendChild(report);
+ root.classList.add('structural-document');
+}
 const priorOpen=window.openDocument;
 window.openDocument=function(id){
  priorOpen(id);
  if(!original[id])return;
  const root=document.querySelector('#modalBody .modalcontent');
- if(root)root.classList.add('archive-v94');
+ if(root){root.classList.add('archive-v94');if(id==='structuralForensic')formatStructuralReport(root);}
 };
 })();
