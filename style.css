@@ -266,3 +266,23 @@
 @media(max-width:600px){.archive-v94.structural-document .structural-report table{font-size:11px}.archive-v94.structural-document .structural-report th,.archive-v94.structural-document .structural-report td{padding:7px 6px}.archive-v94.structural-document .structural-report .sr-banner{flex-direction:column}}
 
 .access-card-report .acr-meta{display:flex;gap:16px;justify-content:space-between;border:1px solid #b6c0b7;padding:12px;margin:16px 0;flex-wrap:wrap}.access-card-report .acr-identity{display:grid;grid-template-columns:1fr 1fr;gap:16px}.access-card-report figure{margin:0}.access-card-report figure img{display:block;width:100%;height:auto;border:1px solid #b6c0b7}.access-card-report figcaption{font-size:11px;margin-top:6px}@media(max-width:650px){.access-card-report .acr-identity{grid-template-columns:1fr}}
+
+/* Card 5172: confidential archival form */
+.modalcontent.structural-document .access-card-report{font-family:Arial,sans-serif;color:#1f2a27;font-size:12px;line-height:1.5}
+.modalcontent.structural-document .access-card-report h3{background:#344e49!important;color:#fff!important;border:1px solid #263f3a!important;padding:9px 13px!important;font-size:14px!important;font-weight:700!important;letter-spacing:.015em!important;text-transform:none!important;margin:23px 0 0!important}
+.modalcontent.structural-document .access-card-report table{border-collapse:collapse!important;width:100%!important;margin:0 0 12px!important;font-size:12px!important}
+.modalcontent.structural-document .access-card-report th,.modalcontent.structural-document .access-card-report td{border:1px solid #c3bfb2!important;padding:9px 11px!important;background:rgba(255,255,255,.16)!important;vertical-align:middle!important}
+.modalcontent.structural-document .access-card-report thead th{background:#ded8c9!important;text-align:center!important}
+.modalcontent.structural-document .access-card-report tbody th{background:#eee9dc!important;width:35%!important}
+.modalcontent.structural-document .access-card-report .acr-meta{background:#ede8da;border:1px solid #bdb6a6;display:grid;grid-template-columns:repeat(3,1fr);padding:0;gap:0;margin:14px 0 19px}
+.modalcontent.structural-document .access-card-report .acr-meta span{padding:12px 10px;border-right:1px solid #bdb6a6;font-size:11px}
+.modalcontent.structural-document .access-card-report .acr-meta span:last-child{border-right:0}
+.modalcontent.structural-document .access-card-report .acr-identity{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:0 0 12px;align-items:start}
+.modalcontent.structural-document .access-card-report .acr-identity table{margin:0!important}
+.modalcontent.structural-document .access-card-report .acr-identity figure{margin:0;background:#ded7c9;padding:7px;border:1px solid #c3bfb2}
+.modalcontent.structural-document .access-card-report .acr-identity img{width:100%;display:block;border:0}
+.modalcontent.structural-document .access-card-report figcaption{font-size:10px;line-height:1.45;padding:6px 1px 0;color:#43463e}
+.modalcontent.structural-document .access-card-report .sr-banner{border-bottom:2px solid #344e49;padding:10px 0;font-size:10px}
+.modalcontent.structural-document .access-card-report .sr-note{background:#f1ede2!important;border:1px solid #c3bfb2!important;border-left:4px solid #344e49!important;margin:10px 0 18px!important;padding:10px 12px!important}
+.modalcontent.structural-document .access-card-report .sr-status{display:inline-block;border:2px solid #a5483e!important;color:#a5483e;font-weight:bold;transform:rotate(-2deg);padding:7px 12px!important;margin:18px 0 6px!important}
+@media(max-width:650px){.modalcontent.structural-document .access-card-report .acr-identity{grid-template-columns:1fr}.modalcontent.structural-document .access-card-report .acr-meta{grid-template-columns:1fr}.modalcontent.structural-document .access-card-report .acr-meta span{border-right:0;border-bottom:1px solid #bdb6a6}}
