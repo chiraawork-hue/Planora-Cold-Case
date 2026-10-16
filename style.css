@@ -249,3 +249,18 @@
 .bap-folder[open] summary{border-bottom:1px solid #b5a88c}
 .bap-folder .doclist{margin:16px 18px 20px}
 @media(max-width:600px){.bap-folder summary{min-height:72px;padding:17px 16px;font-size:15px}}
+
+/* Structural forensic report: formal printed document layout */
+.archive-v94.structural-document .structural-report{font-family:Arial,sans-serif;font-size:13px;line-height:1.65;color:#24332e}
+.archive-v94.structural-document .structural-report h3{font-family:Arial,sans-serif;font-size:15px;letter-spacing:0;text-transform:none;margin:26px 0 12px;border-bottom:1px solid #82988c;padding:0 0 8px}
+.archive-v94.structural-document .structural-report p{font-family:Arial,sans-serif;font-size:13px;line-height:1.8;white-space:normal;background:transparent;border:0;border-radius:0;padding:0;margin:12px 0 18px}
+.archive-v94.structural-document .structural-report table{width:100%;border-collapse:collapse;table-layout:auto;margin:14px 0 20px;font:12px/1.55 Arial,sans-serif}
+.archive-v94.structural-document .structural-report th,.archive-v94.structural-document .structural-report td{border:1px solid #b6c0b7;text-align:left;vertical-align:top;padding:10px 12px;overflow-wrap:break-word}
+.archive-v94.structural-document .structural-report th{background:#e8ece5;font-weight:700}
+.archive-v94.structural-document .structural-report .sr-banner{display:flex;justify-content:space-between;gap:12px;border-bottom:2px solid #597c6c;padding:12px 0;font-size:10px;letter-spacing:.08em}
+.archive-v94.structural-document .structural-report .sr-note{border-left:3px solid #82988c;background:#f2f1e8;padding:12px 14px}
+.archive-v94.structural-document .structural-report .sr-sign{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:28px 0}
+.archive-v94.structural-document .structural-report .sr-sign div{display:flex;flex-direction:column;gap:8px}
+.archive-v94.structural-document .structural-report .sr-sign i{font-style:normal;margin-top:32px}
+.archive-v94.structural-document .structural-report .sr-status{border-top:1px solid #a6b1a6;padding-top:12px;font-size:11px}
+@media(max-width:600px){.archive-v94.structural-document .structural-report table{font-size:11px}.archive-v94.structural-document .structural-report th,.archive-v94.structural-document .structural-report td{padding:7px 6px}.archive-v94.structural-document .structural-report .sr-banner{flex-direction:column}}
