@@ -892,9 +892,8 @@ PERTANYAAN LANJUTAN:"></textarea>
         return;
       }
 
-      if (!reportPhotos[id]) {
-        feedback.textContent =
-          "Pilih foto untuk ketiga tersangka.";
+      if (!data[id + "Person"]) {
+        feedback.textContent = "Pilih personel untuk setiap perkara.";
         return;
       }
     }
@@ -905,7 +904,7 @@ PERTANYAAN LANJUTAN:"></textarea>
       return;
     }
 
-    data.photos = reportPhotos;
+    data.photos = Object.fromEntries(CASE_ROLES.map(role => [role.id, "Planora_Cold_Case_Portraits/" + data[role.id + "Person"] + ".jpg"]));
     data.signature =
       signatureCanvas.toDataURL("image/png");
     data.submittedAt = new Date().toISOString();
