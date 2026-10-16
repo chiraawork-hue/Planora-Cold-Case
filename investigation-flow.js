@@ -547,7 +547,7 @@ envelopes[1].items=[...urutanBerkasAmplop02.filter(id=>daftarAmplop02.includes(i
 docs.personnelAlibiRegister={name:'REGISTER_ALIBI_PERSONEL_0919.pdf',title:'REGISTER KETERANGAN KEBERADAAN PERSONEL',meta:'INVESTIGASI INTERNAL / 19 SEP 2018 / INV-019-ALB',sections:[],callout:''};
 const alibiAwal=[
 ['ADRIAN PUTRA','Ruang direktur','Mengaku tetap berada di ruang kerja sebelum alarm'],
-['NADIA SANTOSO','Area administrasi','Mengaku meninggalkan laboratorium menuju area administrasi pada malam kejadian'],
+['NADIA SANTOSO','Area administrasi','Mengaku berada di area administrasi saat kejadian'],
 ['RAKA WIJAYA','Area operasional dan utilitas','Mengaku melakukan pemeriksaan fasilitas'],
 ['DIMAS ARGA','Area pemantauan struktur','Mengaku memeriksa kondisi struktur dan laporan sensor'],
 ['SISKA ARUM','Pos keamanan','Mengaku menjalankan tugas pemantauan keamanan'],
