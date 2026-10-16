@@ -148,11 +148,41 @@ function formatClinicalCustody(root){
  if(meta)meta.insertAdjacentElement('afterend',report);else root.appendChild(report);
  root.classList.add('structural-document');
 }
+function formatCard5172(root){
+ const headings=[...root.querySelectorAll('h3')];
+ const first=headings.find(h=>h.textContent.trim()==='IDENTITAS KARTU');
+ const last=headings.find(h=>h.textContent.trim()==='REKONSILIASI KARTU');
+ if(!first||!last||!last.nextElementSibling)return;
+ const end=last.nextElementSibling;
+ const report=document.createElement('div');
+ report.className='structural-report access-card-report';
+ report.innerHTML=`<div class="sr-banner"><span>VEYRA RESEARCH CENTER / SECURITY CONTROL</span><strong>SEC-TEMP/0917 · LEMBAR 02/04</strong></div>
+ <div class="acr-meta"><span>Nomor dokumen: <b>SEC-TEMP/0917</b></span><span>Tanggal terbit: <b>17 September 2018</b></span><span>Status: <b>Rekonsiliasi terbuka</b></span></div>
+ <h3>1. Identitas kartu akses</h3>
+ <div class="acr-identity"><table><tbody><tr><th>Nomor kartu</th><td><b>5172</b></td></tr><tr><th>Jenis akses</th><td>Sementara (temporary)</td></tr><tr><th>Area</th><td>AR-03 / ruang arsip Zona C</td></tr><tr><th>Tiket rujukan</th><td>IT-MNT/0917-04</td></tr><tr><th>Status pengembalian</th><td>Belum tercatat</td></tr></tbody></table>
+ <figure><img src="./kartu.png" alt="Dokumentasi kartu akses sementara 5172" loading="lazy"><figcaption>Gambar 1. Dokumentasi kartu akses sementara 5172 (lampiran register).</figcaption></figure></div>
+ <h3>2. Buku serah terima</h3>
+ <table><thead><tr><th>Tanggal / waktu</th><th>Pemohon tercetak</th><th>Paraf penerima</th><th>Pengembalian</th></tr></thead><tbody><tr><td>17 Sep 2018<br>19:12 WIB</td><td>F. Mahendra</td><td>Tidak terbaca</td><td><b>Belum tercatat</b></td></tr></tbody></table>
+ <p class="sr-note">Nama pada kolom pemohon merupakan catatan administratif. Register ini belum memastikan siapa yang memegang kartu secara fisik ketika pintu diakses.</p>
+ <h3>3. Ekspor pembaca pintu AR-03</h3>
+ <table><thead><tr><th>Waktu server</th><th>Kartu</th><th>Peristiwa</th><th>Status</th></tr></thead><tbody><tr><td>18 Sep · 01:41:26</td><td>5172</td><td>ACCESS_GRANTED</td><td>VALID</td></tr><tr><td>18 Sep · 01:41:29</td><td>—</td><td>CONTACT_OPEN</td><td>OK</td></tr><tr><td>18 Sep · 01:41:46</td><td>—</td><td>CONTACT_CLOSED</td><td>OK</td></tr></tbody></table>
+ <p>Ketiga peristiwa berasal dari pencatatan server pembaca pintu. Event CONTACT_OPEN dan CONTACT_CLOSED menunjukkan status kontak pintu, bukan identitas orang yang melintas.</p>
+ <h3>4. Rekonsiliasi kartu</h3>
+ <table><tbody><tr><th>Pengembalian</th><td>☐ Ya &nbsp;&nbsp; ☒ Belum tercatat</td></tr><tr><th>Pemegang fisik saat akses</th><td>Belum terverifikasi</td></tr><tr><th>Tindak lanjut</th><td>Periksa buku jaga, serah terima kartu, dan rekaman area terkait.</td></tr></tbody></table>
+ <h3>5. Pemeriksaan dan pengesahan</h3>
+ <div class="sr-sign"><div><span>Petugas Security Control</span><b>Nama: __________________</b><i>Paraf: __________________</i></div><div><span>Peninjau operasional</span><b>Nama: __________________</b><i>Paraf: __________________</i></div></div>
+ <p class="sr-status">DRAF REKONSILIASI · BELUM DISAHKAN</p>`;
+ let node=first;
+ while(node){const next=node.nextElementSibling;node.remove();if(node===end)break;node=next;}
+ const meta=root.querySelector('.meta');
+ if(meta)meta.insertAdjacentElement('afterend',report);else root.appendChild(report);
+ root.classList.add('structural-document');
+}
 const priorOpen=window.openDocument;
 window.openDocument=function(id){
  priorOpen(id);
  if(!original[id])return;
  const root=document.querySelector('#modalBody .modalcontent');
- if(root){root.classList.add('archive-v94');if(id==='structuralForensic')formatStructuralReport(root);if(id==='clinicalCustody')formatClinicalCustody(root);}
+ if(root){root.classList.add('archive-v94');if(id==='structuralForensic')formatStructuralReport(root);if(id==='clinicalCustody')formatClinicalCustody(root);if(id==='card5172')formatCard5172(root);}
 };
 })();
