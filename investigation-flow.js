@@ -592,7 +592,7 @@ const bapTambahan={
 bapAdrian:{name:'BAP_AP_0919.pdf',person:'DR. ADRIAN PUTRA',age:'43',role:'Direktur',unit:'Direksi',initials:'A.P.',number:'BAP-AP-019/2018',qa:[
 ['Apa kegiatan Saudara pada giliran malam 17–18 September?','Saya menyelesaikan pekerjaan administrasi di ruang direktur. Saya tidak mencatat setiap perpindahan selama malam itu.'],
 ['Apakah Saudara meninggalkan ruang direktur sebelum alarm?','Sepanjang yang saya ingat, saya tetap di area direksi. Waktu tepatnya perlu saya periksa lagi.'],
-['Siapa yang mempunyai kewenangan menggunakan terminal direksi?','Terminal itu ditempatkan untuk pekerjaan direksi. Pengaturan akun dan pendelegasian teknis ditangani sesuai prosedur internal.'],
+['Apakah Saudara berwenang menghentikan kegiatan di Blok C jika ada peringatan struktur?','Keputusan operasional dibahas bersama unit terkait. Kewenangan dan urutan persetujuannya tercatat dalam dokumen keselamatan fasilitas.'],
 ['Apa tindak lanjut Saudara atas laporan risiko struktur C7?','Saya meminta laporan tersebut melalui prosedur operasional. Keputusan dan waktunya harus dinilai berdasarkan berkas disposisi, bukan ingatan saya saja.'],
 ['Apakah Saudara menerima laporan peringatan mengenai struktur C7 sebelum keruntuhan?','Saya menerima laporan kondisi struktur melalui jalur operasional. Tanggal penerimaan dan keputusan tindak lanjut perlu diperiksa pada disposisi resmi.'],
 ['Siapa yang dapat mengonfirmasi keberadaan Saudara?','Petugas yang bertugas di area direksi mungkin mengetahui, tetapi saya tidak dapat memastikan siapa yang melihat saya setiap saat.']]},
