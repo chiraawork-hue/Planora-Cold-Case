@@ -582,6 +582,12 @@ openDocument=function(id){
 };
 
 /* v73 — pemeriksaan delapan personel, keterangan awal bukan temuan terbukti */
+const pertanyaanWaktuBAP=[
+['Di mana Saudara/Saudari berada sekitar pukul 01.35 pada 18 September 2018?','Saya perlu mencocokkan waktu tersebut dengan catatan pekerjaan dan ingatan saya.'],
+['Di mana Saudara/Saudari berada sekitar pukul 01.58 pada tanggal yang sama?','Saya belum dapat memastikan menitnya tanpa memeriksa catatan pendukung.'],
+['Dari lokasi yang disebutkan, jalur mana yang biasa digunakan menuju AR-03?','Jalur dan waktu tempuh perlu diperiksa bersama denah.']
+];
+for(const w of Object.values(witnessFiles))w.qa.push(...pertanyaanWaktuBAP);
 const bapTambahan={
 bapAdrian:{name:'BAP_AP_0919.pdf',person:'DR. ADRIAN PUTRA',age:'43',role:'Direktur',unit:'Direksi',initials:'A.P.',number:'BAP-AP-019/2018',qa:[
 ['Apa kegiatan Saudara pada giliran malam 17–18 September?','Saya menyelesaikan pekerjaan administrasi di ruang direktur. Saya tidak mencatat setiap perpindahan selama malam itu.'],
