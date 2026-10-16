@@ -160,7 +160,7 @@ PERTANYAAN LANJUTAN:"></textarea>
   </div>
 
   <script src="app.js?v=81"></script>
-  <script src="investigation-flow.js?v=118"></script>
+  <script src="investigation-flow.js?v=171"></script>
   <script src="case-evidence-v92.js?v=93"></script>
   <script src="planora-amplop04-arsip-v94.js?v=167"></script>
   <script src="case-review.js?v=134"></script>
@@ -1328,13 +1328,11 @@ PERTANYAAN LANJUTAN:"></textarea>
     const form = document.getElementById("finalReportForm90");
     if (form) form.style.display = "none";
 
-    if (!reportAvailable() || !form) return;
+    if (!reportAvailable()) return;
 
     // Open the existing signed three-case investigation directly.
     // No second report form or invitation step.
-    if (!document.getElementById("investigationPaper")) {
-      window.openInvestigationPaper140();
-    }
+    // The final verdict now offers the signed report directly.
     return;
 
     const invitation = document.createElement("section");
