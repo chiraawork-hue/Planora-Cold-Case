@@ -918,3 +918,14 @@ showVerdict=function(){
  form.parentNode.insertBefore(box,form);
  if(localStorage.getItem('cc_phone91')!=='open'){form.style.display='none';const note=document.createElement('p');note.textContent='Laporan final tersedia setelah DEVICE-01 diperiksa.';box.appendChild(note)}
 };
+
+
+/* v110 — Amplop 02: pemeriksaan integritas ekspor CCTV; tidak menetapkan pelaku atau penghapusan. */
+docs.cctvIntegrity={name:'CAM_AR03_EXPORT_INTEGRITY_0919.pdf',title:'BERITA ACARA PEMERIKSAAN KELENGKAPAN EKSPOR CCTV',meta:'SECURITY SYSTEMS / 19 SEP 2018 / CAM-INT-019',sections:[
+['OBJEK PEMERIKSAAN','Salinan ekspor kamera koridor CAM-AR03 yang diserahkan untuk pemeriksaan awal. Pemeriksaan ini tidak mencakup seluruh media penyimpanan sumber.'],
+['HASIL INVENTARIS','Indeks gambar memuat penanda aktivitas koridor dan penanda uji lampu. Pada salinan ekspor, satu rentang video di sekitar pergerakan koridor tidak dapat diputar utuh. Berkas indeks gambar dan video kontinu merupakan keluaran yang berbeda.'],
+['STATUS TEKNIS','Catatan pemeriksaan awal: EXPORT SEGMENT INCOMPLETE. Penyebab belum ditetapkan; kemungkinan meliputi kegagalan ekspor, gangguan perekaman, kerusakan media, atau tindakan pengguna.'],
+['TINDAK LANJUT','Amankan media sumber dan cadangan, cocokkan nomor segmen serta checksum, dan periksa log akun administrasi. Jangan menyimpulkan penghapusan disengaja hanya dari salinan yang tidak lengkap.'],
+['BATAS PEMBUKTIAN','Perbedaan jam CAM-AR03 dengan server harus dianalisis terpisah dari kelengkapan video. Keduanya tidak otomatis berasal dari tindakan yang sama.']
+],callout:''};
+if(!envelopes[1].items.includes('cctvIntegrity'))envelopes[1].items.push('cctvIntegrity');
