@@ -13,8 +13,6 @@ const records = {
   ]
  },
  structuralForensic: {
- 
- structuralForensic: {
   title:'LEMBAR PEMERIKSAAN FORENSIK STRUKTUR',
   meta:'ENGINEERING REVIEW · STR-FR/0927 · DRAFT / 27 SEP 2018',
   sections:[
