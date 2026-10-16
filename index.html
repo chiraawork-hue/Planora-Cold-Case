@@ -902,10 +902,52 @@ PERTANYAAN LANJUTAN:"></textarea>
       return;
     }
 
-    feedback.textContent =
-      "LAPORAN BERHASIL DISERAHKAN DAN DISIMPAN. " +
-      "Evaluasi jawaban belum diaktifkan.";
+    feedback.textContent = "LAPORAN DITERIMA · HASIL VERIFIKASI TERSEDIA DI BAWAH.";
+    renderCaseEvaluation147(data);
   };
+
+  /* v147: evidence-based case evaluation, with explicit limits of automated text review */
+  function renderCaseEvaluation147(data) {
+    const previous=document.getElementById("caseEvaluation147");
+    if(previous)previous.remove();
+    const correct={collapse:"adrian",manipulation:"maya",collaboration:"farhan"};
+    const clues={
+      collapse:"Tinjau peringatan kolom C7, disposisi teknik, dan kewenangan pengambilan keputusan.",
+      manipulation:"Bandingkan register mentah VX-17, versi publik, dan jejak pengelolaan arsip.",
+      collaboration:"Tinjau komunikasi DEVICE-01, perpindahan berkas, dan perbedaan pemegang kartu dengan pengguna fisik."
+    };
+    const markers={
+      collapse:/c7|kolom|struktur|retak|sensor|teknik|disposisi|peringatan|pemeliharaan|maintenance/i,
+      manipulation:/vx.?17|data|mentah|raw|register|audit|revisi|publik|lampiran|klinis/i,
+      collaboration:/device|chat|pesan|arsip|akses|kartu|cctv|farhan|maya|audit|komunikasi/i
+    };
+    const statuses=[];
+    const rows=CASE_ROLES.map((role,i)=>{
+      const id=role.id, right=data[id+"Person"]===correct[id];
+      const evidence=(data[id+"Evidence"]||"")+" "+(data[id+"Explanation"]||"");
+      const supported=markers[id].test(evidence);
+      const status=!right?"PERLU REVISI":supported?"IDENTITAS SESUAI":"BUKTI PERLU DITINJAU";
+      statuses.push({id,right,supported});
+      const detail=!right?clues[id] : supported?
+        "Identitas sesuai rekonstruksi. Referensi bukti terdeteksi; ketepatan seluruh uraian tetap perlu dinilai penyidik.":
+        "Identitas sesuai, tetapi referensi bukti belum cukup spesifik untuk pemeriksaan otomatis. "+clues[id];
+      const color=!right?"#9d4335":supported?"#235b4b":"#8a681f";
+      return '<section style="border-top:1px solid #bcb7aa;padding:16px 0"><div style="display:flex;gap:12px;justify-content:space-between;align-items:start;flex-wrap:wrap"><strong>'+escapeHTML(role.title)+'</strong><strong style="color:'+color+'">'+status+'</strong></div><p style="margin:8px 0 0">'+escapeHTML(detail)+'</p></section>';
+    }).join("");
+    const total=statuses.filter(x=>x.right).length;
+    const all=total===3;
+    const result=document.createElement("section");
+    result.id="caseEvaluation147";
+    result.style.cssText="margin-top:28px;border-top:2px solid #28504d;padding-top:20px;color:#172826";
+    result.innerHTML='<div style="font-size:11px;color:#68706a">VEYRA RESEARCH CENTER · EVALUASI CASE 001</div><h2 style="font-size:19px;margin:8px 0">LEMBAR HASIL VERIFIKASI PENYELIDIKAN</h2><p><strong>Identifikasi sesuai: '+total+' dari 3 perkara.</strong></p>'+rows+'<p style="font-size:12px;color:#59665e">Catatan: sistem mencocokkan identitas dengan kunci cerita dan memeriksa kata kunci relevansi bukti. Sistem tidak dapat membuktikan kebenaran seluruh argumentasi tertulis secara otomatis.</p><p><strong>'+(all?'IDENTIFIKASI KETIGA PERKARA SESUAI.':'BERKAS MEMERLUKAN PENINJAUAN ULANG.')+'</strong></p><button type="button" class="paperClear" id="caseRevise147" style="padding:12px 18px;cursor:pointer">REVISI LAPORAN</button>';
+    document.getElementById("paperFeedback")?.after(result);
+    result.querySelector("#caseRevise147").addEventListener("click",()=>{
+      result.remove();
+      document.getElementById("paperFeedback").textContent="Laporan dapat diperbaiki dan diserahkan kembali.";
+      document.getElementById("paperInvestigator")?.scrollIntoView({behavior:"smooth",block:"start"});
+    });
+    result.scrollIntoView({behavior:"smooth",block:"start"});
+  }
 
   /* Menampilkan undangan laporan setelah HP terbuka */
   const previousShowVerdict140 = window.showVerdict;
