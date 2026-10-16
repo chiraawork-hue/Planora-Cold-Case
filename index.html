@@ -711,6 +711,9 @@ PERTANYAAN LANJUTAN:"></textarea>
     );
 
     signatureUsed = false;
+    const draft=readReport();
+    delete draft.signature;
+    try{localStorage.setItem(REPORT_KEY,JSON.stringify(draft))}catch(e){}
   };
 
   window.openInvestigationPaper140 = function () {
@@ -829,6 +832,37 @@ PERTANYAAN LANJUTAN:"></textarea>
     });
 
     setupSignature();
+    /* v150: autosave draft on every input and preserve signature */
+    const paper=document.getElementById("investigationPaper");
+    const status=document.createElement("p");
+    status.id="paperAutoSave150";
+    status.style.cssText="font-size:11px;color:#49665c;margin:10px 0";
+    status.textContent="Draf tersimpan otomatis di perangkat ini.";
+    paper.querySelector(".paperMeta")?.before(status);
+    const saveDraft=()=>{
+      const existing=readReport();
+      const draft={...existing,investigator:document.getElementById("paperInvestigator")?.value||""};
+      CASE_ROLES.forEach(role=>{
+        const id=role.id;
+        draft[id+"Person"]=document.getElementById("person_"+id)?.value||"";
+        draft[id+"Evidence"]=document.getElementById("evidence_"+id)?.value||"";
+        draft[id+"Explanation"]=document.getElementById("explanation_"+id)?.value||"";
+      });
+      if(signatureCanvas&&signatureUsed)draft.signature=signatureCanvas.toDataURL("image/png");
+      try{
+        localStorage.setItem(REPORT_KEY,JSON.stringify(draft));
+        status.textContent="Draf tersimpan otomatis · "+new Date().toLocaleTimeString("id-ID",{hour:"2-digit",minute:"2-digit"});
+      }catch(e){status.textContent="Penyimpanan penuh. Salin jawaban sebelum menutup halaman.";}
+    };
+    paper.addEventListener("input",saveDraft);
+    paper.addEventListener("change",saveDraft);
+    signatureCanvas?.addEventListener("pointerup",saveDraft);
+    window.paperSaveDraft150=saveDraft;
+    if(data.signature){
+      const img=new Image();
+      img.onload=()=>{if(!document.getElementById("paperSignature"))return;signatureCanvas.getContext("2d").drawImage(img,0,0,signatureCanvas.width,signatureCanvas.height);signatureUsed=true};
+      img.src=data.signature;
+    }
   };
 
   window.paperSubmitReport = function () {
