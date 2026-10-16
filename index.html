@@ -7,6 +7,17 @@
   <meta name="theme-color" content="#08191d">
   <title>Planora Cold Case — The Collapse</title>
   <link rel="stylesheet" href="style.css?v=158">
+<style>
+.forensic-reveal176{margin:18px 0 24px;padding:22px 18px;text-align:center;background:#09282a;border:1px solid #277c72;border-radius:7px;color:#e3fffa;font:14px/1.5 Arial,Helvetica,sans-serif;animation:forensicReveal176 .5s ease-out}
+.forensic-reveal176 .forensic-scan176{font-size:28px;color:#9be9d5;margin-bottom:7px}
+.forensic-reveal176 h3{color:#9bf2d8;font:700 16px/1.4 Arial,sans-serif;margin:8px 0 12px}
+.forensic-reveal176 p{margin:7px 0;color:#f0fffd}
+.forensic-reveal176 button{margin:13px 0 0;padding:13px 17px;background:#9ce8d3;color:#07332e;border:0;border-radius:5px;font:700 13px Arial,sans-serif;cursor:pointer}
+.forensic-reveal176 button:hover{background:#b5ffe7}
+@keyframes forensicReveal176{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){.forensic-reveal176{animation:none}}
+</style>
+
 </head>
 <body>
   <div class="app">
@@ -1191,17 +1202,7 @@ PERTANYAAN LANJUTAN:"></textarea>
           if(!win){alert("Izinkan pop-up untuk mencetak sertifikat.");return}
           const printable=sheet.cloneNode(true);
           printable.querySelectorAll("button").forEach(b=>b.remove());
-          win.document.write('<!doctype html><html lang="id"><head><meta charset="utf-8"><title>CASE 001 — Case Resolved</title><style>body{font:14px/1.7 Arial,sans-serif;color:#19332e;padding:30px;max-width:800px;margin:auto}h1,h2{color:#214a3f}article{box-shadow:none!important;border:0!important;max-height:none!important;overflow:visible!important;width:100%!important;padding:0!important}</style></head><body>'+printable.outerHTML+'</body><style>
-.forensic-reveal176{margin:18px 0 24px;padding:22px 18px;text-align:center;background:#09282a;border:1px solid #277c72;border-radius:7px;color:#e3fffa;font:14px/1.5 Arial,Helvetica,sans-serif;animation:forensicReveal176 .5s ease-out}
-.forensic-reveal176 .forensic-scan176{font-size:28px;color:#9be9d5;margin-bottom:7px}
-.forensic-reveal176 h3{color:#9bf2d8;font:700 16px/1.4 Arial,sans-serif;margin:8px 0 12px}
-.forensic-reveal176 p{margin:7px 0;color:#f0fffd}
-.forensic-reveal176 button{margin:13px 0 0;padding:13px 17px;background:#9ce8d3;color:#07332e;border:0;border-radius:5px;font:700 13px Arial,sans-serif;cursor:pointer}
-.forensic-reveal176 button:hover{background:#b5ffe7}
-@keyframes forensicReveal176{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-@media(prefers-reduced-motion:reduce){.forensic-reveal176{animation:none}}
-</style>
-</html>');
+          win.document.write('<!doctype html><html lang="id"><head><meta charset="utf-8"><title>CASE 001 — Case Resolved</title><style>body{font:14px/1.7 Arial,sans-serif;color:#19332e;padding:30px;max-width:800px;margin:auto}h1,h2{color:#214a3f}article{box-shadow:none!important;border:0!important;max-height:none!important;overflow:visible!important;width:100%!important;padding:0!important}</style></head><body>'+printable.outerHTML+'</body></html>');
           win.document.close();win.focus();win.print();
         };
         try{localStorage.setItem("cc_case_resolved151","yes")}catch(e){}
