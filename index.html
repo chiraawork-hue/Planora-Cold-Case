@@ -1042,6 +1042,45 @@ PERTANYAAN LANJUTAN:"></textarea>
       @media(max-width:600px){.icrb-review-overlay{padding:8px!important;align-items:flex-end!important}.icrb-review-paper{max-height:95dvh!important;border-radius:12px 12px 0 0!important;padding:22px 18px!important}.icrb-review-header{flex-direction:column;align-items:flex-start!important;gap:7px!important}.icrb-review-header>div:nth-child(2){text-align:left!important}.icrb-review-case{padding:15px!important}.icrb-review-case-heading{align-items:flex-start!important;flex-direction:column}.icrb-review-status{white-space:normal}.icrb-review-footer button{width:100%}}
     `;
     paper.appendChild(redesign);
+    if(all){
+      const resolveButton=document.createElement("button");
+      resolveButton.type="button";
+      resolveButton.textContent="BUKA BERKAS PENYELESAIAN →";
+      resolveButton.style.cssText="background:#244f4b;color:#fff;border:0;border-radius:5px;padding:13px 18px;font-weight:700;cursor:pointer;margin:15px 0 6px;width:100%;letter-spacing:.03em";
+      result.querySelector("#caseRevise147")?.before(resolveButton);
+      resolveButton.addEventListener("click",()=>{
+        overlay.remove();
+        const old=document.getElementById("caseResolution151");if(old)old.remove();
+        const end=document.createElement("div");end.id="caseResolution151";
+        end.setAttribute("role","dialog");end.setAttribute("aria-modal","true");
+        end.style.cssText="position:fixed;inset:0;z-index:2147483646;background:rgba(4,15,17,.94);display:flex;align-items:center;justify-content:center;padding:15px;animation:icrbFade .5s ease";
+        const sheet=document.createElement("article");
+        sheet.style.cssText="background:#fbf9f2;color:#1a312c;width:min(750px,100%);max-height:94vh;overflow:auto;padding:clamp(22px,5vw,45px);font:14px/1.75 Arial,sans-serif;border:1px solid #bcb7aa;box-shadow:0 22px 80px #0008";
+        const investigator=escapeHTML(data.investigator||"Penyidik");
+        const date=new Date(data.submittedAt||Date.now()).toLocaleDateString("id-ID",{day:"numeric",month:"long",year:"numeric"});
+        sheet.innerHTML='<div style="display:flex;justify-content:space-between;gap:12px;border-bottom:2px solid #244f4b;padding-bottom:14px;font-size:10px"><div>INDEPENDENT CASE REVIEW BOARD<br>ARSIP PENYELESAIAN PERKARA</div><div style="text-align:right">ICRB/CASE-001/CLOSE<br>CLASSIFIED · FINAL</div></div>'+
+        '<div style="text-align:center;padding:34px 0 25px"><div style="font-size:11px;letter-spacing:.25em;color:#50675e">CASE 001 — THE COLLAPSE</div><h1 style="font-size:clamp(28px,6vw,44px);letter-spacing:.06em;margin:12px 0;color:#1e473d">CASE RESOLVED</h1><p style="margin:0;color:#566a61">Ketiga identifikasi sesuai dengan rekonstruksi perkara.</p></div>'+
+        '<div style="border-top:1px solid #bcb7aa;padding-top:20px"><h2 style="font-size:18px">BERKAS REKONSTRUKSI AKHIR</h2>'+
+        '<p><strong>01 · Keruntuhan Gedung — Adrian.</strong> Peringatan kondisi kolom C7 dan catatan teknik menunjukkan risiko struktur yang tidak ditangani secara memadai. Rekonstruksi mengaitkan tanggung jawab keputusan pada Adrian; penyebab keruntuhan harus dibedakan dari dugaan kebocoran gas dalam laporan awal.</p>'+
+        '<p><strong>02 · Manipulasi Data VX-17 — Maya.</strong> Perbedaan antara register mentah dan versi yang dipublikasikan, serta hilangnya lampiran sumber, mengarah pada peran Maya dalam penyembunyian data klinis.</p>'+
+        '<p><strong>03 · Upaya Menutupi Manipulasi — Farhan.</strong> Percakapan DEVICE-01 dan jejak akses arsip mengaitkan Farhan dengan upaya menghalangi penelusuran berkas. Identitas pengguna kartu akses tetap harus dibedakan dari pemegang kartunya.</p>'+
+        '<p style="font-size:12px;color:#5b6a61;border-top:1px solid #d5d0c3;padding-top:15px">Kesimpulan ini adalah rekonstruksi kasus fiksi, bukan putusan pengadilan. Verifikasi otomatis memastikan identitas, bukan seluruh ketepatan uraian bukti.</p></div>'+
+        '<div style="margin-top:25px;border:1px solid #c9c5b8;padding:20px;text-align:center"><div style="font-size:10px;letter-spacing:.15em">SERTIFIKAT PENYELESAIAN KASUS</div><h2 style="font-size:23px;margin:12px 0">'+investigator+'</h2><p>Telah menyelesaikan identifikasi tiga perkara<br>CASE 001 — THE COLLAPSE</p><p style="font-size:11px;color:#647169">'+escapeHTML(date)+' · ICRB/CASE-001/CLOSE</p></div>'+
+        '<p style="text-align:center;font-size:14px;margin:26px 0 18px">Sebelas nyawa hilang. Kebenaran akhirnya mendapat tempat dalam arsip.</p>'+
+        '<div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap"><button type="button" id="casePrint151" style="background:#244f4b;color:white;border:0;padding:12px 20px;cursor:pointer">CETAK / SIMPAN PDF</button><button type="button" id="caseClose151" style="background:#e7e4da;color:#1a312c;border:0;padding:12px 20px;cursor:pointer">KEMBALI KE ARSIP</button></div>';
+        end.appendChild(sheet);document.body.appendChild(end);
+        sheet.querySelector("#caseClose151").onclick=()=>end.remove();
+        sheet.querySelector("#casePrint151").onclick=()=>{
+          const win=window.open("","_blank");
+          if(!win){alert("Izinkan pop-up untuk mencetak sertifikat.");return}
+          const printable=sheet.cloneNode(true);
+          printable.querySelectorAll("button").forEach(b=>b.remove());
+          win.document.write('<!doctype html><html lang="id"><head><meta charset="utf-8"><title>CASE 001 — Case Resolved</title><style>body{font:14px/1.7 Arial,sans-serif;color:#19332e;padding:30px;max-width:800px;margin:auto}h1,h2{color:#214a3f}article{box-shadow:none!important;border:0!important;max-height:none!important;overflow:visible!important;width:100%!important;padding:0!important}</style></head><body>'+printable.outerHTML+'</body></html>');
+          win.document.close();win.focus();win.print();
+        };
+        try{localStorage.setItem("cc_case_resolved151","yes")}catch(e){}
+      });
+    }
     overlay.appendChild(paper);document.body.appendChild(overlay);
     result.querySelector("#caseRevise147").addEventListener("click",()=>{
       overlay.remove();
