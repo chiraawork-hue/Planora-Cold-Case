@@ -124,3 +124,37 @@ function openReviewPopup(i){
  body.appendChild(overlay);
 }
 function closeReviewPopup(){document.getElementById('reviewPopupOverlay')?.remove()}
+
+/* v137 — staged forensic evidence reveal after verified VX-17 calculation */
+(function(){
+ const css=document.createElement('style');
+ css.textContent='.phone-reveal-overlay{position:fixed;inset:0;z-index:99999;background:rgba(4,18,21,.95);display:flex;align-items:center;justify-content:center;padding:20px;animation:phoneRevealFade .35s ease}.phone-reveal-card{width:min(440px,100%);text-align:center;color:#e4f4ed;border:1px solid #3d786c;padding:38px 25px;background:#0b2528;box-shadow:0 0 65px #1a74604a}.phone-reveal-symbol{font-size:43px;color:#8df0c7;margin-bottom:18px}.phone-reveal-title{font-size:23px;letter-spacing:2px;margin:0 0 14px}.phone-reveal-sub{line-height:1.7;color:#b7d3c9}.phone-reveal-card button{margin-top:23px;padding:13px 23px;background:#9ee6cb;border:0;color:#102c29;font-weight:700;cursor:pointer}@keyframes phoneRevealFade{from{opacity:0}to{opacity:1}}';
+ document.head.appendChild(css);
+ const priorShow=showVerdict;
+ showVerdict=function(){
+   priorShow();
+   if(state.unlocked<4)return;
+   const box=[...document.querySelectorAll('#modalBody .question')].find(e=>e.textContent.includes('BARANG BUKTI TERAKHIR'));
+   if(!box)return;
+   const opened=localStorage.getItem('cc_phone91')==='open';
+   if(!state.verdict&&!opened){box.style.display='none';return}
+   if(!opened){box.style.display='none';return}
+   box.style.display='';
+   box.querySelector('h3').textContent='BARANG BUKTI DIPERIKSA · DEVICE-01';
+   box.querySelector('p').textContent='Ekstrak percakapan telah tersedia dalam arsip penyelidikan.';
+   const btn=box.querySelector('button');if(btn)btn.textContent='LIHAT KEMBALI HP FARHAN';
+ };
+ const priorSubmit=submitVerdict;
+ submitVerdict=function(){
+   const wasVerified=!!state.verdict;
+   priorSubmit();
+   if(wasVerified||!state.verdict)return;
+   const box=[...document.querySelectorAll('#modalBody .question')].find(e=>e.textContent.includes('BARANG BUKTI TERAKHIR'));
+   if(box)box.style.display='none';
+   const overlay=document.createElement('div');
+   overlay.className='phone-reveal-overlay';
+   overlay.innerHTML='<div class="phone-reveal-card" role="dialog" aria-modal="true" aria-label="Barang bukti baru ditemukan"><div class="phone-reveal-symbol">◇</div><h2 class="phone-reveal-title">AKSES FORENSIK TERBUKA</h2><p class="phone-reveal-sub">Verifikasi data VX-17 berhasil.<br>Barang bukti digital baru ditemukan.<br><strong>DEVICE-01 · MILIK FARHAN</strong></p><button type="button" id="phoneRevealContinue">PERIKSA PERANGKAT →</button></div>';
+   document.body.appendChild(overlay);
+   overlay.querySelector('button').addEventListener('click',()=>{overlay.remove();openPhone91()});
+ };
+})();
