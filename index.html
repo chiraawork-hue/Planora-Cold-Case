@@ -1186,7 +1186,23 @@ PERTANYAAN LANJUTAN:"></textarea>
           if(!win){alert("Izinkan pop-up untuk mencetak sertifikat.");return}
           const printable=sheet.cloneNode(true);
           printable.querySelectorAll("button").forEach(b=>b.remove());
-          win.document.write('<!doctype html><html lang="id"><head><meta charset="utf-8"><title>CASE 001 — Case Resolved</title><style>body{font:14px/1.7 Arial,sans-serif;color:#19332e;padding:30px;max-width:800px;margin:auto}h1,h2{color:#214a3f}article{box-shadow:none!important;border:0!important;max-height:none!important;overflow:visible!important;width:100%!important;padding:0!important}</style></head><body>'+printable.outerHTML+'</body></html>');
+          win.document.write('<!doctype html><html lang="id"><head><meta charset="utf-8"><title>CASE 001 — Case Resolved</title><style>body{font:14px/1.7 Arial,sans-serif;color:#19332e;padding:30px;max-width:800px;margin:auto}h1,h2{color:#214a3f}article{box-shadow:none!important;border:0!important;max-height:none!important;overflow:visible!important;width:100%!important;padding:0!important}</style></head><body>'+printable.outerHTML+'</body><style>
+/* v163: document-style tabular maintenance register */
+.maintenance-report{background:#f2ecdf!important;border:1px solid #bcb8a9;padding:clamp(16px,3vw,30px)!important}
+.maintenance-report .letterhead{border:0!important;border-bottom:2px solid #677b71!important;border-radius:0!important;background:transparent!important;padding:0 0 14px!important}
+.maintenance-report>h2{background:transparent!important;border:0!important;border-bottom:1px solid #aeb4a9!important;border-radius:0!important;padding:16px 0!important;margin:0 0 12px!important;text-align:center;font-size:clamp(19px,3vw,24px)!important}
+.maintenance-report>.meta{background:transparent!important;border:0!important;border-bottom:1px solid #aeb4a9!important;padding:8px 0 13px!important;font:11px/1.8 ui-monospace,Consolas,monospace!important}
+.maintenance-report .maintenance-section{background:transparent!important;border:0!important;border-radius:0!important;margin:22px 0!important;overflow:visible!important}
+.maintenance-report .maintenance-section>h3{background:transparent!important;border:0!important;border-bottom:1px solid #9daea4!important;padding:0 0 9px!important;margin:0 0 12px!important;font-size:13px!important;letter-spacing:.045em}
+.maintenance-table163{width:100%;border-collapse:collapse;table-layout:auto;font:11px/1.65 ui-monospace,Consolas,monospace;color:#243a34}
+.maintenance-table163 th,.maintenance-table163 td{border:1px solid #b9b7a9;padding:10px 9px;text-align:left;vertical-align:top;overflow-wrap:anywhere}
+.maintenance-table163 th{background:#e1dfd5;font-weight:700}
+.maintenance-table163 tr:nth-child(even) td{background:#eae7de}
+.maintenance-table163 tr:nth-child(odd) td{background:#f7f3e9}
+.maintenance-table163 tr:hover td{background:#e4ede5}
+@media(max-width:600px){.maintenance-report{padding:12px!important}.maintenance-section{overflow-x:auto!important}.maintenance-table163{font-size:10px;min-width:530px}.maintenance-table163 th,.maintenance-table163 td{padding:8px 7px}.maintenance-report .maintenance-section:not(:has(tr:first-child>th:nth-child(3))) .maintenance-table163{min-width:0}}
+</style>
+</html>');
           win.document.close();win.focus();win.print();
         };
         try{localStorage.setItem("cc_case_resolved151","yes")}catch(e){}
@@ -1402,52 +1418,39 @@ PERTANYAAN LANJUTAN:"></textarea>
 
     headings.forEach(heading => {
       const paragraph = heading.nextElementSibling;
-
-      if (!paragraph || paragraph.tagName !== "P") {
-        return;
-      }
-
+      if (!paragraph || paragraph.tagName !== "P") return;
       const section = document.createElement("section");
       section.className = "maintenance-section";
-
-      const content = document.createElement("div");
-      content.className = "maintenance-content";
-
-      const lines = paragraph.textContent
-        .split(/\r?\n/)
-        .map(line => line.trim())
-        .filter(Boolean);
-
-      lines.forEach(line => {
-        const row = document.createElement("div");
-        row.className = "maintenance-row";
-
-        const separator = line.indexOf("|");
-
-        const label = document.createElement("div");
-        label.className = "maintenance-label";
-
-        const value = document.createElement("div");
-        value.className = "maintenance-value";
-
-        label.textContent =
-          separator >= 0
-            ? line.slice(0, separator).trim()
-            : line;
-
-        value.textContent =
-          separator >= 0
-            ? line.slice(separator + 1).trim()
-            : "";
-
-        row.append(label, value);
-        content.appendChild(row);
-      });
-
+      const lines = paragraph.textContent.split(/\\r?\\n/).map(x=>x.trim()).filter(Boolean);
+      const rows = lines.map(line=>line.split("|").map(x=>x.trim()));
+      const table = document.createElement("table");
+      table.className = "maintenance-table163";
+      const isEvent = /EKSPOR PERISTIWA/i.test(heading.textContent);
+      const isMatrix = /MATRIKS OTORISASI/i.test(heading.textContent);
+      if(isEvent || isMatrix){
+        rows.forEach((cells,i)=>{
+          const tr=document.createElement("tr");
+          cells.forEach(value=>{
+            const cell=document.createElement(i===0?"th":"td");
+            cell.textContent=value;
+            tr.appendChild(cell);
+          });
+          table.appendChild(tr);
+        });
+      } else {
+        rows.forEach(cells=>{
+          const tr=document.createElement("tr");
+          const label=document.createElement("th");
+          label.textContent=cells[0]||"";
+          const value=document.createElement("td");
+          value.textContent=cells.slice(1).join(" | ");
+          tr.append(label,value);table.appendChild(tr);
+        });
+      }
       heading.before(section);
-      section.append(heading, content);
+      section.append(heading,table);
       paragraph.remove();
-    });
+    });;
   }
 
   document.addEventListener("DOMContentLoaded", () => {
