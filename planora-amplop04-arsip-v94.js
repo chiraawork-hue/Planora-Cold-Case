@@ -101,7 +101,7 @@ function formatStructuralReport(root){
  <p>Perangkat gas GZ-C02 mencatat alarm aktif pada 02.17.06 WIB. Urutan waktu kedua perangkat tidak dengan sendirinya membuktikan hubungan sebab-akibat.</p>
  <h3>IV. Penelaahan riwayat teknis</h3>
  <p>Nota pemeriksaan tanggal 12 September memuat catatan retak C7. Rekomendasi pembatasan area dan evakuasi sementara tercatat pada 16 September. Dokumen disposisi tanggal 17 September perlu dicocokkan untuk menilai tindak lanjut administratif terhadap rekomendasi tersebut.</p>
- <h3>V. Pendapat sementara pemeriksa</h3>
+ <h3>V. Pendapat sementara pemeriksa</h3><table class="sr-assessment"><thead><tr><th>Kategori penilaian</th><th>Uraian</th></tr></thead><tbody><tr><td>Fakta terverifikasi</td><td>Catatan retak C7 telah ada sebelum kejadian; rekaman sensor menunjukkan peningkatan pembacaan pada malam keruntuhan.</td></tr><tr><td>Keterbatasan</td><td>Posisi asal sebagian fragmen tidak diketahui; pengujian material dan rekonstruksi belum selesai.</td></tr><tr><td>Belum dapat ditetapkan</td><td>Titik awal kegagalan, urutan kerusakan, dan keterkaitan kerusakan sambungan dengan keruntuhan.</td></tr></tbody></table>
  <p>Indikasi kerusakan pada elemen C7 telah terdokumentasi sebelum peristiwa 18 September. Rekaman sensor menunjukkan peningkatan aktivitas pada malam kejadian. Namun, titik awal kegagalan, urutan kerusakan antarelemen, serta hubungan kerusakan sambungan dengan keruntuhan belum dapat ditetapkan dari bukti yang tersedia.</p>
  <p><b>Kesimpulan sementara:</b> diperlukan rekonstruksi mekanisme kegagalan dan verifikasi riwayat penanganan peringatan struktur. Dokumen ini tidak menetapkan pihak yang bertanggung jawab atas keputusan operasional.</p>
  <h3>VI. Pemeriksaan lanjutan dan pengesahan</h3>
