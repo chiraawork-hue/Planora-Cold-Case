@@ -264,3 +264,5 @@
 .archive-v94.structural-document .structural-report .sr-sign i{font-style:normal;margin-top:32px}
 .archive-v94.structural-document .structural-report .sr-status{border-top:1px solid #a6b1a6;padding-top:12px;font-size:11px}
 @media(max-width:600px){.archive-v94.structural-document .structural-report table{font-size:11px}.archive-v94.structural-document .structural-report th,.archive-v94.structural-document .structural-report td{padding:7px 6px}.archive-v94.structural-document .structural-report .sr-banner{flex-direction:column}}
+
+.access-card-report .acr-meta{display:flex;gap:16px;justify-content:space-between;border:1px solid #b6c0b7;padding:12px;margin:16px 0;flex-wrap:wrap}.access-card-report .acr-identity{display:grid;grid-template-columns:1fr 1fr;gap:16px}.access-card-report figure{margin:0}.access-card-report figure img{display:block;width:100%;height:auto;border:1px solid #b6c0b7}.access-card-report figcaption{font-size:11px;margin-top:6px}@media(max-width:650px){.access-card-report .acr-identity{grid-template-columns:1fr}}
