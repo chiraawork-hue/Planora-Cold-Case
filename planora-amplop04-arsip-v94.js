@@ -81,7 +81,7 @@ function formatStructuralReport(root){
  let end=last.nextElementSibling;
  if(!end)return;
  const report=document.createElement('div');
- report.className='structural-report';
+ report.className='structural-report forensic-sheet';
  report.innerHTML=`<div class="sr-banner"><span>VEYRA RESEARCH CENTER · UNIT REKAYASA STRUKTUR</span><strong>SALINAN PEMERIKSAAN TEKNIS</strong></div>
  <p class="sr-intro">Pemeriksaan ini disusun berdasarkan dokumentasi inspeksi sebelum kejadian, pengamatan material pascakejadian, serta rekaman instrumen di Zona C. Penilaian masih bersifat sementara karena sebagian material telah dipindahkan dan pengujian laboratorium belum selesai.</p>
  <h3>I. Identitas pemeriksaan</h3>
