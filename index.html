@@ -528,13 +528,6 @@ PERTANYAAN LANJUTAN:"></textarea>
               FOTO PERSONEL
             </div>
 
-            <input
-              class="paperPhotoInput"
-              type="file"
-              accept="image/*"
-              aria-label="Pilih foto tersangka"
-              onchange="paperUploadPhoto('${id}', this)"
-            >
           </div>
 
           <div>
@@ -573,25 +566,16 @@ PERTANYAAN LANJUTAN:"></textarea>
   }
 
   window.paperPersonChanged = function (id) {
-    const selected =
-      document.getElementById("person_" + id)?.value;
-
+    const selected = document.getElementById("person_" + id)?.value;
     const box = document.getElementById("photo_" + id);
-
     if (!box) return;
-
-    if (reportPhotos[id]) {
-      box.innerHTML =
-        '<img alt="Foto tersangka" src="' +
-        reportPhotos[id] + '">';
-      return;
-    }
-
+    if (!selected) { box.textContent = "PILIH PERSONEL"; return; }
     const person = PEOPLE.find(p => p[0] === selected);
-
-    box.textContent = person
-      ? "FOTO BELUM DIPILIH"
-      : "FOTO PERSONEL";
+    const img = document.createElement("img");
+    img.src = "Planora_Cold_Case_Portraits/" + selected + ".jpg";
+    img.alt = "Potret " + (person ? person[1] : selected);
+    img.onerror = function () { box.textContent = "FOTO TIDAK TERSEDIA"; };
+    box.replaceChildren(img);
   };
 
   window.paperUploadPhoto = function (id, input) {
