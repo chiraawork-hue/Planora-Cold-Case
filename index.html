@@ -979,4 +979,26 @@ PERTANYAAN LANJUTAN:"></textarea>
 })();
 </script>
 
+
+<script>
+/* v142: verification appears only until the correct VX-17 answer is accepted */
+(function(){
+  const originalShowVerdict=window.showVerdict;
+  window.showVerdict=function(){
+    originalShowVerdict();
+    if(typeof state==='undefined'||!state.verdict)return;
+    const field=document.getElementById('finalCode');
+    const verification=field?.closest('section');
+    if(verification)verification.style.display='none';
+  };
+  const originalSubmitVerdict=window.submitVerdict;
+  window.submitVerdict=function(){
+    originalSubmitVerdict();
+    if(typeof state==='undefined'||!state.verdict)return;
+    const field=document.getElementById('finalCode');
+    const verification=field?.closest('section');
+    if(verification)verification.style.display='none';
+  };
+})();
+</script>
 </html>
