@@ -872,7 +872,7 @@ submitVerdict=function(){
  if(!raw){feedback.textContent='Kolom belum diisi. Masukkan persentase hasil perhitungan.';input.focus();return}
  const number=Number(raw);
  if(!Number.isFinite(number)){feedback.textContent='Masukkan angka persentase, misalnya 12,5.';input.focus();return}
- if(Math.abs(number-25)<0.001){state.verdict=true;persist();render();feedback.textContent='VERIFIKASI BERHASIL. Nilai 25% sesuai register keselamatan (10 dari 40 peserta). Ini belum menetapkan identitas pengubah data atau pihak yang bertanggung jawab atas keruntuhan.';}
+ if(Math.abs(number-25)<0.001){state.verdict=true;persist();render();feedback.textContent='VERIFIKASI BERHASIL · DEVICE-01 TERDETEKSI';if(typeof window.openPhone91==='function'){window.openPhone91();}else{feedback.textContent='Verifikasi berhasil. Buka kembali Final Verdict untuk melihat bukti DEVICE-01.';}}
  else{feedback.textContent='Belum sesuai. Gunakan jumlah kejadian serius dibagi seluruh peserta yang menerima dosis, kemudian kalikan 100.';input.focus();}
 };
 
