@@ -362,3 +362,10 @@
 
 /* Maintenance reconciliation document layout */
 .archive-v94:has(h2) .maintenance-paper{background:#f8f3e8;border:1px solid #c2b9a6;padding:25px}.maintenance-report table{width:100%;border-collapse:collapse}.maintenance-report th,.maintenance-report td{border:1px solid #bcb4a5;padding:9px}.maintenance-report th{background:#ddd5c4}
+
+/* Chapter review popup */
+.review-launch{display:block;width:100%;margin:20px 0 6px;padding:15px;border:1px solid #8d806c;border-radius:6px;background:#f7f1e5;color:#203e3c;font-weight:700;text-align:center;cursor:pointer}
+.review-popup-overlay{position:fixed;inset:0;z-index:9998;background:rgba(12,19,19,.74);display:flex;align-items:center;justify-content:center;padding:18px}
+.review-popup-panel{position:relative;width:min(720px,100%);max-height:88vh;overflow-y:auto;background:#eae2d3;border:1px solid #ad9c82;border-radius:9px;padding:16px;box-shadow:0 20px 65px #0007}
+.review-popup-panel .case-review{margin:0;padding:12px;border:0}
+.review-popup-close{position:sticky;top:0;float:right;z-index:2;border:1px solid #aaa;background:#fffaf0;color:#253b3b;border-radius:5px;padding:8px 12px;cursor:pointer}
