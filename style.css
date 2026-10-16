@@ -338,3 +338,19 @@
 .archive-v94.structural-document .custody-report .sr-sign{display:grid!important;grid-template-columns:1fr 1fr!important;gap:18px!important;margin:22px 0!important}
 .archive-v94.structural-document .custody-report .sr-status{display:inline-block!important;border:2px solid #a94b40!important;color:#a94b40!important;padding:7px 12px!important;transform:rotate(-2deg);font-weight:700!important}
 @media(max-width:600px){.archive-v94.structural-document .custody-report th,.archive-v94.structural-document .custody-report td{padding:7px!important}.archive-v94.structural-document .custody-report table{font-size:11px!important}}
+
+/* v130 - VX17 custody document as one printed paper */
+.archive-v94.custody-paper-host{background:#e9e3d2!important;padding:24px!important}
+.archive-v94.custody-paper-host .custody-paper{background:#f8f3e8!important;border:1px solid #c2b9a6!important;padding:28px 30px!important;color:#222b29!important;box-sizing:border-box}
+.archive-v94.custody-paper-host .custody-paperhead{display:flex;justify-content:space-between;gap:20px;border-bottom:2px solid #395b50;padding-bottom:14px;font:10px/1.6 Arial,sans-serif;letter-spacing:.025em}
+.archive-v94.custody-paper-host .custody-paperhead span:last-child{text-align:right}
+.archive-v94.custody-paper-host .custody-paperline{font:10px Arial,sans-serif;color:#6c726a;letter-spacing:.07em;margin:15px 0 18px!important}
+.archive-v94.custody-paper-host .custody-paper h2{font:700 22px/1.3 Arial,sans-serif!important;color:#1d2a28!important;border:0!important;padding:0!important;margin:0 0 10px!important}
+.archive-v94.custody-paper-host .custody-paper>.meta{font:11px/1.7 Arial,sans-serif!important;border-bottom:1px solid #bdb6a8!important;padding:0 0 14px!important;margin:0 0 15px!important;color:#555a55!important}
+.archive-v94.custody-paper-host .custody-paper .custody-report>.sr-banner{display:none!important}
+.archive-v94.custody-paper-host .custody-paper .custody-report h3{background:transparent!important;border:0!important;color:#202c28!important;padding:0!important;margin:26px 0 13px!important;font:700 14px/1.4 Arial,sans-serif!important}
+.archive-v94.custody-paper-host .custody-paper .custody-report .sr-intro{background:transparent!important;border:0!important;padding:0!important;margin:12px 0 20px!important;font:13px/1.85 Arial,sans-serif!important}
+.archive-v94.custody-paper-host .custody-paper .custody-report thead th{background:#ddd5c4!important}
+.archive-v94.custody-paper-host .custody-paper .custody-report tbody th{background:#eee9dd!important}
+.archive-v94.custody-paper-host .custody-paper .custody-report td{background:transparent!important}
+@media(max-width:600px){.archive-v94.custody-paper-host{padding:10px!important}.archive-v94.custody-paper-host .custody-paper{padding:18px 14px!important}.archive-v94.custody-paper-host .custody-paper h2{font-size:18px!important}}
