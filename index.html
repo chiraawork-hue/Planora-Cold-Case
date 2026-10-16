@@ -1330,9 +1330,12 @@ PERTANYAAN LANJUTAN:"></textarea>
 
     if (!reportAvailable() || !form) return;
 
-    if (document.getElementById("paperInvite140")) {
-      return;
+    // Open the existing signed three-case investigation directly.
+    // No second report form or invitation step.
+    if (!document.getElementById("investigationPaper")) {
+      window.openInvestigationPaper140();
     }
+    return;
 
     const invitation = document.createElement("section");
 
