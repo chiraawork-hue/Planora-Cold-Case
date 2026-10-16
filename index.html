@@ -207,6 +207,44 @@ PERTANYAAN LANJUTAN:"></textarea>
  };
 })();
 </script>
+<style>
+/* v159: audit queue register presented as structured forensic log */
+.audit-register159{font-family:Arial,sans-serif!important;color:#1b3331!important}
+.audit-register159 h2{font-size:clamp(20px,3vw,26px)!important;letter-spacing:.015em!important;border-bottom:2px solid #2e514a;padding-bottom:15px;margin-bottom:14px!important}
+.audit-register159 .meta{background:#edf0e9;border:1px solid #cbd3c9;border-left:4px solid #2c6256;padding:13px 16px!important;font:12px/1.8 Arial,sans-serif!important;margin:15px 0 22px!important}
+.audit-register159 .audit-source159{background:#f6f4ec;border:1px solid #c6c8bd;padding:14px 17px;margin:12px 0 24px;border-radius:7px}
+.audit-register159 .audit-source159 h3{font-size:11px!important;letter-spacing:.13em;color:#48695f;margin:0 0 7px!important}
+.audit-register159 .audit-source159 p{font:12px/1.75 ui-monospace,Consolas,monospace!important;margin:0!important;overflow-wrap:anywhere}
+.audit-register159 .audit-entry159{display:grid;grid-template-columns:150px minmax(0,1fr);border:1px solid #c9cec4;border-left:4px solid #557e70;background:#fffefa;margin:9px 0;border-radius:6px;overflow:hidden}
+.audit-register159 .audit-entry159 h3{background:#e8eee8;margin:0!important;padding:14px 12px;font:700 12px/1.6 ui-monospace,Consolas,monospace!important;color:#204b42;border-right:1px solid #c9cec4}
+.audit-register159 .audit-entry159 p{padding:12px 16px;margin:0!important;font:12px/1.8 ui-monospace,Consolas,monospace!important;overflow-wrap:anywhere;white-space:normal}
+.audit-register159 .audit-entry159:nth-of-type(even){border-left-color:#b59a5d}
+@media(max-width:600px){.audit-register159 .audit-entry159{grid-template-columns:1fr}.audit-register159 .audit-entry159 h3{border-right:0;border-bottom:1px solid #c9cec4;padding:9px 12px}.audit-register159 .audit-entry159 p{padding:11px 12px}}
+</style>
+<script>
+(function(){
+ function enhanceAudit(){
+   const body=document.getElementById('modalBody');
+   const paper=body?.querySelector('.modalcontent');
+   if(!paper||paper.classList.contains('audit-register159')||!paper.querySelector('h2')?.textContent?.includes('REGISTER ANTRIAN TUGAS AUDIT'))return;
+   paper.classList.add('audit-register159');
+   const headings=Array.from(paper.querySelectorAll(':scope > h3'));
+   headings.forEach(h=>{
+     const next=h.nextElementSibling;
+     if(!next||next.tagName!=='P')return;
+     const block=document.createElement('section');
+     block.className=/SUMBER/i.test(h.textContent)?'audit-source159':'audit-entry159';
+     h.before(block);block.append(h,next);
+   });
+ }
+ const obs=new MutationObserver(()=>requestAnimationFrame(enhanceAudit));
+ document.addEventListener('DOMContentLoaded',()=>{
+   const body=document.getElementById('modalBody');
+   if(body)obs.observe(body,{childList:true});
+   enhanceAudit();
+ });
+})();
+</script>
 </body>
   
 <style>
