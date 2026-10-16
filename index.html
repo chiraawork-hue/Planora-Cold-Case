@@ -862,22 +862,19 @@ PERTANYAAN LANJUTAN:"></textarea>
       return;
     }
 
-    for (const role of CASE_ROLES) {
+    for (let i = 0; i < CASE_ROLES.length; i++) {
+      const role = CASE_ROLES[i];
       const id = role.id;
-
-      if (
-        !data[id + "Person"] ||
-        data[id + "Evidence"].length < 10 ||
-        data[id + "Explanation"].length < 20
-      ) {
-        feedback.textContent =
-          "Lengkapi tersangka, bukti, dan penjelasan " +
-          "pada ketiga perkara.";
-        return;
-      }
-
-      if (!data[id + "Person"]) {
-        feedback.textContent = "Pilih personel untuk setiap perkara.";
+      const number = ["I", "II", "III"][i];
+      const missing = !data[id + "Person"] ? "nama tersangka" :
+        !data[id + "Evidence"] ? "bukti pendukung" :
+        !data[id + "Explanation"] ? "penjelasan singkat" : "";
+      if (missing) {
+        feedback.textContent = "Tersangka " + number + ": lengkapi " + missing + ".";
+        const target = document.getElementById(
+          (!data[id + "Person"] ? "person_" : !data[id + "Evidence"] ? "evidence_" : "explanation_") + id
+        );
+        if (target) { target.focus(); target.scrollIntoView({behavior:"smooth",block:"center"}); }
         return;
       }
     }
