@@ -26,7 +26,7 @@ if(i>=state.unlocked)return;
 const board=document.querySelector('#modalBody .suspectgrid');if(board&&board.previousElementSibling?.tagName==='P'&&board.previousElementSibling.previousElementSibling?.textContent?.includes('SUSPECT BOARD')){board.previousElementSibling.previousElementSibling.remove();board.previousElementSibling.remove();board.remove()}
 const body=document.getElementById('modalBody');
 const panel=document.createElement('div');
-panel.innerHTML=reviewSection(i);
+panel.innerHTML='<button type="button" class="review-launch" onclick="openReviewPopup('+i+')">✎ BUAT KESIMPULAN BABAK '+(i+1)+'</button>';
 body.querySelector('.modalcontent')?.appendChild(panel);
 };
 
@@ -114,3 +114,13 @@ showHint=function(i){
  h.textContent=n===0?'Cari peristiwa TASK_HOLD di log terminal, lalu cocokkan waktunya dengan antrean tugas audit.':'SESSION berasal dari AUDIT_TERMINAL_EVENTS.log; nomor JOB berasal dari AUDIT_JOB_QUEUE_0918.csv. Susun SESSION di depan nomor JOB.';
  state.hints[i]=n+1;persist();
 };
+
+function openReviewPopup(i){
+ const body=document.getElementById('modalBody');if(!body)return;
+ document.getElementById('reviewPopupOverlay')?.remove();
+ const overlay=document.createElement('div');overlay.id='reviewPopupOverlay';overlay.className='review-popup-overlay';
+ overlay.innerHTML='<div class="review-popup-panel" role="dialog" aria-modal="true" aria-label="Case Review Babak '+(i+1)+'"><button type="button" class="review-popup-close" onclick="closeReviewPopup()" aria-label="Tutup">✕</button>'+reviewSection(i)+'</div>';
+ overlay.addEventListener('click',e=>{if(e.target===overlay)closeReviewPopup()});
+ body.appendChild(overlay);
+}
+function closeReviewPopup(){document.getElementById('reviewPopupOverlay')?.remove()}
