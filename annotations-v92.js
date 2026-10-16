@@ -13,12 +13,14 @@
  }
  function attach(title){
   const body=document.getElementById('modalBody'),paper=body&&body.querySelector('.modalcontent');
-  if(!paper||!eligible(title,body)||paper.querySelector('.ink-tools'))return;
+  if(!paper||!eligible(title,body)||document.querySelector('.modalwindow > .ink-tools'))return;
   const key=keyFor(title);const strokes=load(key);
   paper.classList.add('ink-paper');
   const bar=document.createElement('div');bar.className='ink-tools';
   bar.innerHTML='<span class="ink-title">✎ ANOTASI BERKAS</span><button type="button" data-tool="pen">Pena</button><button type="button" data-tool="highlight">Stabilo</button><button type="button" data-tool="erase">Hapus garis</button><button type="button" data-tool="off">Selesai</button><span class="ink-status">Pilih alat untuk mencoret</span>';
-  paper.insertBefore(bar,paper.firstChild);
+  const modalWindow=document.querySelector('.modalwindow');
+  if(!modalWindow)return;
+  modalWindow.insertBefore(bar,body);
   const canvas=document.createElement('canvas');canvas.className='ink-layer';paper.appendChild(canvas);
   let tool='off',active=null,ctx=null,w=1,h=1;
   const redraw=()=>{
@@ -41,9 +43,9 @@
   canvas.addEventListener('pointerup',end);canvas.addEventListener('pointercancel',end);
   choose('off');requestAnimationFrame(redraw);
   const observer=new ResizeObserver(()=>{if(!active)redraw()});observer.observe(paper);
-  current={observer,canvas};
+  current={observer,canvas,bar};
  }
- function refresh(){if(current){current.observer.disconnect();current=null}const title=window.modalCurrent&&window.modalCurrent.title||document.getElementById('modalPath')?.textContent?.split('\\').pop()||'';requestAnimationFrame(()=>attach(title))}
+ function refresh(){if(current){current.observer.disconnect();current.bar?.remove();current=null}const title=window.modalCurrent&&window.modalCurrent.title||document.getElementById('modalPath')?.textContent?.split('\\').pop()||'';requestAnimationFrame(()=>attach(title))}
  const oldShow=window.show;window.show=function(){const result=oldShow.apply(this,arguments);refresh();return result};
  const oldBack=window.backModal;window.backModal=function(){const result=oldBack.apply(this,arguments);refresh();return result};
  const oldClose=window.closeModal;window.closeModal=function(){if(current){current.observer.disconnect();current=null}return oldClose.apply(this,arguments)};
