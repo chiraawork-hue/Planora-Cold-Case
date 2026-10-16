@@ -160,7 +160,7 @@ PERTANYAAN LANJUTAN:"></textarea>
   </div>
 
   <script src="app.js?v=81"></script>
-  <script src="investigation-flow.js?v=171"></script>
+  <script src="investigation-flow.js?v=173"></script>
   <script src="case-evidence-v92.js?v=93"></script>
   <script src="planora-amplop04-arsip-v94.js?v=167"></script>
   <script src="case-review.js?v=134"></script>
@@ -803,7 +803,7 @@ PERTANYAAN LANJUTAN:"></textarea>
   window.openInvestigationPaper140 = function () {
     // The report is the next step after opening Final Verdict.
     // Do not silently block its button because an older phone flag is missing.
-    if (typeof state === "undefined" || state.unlocked < 4) {
+    if (typeof state !== "undefined" && state.unlocked < 4) {
       alert("Buka keempat amplop terlebih dahulu.");
       return;
     }
@@ -1322,80 +1322,12 @@ PERTANYAAN LANJUTAN:"></textarea>
 
   }
 
-  /* Menampilkan undangan laporan setelah HP terbuka */
-  const previousShowVerdict140 = window.showVerdict;
-
-  window.showVerdict = function () {
-    previousShowVerdict140();
-
-    // Legacy report is superseded by the three-case paper investigation.
-    // Hide it regardless of whether the new report has been unlocked.
-    const form = document.getElementById("finalReportForm90");
-    if (form) form.style.display = "none";
-
-    if (!reportAvailable()) return;
-
-    // Open the existing signed three-case investigation directly.
-    // No second report form or invitation step.
-    // The final verdict now offers the signed report directly.
-    return;
-
-    const invitation = document.createElement("section");
-
-    invitation.id = "paperInvite140";
-    invitation.className = "paperInvitation";
-
-    invitation.innerHTML = `
-      <h3>SUDAH YAKIN DENGAN KESIMPULANMU?</h3>
-
-      <p>
-        Seluruh barang bukti telah tersedia.
-        Kini saatnya menentukan pihak yang bertanggung
-        jawab atas tiga perkara.
-
-        Setiap tuduhan harus didukung bukti.
-      </p>
-
-      <button
-        type="button"
-        id="openInvestigationPaper"
-        onclick="openInvestigationPaper140()"
-      >
-        BUAT LAPORAN PENYELIDIKAN →
-      </button>
-    `;
-
-    form.parentNode.insertBefore(
-      invitation,
-      form
-    );
-  };
 
 })();
 </script>
 
 
-<script>
-/* v142: verification appears only until the correct VX-17 answer is accepted */
-(function(){
-  const originalShowVerdict=window.showVerdict;
-  window.showVerdict=function(){
-    originalShowVerdict();
-    if(typeof state==='undefined'||!state.verdict)return;
-    const field=document.getElementById('finalCode');
-    const verification=field?.closest('section');
-    if(verification)verification.style.display='none';
-  };
-  const originalSubmitVerdict=window.submitVerdict;
-  window.submitVerdict=function(){
-    originalSubmitVerdict();
-    if(typeof state==='undefined'||!state.verdict)return;
-    const field=document.getElementById('finalCode');
-    const verification=field?.closest('section');
-    if(verification)verification.style.display='none';
-  };
-})();
-</script>
+
 
 <style>
 /* PLANORA COLD CASE — MAINTENANCE REPORT */
