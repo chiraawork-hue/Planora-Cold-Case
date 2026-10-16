@@ -971,6 +971,43 @@ PERTANYAAN LANJUTAN:"></textarea>
     const done=document.createElement("button");done.type="button";done.textContent="TUTUP HASIL PENINJAUAN";
     done.style.cssText="background:#244f4b;color:white;border:0;padding:12px 16px;cursor:pointer";
     done.onclick=()=>overlay.remove();footer.appendChild(done);paper.appendChild(footer);
+    /* v149: calmer editorial layout with readable case-by-case review */
+    overlay.classList.add("icrb-review-overlay");
+    paper.classList.add("icrb-review-paper");
+    header.classList.add("icrb-review-header");
+    result.classList.add("icrb-review-result");
+    footer.classList.add("icrb-review-footer");
+    const summary=result.querySelector("p");
+    if(summary)summary.classList.add("icrb-review-summary");
+    const caseRows=Array.from(result.querySelectorAll("section"));
+    caseRows.forEach((section,i)=>{
+      section.classList.add("icrb-review-case");
+      const heading=section.querySelector("div");
+      if(heading)heading.classList.add("icrb-review-case-heading");
+      const status=heading?.querySelector("strong:last-child");
+      if(status)status.classList.add("icrb-review-status");
+    });
+    const redesign=document.createElement("style");
+    redesign.textContent=`
+      .icrb-review-overlay{backdrop-filter:blur(5px);animation:icrbFade .25s ease}
+      .icrb-review-paper{border-radius:9px!important;width:min(790px,100%)!important;max-height:min(90vh,850px)!important;padding:clamp(22px,4vw,42px)!important;box-shadow:0 24px 90px #0007!important}
+      .icrb-review-header{position:relative;align-items:center!important;padding-right:55px!important}
+      .icrb-review-header>button{position:absolute;right:0;top:0;border-radius:7px!important;width:38px;height:38px;display:grid;place-items:center;font-size:22px!important}
+      .icrb-review-result>h2{font-size:clamp(19px,2.5vw,24px)!important;letter-spacing:-.025em;line-height:1.3;margin:12px 0 19px!important}
+      .icrb-review-summary{background:#edf3ef;border-left:4px solid #2e6657;padding:14px 17px;margin:18px 0 22px!important;border-radius:0 7px 7px 0;font-size:14px}
+      .icrb-review-case{border:1px solid #dedfd7!important;background:#fff;border-radius:8px;padding:18px 20px!important;margin:11px 0!important}
+      .icrb-review-case-heading{align-items:center!important;gap:12px!important}
+      .icrb-review-case-heading>strong:first-child{font-size:13px;line-height:1.5;flex:1}
+      .icrb-review-status{border-radius:5px;padding:5px 9px;background:#f4f2e9;font-size:10px;letter-spacing:.03em;white-space:nowrap}
+      .icrb-review-case>p{font-size:12.5px;line-height:1.7;color:#4b5b55;margin-top:10px!important}
+      .icrb-review-result>p:not(.icrb-review-summary){line-height:1.7}
+      .icrb-review-result #caseRevise147{border:1px solid #28514b!important;border-radius:5px;background:white!important;color:#244c46!important;font-weight:600}
+      .icrb-review-footer{margin-top:24px!important}
+      .icrb-review-footer button{border-radius:5px;font-weight:600}
+      @keyframes icrbFade{from{opacity:0}to{opacity:1}}
+      @media(max-width:600px){.icrb-review-overlay{padding:8px!important;align-items:flex-end!important}.icrb-review-paper{max-height:95dvh!important;border-radius:12px 12px 0 0!important;padding:22px 18px!important}.icrb-review-header{flex-direction:column;align-items:flex-start!important;gap:7px!important}.icrb-review-header>div:nth-child(2){text-align:left!important}.icrb-review-case{padding:15px!important}.icrb-review-case-heading{align-items:flex-start!important;flex-direction:column}.icrb-review-status{white-space:normal}.icrb-review-footer button{width:100%}}
+    `;
+    paper.appendChild(redesign);
     overlay.appendChild(paper);document.body.appendChild(overlay);
     result.querySelector("#caseRevise147").addEventListener("click",()=>{
       overlay.remove();
