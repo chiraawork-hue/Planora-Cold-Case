@@ -872,10 +872,17 @@ submitVerdict=function(){
  if(!raw){feedback.textContent='Kolom belum diisi. Masukkan persentase hasil perhitungan.';input.focus();return}
  const number=Number(raw);
  if(!Number.isFinite(number)){feedback.textContent='Masukkan angka persentase, misalnya 12,5.';input.focus();return}
- if(Math.abs(number-25)<0.001){state.verdict=true;persist();render();feedback.textContent='VERIFIKASI BERHASIL · DEVICE-01 TERDETEKSI';if(typeof window.openPhone91==='function'){window.openPhone91();}else{feedback.textContent='Verifikasi berhasil. Buka kembali Final Verdict untuk melihat bukti DEVICE-01.';}}
+ if(Math.abs(number-25)<0.001){state.verdict=true;persist();render();showForensicUnlocked176();}
  else{feedback.textContent='Belum sesuai. Gunakan jumlah kejadian serius dibagi seluruh peserta yang menerima dosis, kemudian kalikan 100.';input.focus();}
 };
 
+/* v176: reveal the phone as a discovery, not an automatic PIN popup. */
+function showForensicUnlocked176(){
+ const input=document.getElementById('finalCode');
+ const section=input&&input.closest('section');
+ if(!section)return;
+ section.outerHTML='<section class="forensic-reveal176" role="status" aria-live="polite"><div class="forensic-scan176" aria-hidden="true">▣</div><h3>AKSES FORENSIK TERBUKA</h3><p>Verifikasi data VX-17 berhasil. Barang bukti digital baru ditemukan.</p><p><strong>DEVICE-01 · MILIK FARHAN</strong></p><button type="button" onclick="window.openPhone91()">PERIKSA PERANGKAT →</button></section>';
+}
 /* v90 — two-track evidence-based final investigation report */
 const finalReportKey90='planora_cc_final_report_v90';
 const finalEscape90=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]));
@@ -890,6 +897,7 @@ showVerdict=function(){
  const verified=!!state.verdict;
  show('FINAL_VERDICT','<div class="modalcontent"><span class="overline">FINAL INVESTIGATION REPORT / CASE 001</span><h2>LAPORAN KESIMPULAN INVESTIGASI</h2><p>Susun dua jalur perkara secara terpisah. Nama pemilik akun atau tanda tangan pada salinan tidak otomatis membuktikan siapa yang bertindak. Pilihan “Belum dapat dipastikan” diperbolehkan bila bukti belum cukup.</p><section class="question"><h3>01 / VERIFIKASI DATA KESELAMATAN</h3><p>Berapa persen peserta yang menerima dosis mengalami kejadian serius pada data mentah VX-17?</p><form onsubmit="event.preventDefault();submitVerdict();"><input id="finalCode" type="text" inputmode="decimal" autocomplete="off" placeholder="Persentase" value="'+(verified?'25':'')+'"><button class="primary" type="submit">VERIFIKASI DATA</button></form><p id="finalFeedback" class="feedback" role="status">'+(verified?'DATA TERVERIFIKASI · 10 dari 40 peserta.':'')+'</p></section><section class="question" id="finalDevice173"><h3>BARANG BUKTI TERAKHIR · DEVICE-01</h3><p>Periksa HP Farhan dan percakapan yang tersimpan sebelum menyerahkan kesimpulan.</p><button class="primary" type="button" onclick="window.openPhone91()">BUKA HP FARHAN →</button></section><section class="question" id="finalPaperEntry171"><h3>LAPORAN HASIL PENYELIDIKAN</h3><p>Laporan tiga perkara, tanda tangan penyidik, pemeriksaan ICRB, dan penilaian lencana.</p><button class="primary" type="button" onclick="window.openInvestigationPaper140()">BUKA LAPORAN PENYELIDIKAN →</button><p id="reportOpenFeedback173" class="feedback" role="status"></p></section></div>');
 };
+if(state.verdict)showForensicUnlocked176();
 function saveFinalReport90(){
  const fb=document.getElementById('finalReportFeedback90');
  if(!state.verdict){fb.textContent='Verifikasi data keselamatan pada bagian 01 terlebih dahulu.';return}
