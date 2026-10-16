@@ -1275,5 +1275,197 @@ PERTANYAAN LANJUTAN:"></textarea>
     if(verification)verification.style.display='none';
   };
 })();
+  
+<style>
+/* PLANORA COLD CASE — MAINTENANCE REPORT */
+
+.maintenance-report {
+  color: #243c36;
+  font-family: Arial, sans-serif;
+}
+
+.maintenance-report .letterhead {
+  background: #fffdf7;
+  border: 1px solid #c9cabe;
+  border-bottom: none;
+  border-radius: 9px 9px 0 0;
+  padding: 16px 20px;
+  margin-bottom: 0 !important;
+}
+
+.maintenance-report > h2 {
+  background: #fffdf7;
+  border: 1px solid #c9cabe;
+  border-top: none;
+  border-radius: 0 0 9px 9px;
+  padding: 12px 20px 20px;
+  margin: 0 0 18px !important;
+  font-size: clamp(19px, 3vw, 25px) !important;
+  line-height: 1.4;
+}
+
+.maintenance-report > .meta {
+  background: #edf2ec;
+  border: 1px solid #cbd5cb;
+  border-left: 4px solid #35695b;
+  padding: 14px 16px;
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.maintenance-section {
+  margin: 22px 0;
+  background: #fffefa;
+  border: 1px solid #cbd0c6;
+  border-radius: 9px;
+  overflow: hidden;
+}
+
+.maintenance-section > h3 {
+  margin: 0 !important;
+  padding: 14px 17px;
+  background: #e8eee7;
+  border-bottom: 1px solid #cbd0c6;
+  color: #28584c;
+  font-size: 12px !important;
+  letter-spacing: .06em;
+}
+
+.maintenance-content {
+  padding: 8px 16px;
+}
+
+.maintenance-row {
+  display: grid;
+  grid-template-columns: minmax(130px, 30%) minmax(0, 1fr);
+  gap: 14px;
+  padding: 11px 4px;
+  border-bottom: 1px solid #e1e6df;
+  font: 12px/1.7 Consolas, monospace;
+}
+
+.maintenance-row:last-child {
+  border-bottom: none;
+}
+
+.maintenance-label {
+  color: #456e61;
+  font-weight: bold;
+  overflow-wrap: anywhere;
+}
+
+.maintenance-value {
+  color: #263b34;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 550px) {
+  .maintenance-row {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+
+  .maintenance-content {
+    padding: 8px 12px;
+  }
+}
+</style>
+
+<script>
+(function () {
+  function improveMaintenanceReport() {
+    const paper = document.querySelector(
+      "#modalBody .modalcontent"
+    );
+
+    if (!paper) return;
+
+    if (paper.classList.contains("maintenance-report")) {
+      return;
+    }
+
+    const title = paper.querySelector("h2");
+
+    if (
+      !title ||
+      !title.textContent.includes(
+        "LAPORAN REKONSILIASI PEMELIHARAAN"
+      )
+    ) {
+      return;
+    }
+
+    paper.classList.add("maintenance-report");
+
+    const headings = paper.querySelectorAll(":scope > h3");
+
+    headings.forEach(heading => {
+      const paragraph = heading.nextElementSibling;
+
+      if (!paragraph || paragraph.tagName !== "P") {
+        return;
+      }
+
+      const section = document.createElement("section");
+      section.className = "maintenance-section";
+
+      const content = document.createElement("div");
+      content.className = "maintenance-content";
+
+      const lines = paragraph.textContent
+        .split(/\r?\n/)
+        .map(line => line.trim())
+        .filter(Boolean);
+
+      lines.forEach(line => {
+        const row = document.createElement("div");
+        row.className = "maintenance-row";
+
+        const separator = line.indexOf("|");
+
+        const label = document.createElement("div");
+        label.className = "maintenance-label";
+
+        const value = document.createElement("div");
+        value.className = "maintenance-value";
+
+        label.textContent =
+          separator >= 0
+            ? line.slice(0, separator).trim()
+            : line;
+
+        value.textContent =
+          separator >= 0
+            ? line.slice(separator + 1).trim()
+            : "";
+
+        row.append(label, value);
+        content.appendChild(row);
+      });
+
+      heading.before(section);
+      section.append(heading, content);
+      paragraph.remove();
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const modalBody = document.getElementById("modalBody");
+
+    if (!modalBody) return;
+
+    const observer = new MutationObserver(() => {
+      requestAnimationFrame(improveMaintenanceReport);
+    });
+
+    observer.observe(modalBody, {
+      childList: true
+    });
+
+    improveMaintenanceReport();
+  });
+})();
+</script>
+
 </script>
 </html>
