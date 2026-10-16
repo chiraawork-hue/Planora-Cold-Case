@@ -174,7 +174,7 @@ function formatCard5172(root){
  </tbody></table>
  <div class="acr-bottom">
  <section><h3>4. Rekonsiliasi kartu</h3><table class="acr-reconcile"><tbody>
- <tr><th>Kartu dikembalikan</th><td><span class="acr-checkbox">□</span> Ya &nbsp;&nbsp; <span class="acr-check-no">☑</span> Belum tercatat</td></tr>
+ <tr><th>Kartu dikembalikan</th><td><span class="acr-choice"><span class="acr-box" aria-hidden="true"></span> Ya</span><span class="acr-choice"><span class="acr-box acr-box-checked" aria-hidden="true">✓</span> <strong>Belum tercatat</strong></span></td></tr>
  <tr><th>Kondisi fisik</th><td>—</td></tr>
  <tr><th>Catatan</th><td>Tidak ditemukan catatan pengembalian pada buku serah terima maupun sistem inventaris. Perlu verifikasi lebih lanjut melalui rekaman CCTV dan laporan petugas jaga.</td></tr>
  </tbody></table></section>
