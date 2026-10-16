@@ -184,6 +184,24 @@ function paperLayoutCustody(root){
  if(note)paper.appendChild(note);
  root.classList.add('custody-paper-host');
 }
+function paperLayoutCard5172(root){
+ const report=root.querySelector('.access-card-report');
+ const title=root.querySelector('h2');
+ const meta=root.querySelector('.meta');
+ const letterhead=root.querySelector('.letterhead');
+ if(!report||!title||!meta)return;
+ const paper=document.createElement('article');
+ paper.className='card5172-paper';
+ paper.innerHTML='<div class="card5172-paperhead"><span>VEYRA RESEARCH CENTER<br>SECURITY CONTROL</span><span>SEC-TEMP/0917<br>LEMBAR 02/04</span></div><p class="card5172-paperline">REGISTER AKSES SEMENTARA · 17 SEPTEMBER 2018</p>';
+ (letterhead||title).insertAdjacentElement('beforebegin',paper);
+ if(letterhead)letterhead.remove();
+ paper.appendChild(title);
+ paper.appendChild(meta);
+ paper.appendChild(report);
+ const note=[...root.querySelectorAll('p.small')].find(x=>x.textContent.includes('karya fiksi'));
+ if(note)paper.appendChild(note);
+ root.classList.add('card5172-paper-host');
+}
 function formatCard5172(root){
  const headings=[...root.querySelectorAll('h3')];
  const first=headings.find(h=>h.textContent.trim()==='IDENTITAS KARTU');
@@ -199,7 +217,7 @@ function formatCard5172(root){
  <figure><img src="./kartu.png" alt="Dokumentasi kartu akses sementara 5172" loading="lazy"><figcaption>Gambar 1. Dokumentasi kartu akses sementara 5172 (lampiran register).</figcaption></figure></div>
  <h3>2. Buku serah terima</h3>
  <table class="acr-ledger"><thead><tr><th>Tanggal</th><th>Jam</th><th>Kegiatan</th><th>Pemohon / petugas</th><th>Paraf</th><th>Keterangan</th></tr></thead><tbody>
- <tr><td>17 Sep 2018</td><td>19:12</td><td>Penerbitan kartu akses sementara</td><td>F. Mahendra<br><small>(Security Control)</small></td><td class="acr-paraf">Tidak terbaca</td><td>Tidak tercatat<br>(penulisan lisan)</td></tr>
+ <tr><td>17 Sep 2018</td><td>19:12</td><td>Penerbitan kartu akses sementara</td><td>F. Mahendra<br><small>(Security Control)</small></td><td class="acr-paraf"><span class="acr-farhan-mark">F.M.</span><small>F. Mahendra</small></td><td>Tidak tercatat<br>(penulisan lisan)</td></tr>
  <tr><td>19 Sep 2018</td><td>—</td><td>Pengembalian kartu akses</td><td>—</td><td>—</td><td><span class="acr-warning">BELUM TERCATAT</span></td></tr>
  </tbody></table>
  <h3>3. Log ekspor pembaca pintu (access log)</h3>
@@ -228,6 +246,6 @@ window.openDocument=function(id){
  priorOpen(id);
  if(!original[id])return;
  const root=document.querySelector('#modalBody .modalcontent');
- if(root){root.classList.add('archive-v94');if(id==='structuralForensic'){formatStructuralReport(root);paperLayoutForensic(root);}if(id==='clinicalCustody'){formatClinicalCustody(root);paperLayoutCustody(root);}if(id==='card5172')formatCard5172(root);}
+ if(root){root.classList.add('archive-v94');if(id==='structuralForensic'){formatStructuralReport(root);paperLayoutForensic(root);}if(id==='clinicalCustody'){formatClinicalCustody(root);paperLayoutCustody(root);}if(id==='card5172'){formatCard5172(root);paperLayoutCard5172(root);}}
 };
 })();
