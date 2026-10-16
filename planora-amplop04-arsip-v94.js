@@ -217,7 +217,7 @@ function formatCard5172(root){
  <figure><img src="./kartu.png" alt="Dokumentasi kartu akses sementara 5172" loading="lazy"><figcaption>Gambar 1. Dokumentasi kartu akses sementara 5172 (lampiran register).</figcaption></figure></div>
  <h3>2. Buku serah terima</h3>
  <table class="acr-ledger"><thead><tr><th>Tanggal</th><th>Jam</th><th>Kegiatan</th><th>Pemohon / petugas</th><th>Paraf</th><th>Keterangan</th></tr></thead><tbody>
- <tr><td>17 Sep 2018</td><td>19:12</td><td>Penerbitan kartu akses sementara</td><td>F. Mahendra<br><small>(Security Control)</small></td><td class="acr-paraf"><span class="acr-farhan-mark">F.M.</span><small>F. Mahendra</small></td><td>Tidak tercatat<br>(penulisan lisan)</td></tr>
+ <tr><td>17 Sep 2018</td><td>19:12</td><td>Penerbitan kartu akses sementara</td><td>F. Mahendra<br><small>(Security Control)</small></td><td class="acr-paraf"><svg class="acr-handmark" viewBox="0 0 110 46" width="96" height="40" role="img" aria-label="Paraf tinta" xmlns="http://www.w3.org/2000/svg"><path d="M8 35 C18 17 23 11 26 15 C30 19 18 34 22 34 C29 31 39 11 44 14 C48 17 32 36 40 32 C48 27 52 19 56 23 C61 30 45 39 58 33 C67 28 70 15 75 20 C80 25 70 33 80 29 C88 25 92 19 97 24 M12 39 C40 31 68 33 101 29" fill="none" stroke="#273d48" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></td><td>Tidak tercatat<br>(penulisan lisan)</td></tr>
  <tr><td>19 Sep 2018</td><td>—</td><td>Pengembalian kartu akses</td><td>—</td><td>—</td><td><span class="acr-warning">BELUM TERCATAT</span></td></tr>
  </tbody></table>
  <h3>3. Log ekspor pembaca pintu (access log)</h3>
