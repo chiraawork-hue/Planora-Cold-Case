@@ -44,6 +44,7 @@
           <b>GUEST DETECTIVE</b>
           <small id="openedCount">1 / 4 ENVELOPES OPENED</small>
           <small>LOCAL SAVE ENABLED</small>
+          <button type="button" id="pddProfileButton" style="margin-top:12px;padding:9px 11px;background:#244f4b;color:#fff;border:1px solid #bba56d;border-radius:7px;cursor:pointer;width:100%;font-size:12px">◇ DETECTIVE ID · MAGANG</button>
         </div>
       </aside>
 
@@ -431,6 +432,50 @@ PERTANYAAN LANJUTAN:"></textarea>
   "use strict";
 
   const REPORT_KEY = "planora_case001_report_v140";
+  const PDD_KEY="planora_detective_profile_v1";
+  function pddRead(){try{return JSON.parse(localStorage.getItem(PDD_KEY)||"{}")}catch(e){return {}}}
+  function pddWrite(value){localStorage.setItem(PDD_KEY,JSON.stringify(value));pddRefresh()}
+  function pddRank(profile){return profile.case001Solved?"JUNIOR DETECTIVE":"INTERN INVESTIGATOR"}
+  function pddRefresh(){
+    const profile=pddRead(),button=document.getElementById("pddProfileButton");
+    if(button)button.textContent="◇ DETECTIVE ID · "+(profile.case001Solved?"JUNIOR":"MAGANG");
+    const side=document.querySelector(".sidebottom b");
+    if(side)side.textContent=profile.name||"DETEKTIF MAGANG";
+  }
+  function pddOpen(promoted=false){
+    document.getElementById("pddModal")?.remove();
+    const profile=pddRead(),overlay=document.createElement("div");
+    overlay.id="pddModal";overlay.style.cssText="position:fixed;inset:0;z-index:2147483647;background:#061411ed;display:flex;align-items:center;justify-content:center;padding:16px";
+    const card=document.createElement("section");
+    card.style.cssText="background:#173b35;color:#fff;border:2px solid #d8bc79;border-radius:18px;padding:25px;width:min(420px,100%);box-shadow:0 20px 70px #0008;font:14px/1.6 Arial,sans-serif";
+    card.innerHTML='<div style="color:#d8bc79;font-size:12px;letter-spacing:.12em">PLANORA DETECTIVE DIVISION</div><div style="font-size:10px;color:#b8ccc4">FICTIONAL GAME PROFILE · NOT AN OFFICIAL ID</div><hr style="border:0;border-top:1px solid #738b77;margin:18px 0">'+
+      (promoted?'<div style="text-align:center;color:#e7ca84;font-size:19px;font-weight:bold;margin-bottom:12px">✦ PROMOTED! ✦</div>':'')+
+      '<div style="text-align:center;font-size:42px;color:#d8bc79">⬡</div><div style="text-align:center;font-size:11px;color:#b8ccc4">DETECTIVE NAME</div>'+
+      '<input id="pddName" maxlength="55" placeholder="Nama detektif" style="box-sizing:border-box;width:100%;margin:8px 0 15px;padding:12px;background:#f8f8f1;border:0;border-radius:6px;color:#183c34;font-size:16px;text-align:center">'+
+      '<div style="text-align:center;color:#e7ca84;font-weight:bold;font-size:18px">'+pddRank(profile)+'</div>'+
+      '<div style="text-align:center;margin:12px 0">CASES SOLVED · '+(profile.case001Solved?'01':'00')+'</div>'+
+      (profile.case001Solved?'<div style="text-align:center;color:#d8bc79">🏅 THE COLLAPSE · CASE 001 BADGE</div>':'<div style="text-align:center;color:#b8ccc4">Selesaikan CASE 001 untuk naik pangkat.</div>')+
+      '<div style="font-size:10px;color:#b8ccc4;text-align:center;margin:18px 0">Progres tersimpan di browser ini. Sinkronisasi antar-game belum tersedia.</div>'+
+      '<button id="pddSave" style="width:100%;background:#d8bc79;color:#173b35;border:0;border-radius:6px;padding:12px;cursor:pointer;font-weight:bold">SIMPAN PROFIL</button>'+
+      '<button id="pddClose" style="width:100%;background:transparent;color:#fff;border:0;padding:12px;cursor:pointer">TUTUP</button>';
+    overlay.appendChild(card);document.body.appendChild(overlay);
+    const input=card.querySelector("#pddName");input.value=profile.name||"";
+    card.querySelector("#pddSave").onclick=()=>{const name=input.value.trim();if(!name){input.focus();return}pddWrite({...pddRead(),name});const reportName=document.getElementById("paperInvestigator");if(reportName)reportName.value=name;overlay.remove()};
+    card.querySelector("#pddClose").onclick=()=>overlay.remove();
+    overlay.addEventListener("click",e=>{if(e.target===overlay)overlay.remove()});
+  }
+  function pddPromote(name){
+    const profile=pddRead(),wasSolved=!!profile.case001Solved;
+    pddWrite({...profile,name:profile.name||name||"Detektif",case001Solved:true});
+    if(!wasSolved)pddOpen(true);
+  }
+  document.addEventListener("DOMContentLoaded",()=>{
+    pddRefresh();
+    document.getElementById("pddProfileButton")?.addEventListener("click",()=>pddOpen());
+    const profile=pddRead();
+    if(!profile.name)setTimeout(()=>pddOpen(),600);
+  });
+
 
   const CASE_ROLES = [
     {
@@ -1048,6 +1093,7 @@ PERTANYAAN LANJUTAN:"></textarea>
       resolveButton.textContent="BUKA BERKAS PENYELESAIAN →";
       resolveButton.style.cssText="background:#244f4b;color:#fff;border:0;border-radius:5px;padding:13px 18px;font-weight:700;cursor:pointer;margin:15px 0 6px;width:100%;letter-spacing:.03em";
       result.querySelector("#caseRevise147")?.before(resolveButton);
+      pddPromote(data.investigator);
       resolveButton.addEventListener("click",()=>{
         overlay.remove();
         const old=document.getElementById("caseResolution151");if(old)old.remove();
