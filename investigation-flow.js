@@ -389,6 +389,7 @@ bapNadia:{name:'BAP_NS_0919.pdf',person:'NADIA SANTOSO',age:'38',role:'Kepala La
 ['Apakah Saudari memastikan melewati simpang J-01?','Saya biasa melewati koridor itu, tetapi tidak dapat memastikan setiap langkah saya pada malam kejadian.'],
 ['Apakah Anda dapat mengenali sosok pada rekaman koridor?','Tidak dari gambar yang diperlihatkan kepada saya.'],
 ['Apakah Anda mengetahui isi rak B-04/17?','Saya mengetahui ada dokumen lintas unit yang disimpan sementara, tetapi tidak memeriksa isinya.'],
+['Apakah ada dokumen pembanding hasil uji VX-17 yang Saudari cari?','Ada salinan tabel kerja dan catatan perbedaan angka yang ingin saya cocokkan dengan laporan revisi. Saya belum dapat memastikan apakah seluruh lembar masih lengkap setelah kejadian.'],
 ['Apakah nomor kartu cukup untuk menentukan siapa yang masuk?','Menurut saya tidak. Perlu bukti lain untuk memastikan orangnya.']
 ]},
 bapSiska:{name:'BAP_SA_0919.pdf',person:'SISKA ARUM',age:'29',role:'Petugas Keamanan',unit:'Security Operations',initials:'S.A.',number:'BAP-SA-020/2018',qa:[
