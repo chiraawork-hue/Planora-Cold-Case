@@ -895,9 +895,17 @@ showVerdict=function(){
  if(state.unlocked<4){setView('verdict');return}
  const d=finalReportData90();
  const verified=!!state.verdict;
- show('FINAL_VERDICT','<div class="modalcontent"><span class="overline">FINAL INVESTIGATION REPORT / CASE 001</span><h2>LAPORAN KESIMPULAN INVESTIGASI</h2><p>Susun dua jalur perkara secara terpisah. Nama pemilik akun atau tanda tangan pada salinan tidak otomatis membuktikan siapa yang bertindak. Pilihan “Belum dapat dipastikan” diperbolehkan bila bukti belum cukup.</p><section class="question"><h3>01 / VERIFIKASI DATA KESELAMATAN</h3><p>Berapa persen peserta yang menerima dosis mengalami kejadian serius pada data mentah VX-17?</p><form onsubmit="event.preventDefault();submitVerdict();"><input id="finalCode" type="text" inputmode="decimal" autocomplete="off" placeholder="Persentase" value="'+(verified?'25':'')+'"><button class="primary" type="submit">VERIFIKASI DATA</button></form><p id="finalFeedback" class="feedback" role="status">'+(verified?'DATA TERVERIFIKASI · 10 dari 40 peserta.':'')+'</p></section><section class="question" id="finalDevice173"><h3>BARANG BUKTI TERAKHIR · DEVICE-01</h3><p>Periksa HP Farhan dan percakapan yang tersimpan sebelum menyerahkan kesimpulan.</p><button class="primary" type="button" onclick="window.openPhone91()">BUKA HP FARHAN →</button></section><section class="question" id="finalPaperEntry171"><h3>LAPORAN HASIL PENYELIDIKAN</h3><p>Laporan tiga perkara, tanda tangan penyidik, pemeriksaan ICRB, dan penilaian lencana.</p><button class="primary" type="button" onclick="window.openInvestigationPaper140()">BUKA LAPORAN PENYELIDIKAN →</button><p id="reportOpenFeedback173" class="feedback" role="status"></p></section></div>');
+ const verification = verified
+  ? ''
+  : '<section class="question"><h3>01 / VERIFIKASI DATA KESELAMATAN</h3><p>Berapa persen peserta yang menerima dosis mengalami kejadian serius pada data mentah VX-17?</p><form onsubmit="event.preventDefault();submitVerdict();"><input id="finalCode" type="text" inputmode="decimal" autocomplete="off" placeholder="Persentase"><button class="primary" type="submit">VERIFIKASI DATA</button></form><p id="finalFeedback" class="feedback" role="status"></p></section>';
+ const device = verified
+  ? '<section class="question" id="finalDevice173" style="padding:22px;background:#dcd0b5;border:1px solid #b9aa88"><h3>BARANG BUKTI DIPERIKSA · DEVICE-01</h3><p>Ekstrak percakapan telah tersedia dalam arsip penyelidikan.</p><button class="primary" type="button" onclick="window.openPhone91()">LIHAT KEMBALI HP FARHAN</button></section>'
+  : '';
+ const report = verified
+  ? '<section class="question" id="finalPaperEntry171" style="text-align:center;padding:26px;background:#f9f6ed;border:1px solid #c4bda9"><h3>SUDAH YAKIN DENGAN KESIMPULANMU?</h3><p>Seluruh barang bukti telah tersedia. Kini saatnya menentukan pihak yang bertanggung jawab atas tiga perkara. Setiap tuduhan harus didukung bukti.</p><button class="primary" type="button" onclick="window.openInvestigationPaper140()">BUAT LAPORAN PENYELIDIKAN →</button><p id="reportOpenFeedback173" class="feedback" role="status"></p></section>'
+  : '';
+ show('FINAL_VERDICT','<div class="modalcontent"><span class="overline">FINAL INVESTIGATION REPORT / CASE 001</span><h2>LAPORAN KESIMPULAN INVESTIGASI</h2><p>Periksa bukti digital, kemudian susun kesimpulan atas tiga perkara berdasarkan dokumen, keterangan saksi, dan barang bukti.</p>'+verification+device+report+'</div>');
 };
-if(state.verdict)showForensicUnlocked176();
 function saveFinalReport90(){
  const fb=document.getElementById('finalReportFeedback90');
  if(!state.verdict){fb.textContent='Verifikasi data keselamatan pada bagian 01 terlebih dahulu.';return}
