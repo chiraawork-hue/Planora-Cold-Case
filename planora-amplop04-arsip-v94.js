@@ -148,6 +148,24 @@ function formatClinicalCustody(root){
  if(meta)meta.insertAdjacentElement('afterend',report);else root.appendChild(report);
  root.classList.add('structural-document');
 }
+function paperLayoutForensic(root){
+ const report=root.querySelector('.forensic-sheet');
+ const title=root.querySelector('h2');
+ const meta=root.querySelector('.meta');
+ const letterhead=root.querySelector('.letterhead');
+ if(!report||!title||!meta)return;
+ const paper=document.createElement('article');
+ paper.className='forensic-paper';
+ paper.innerHTML='<div class="forensic-paperhead"><span>VEYRA RESEARCH CENTER<br>UNIT REKAYASA STRUKTUR</span><span>STR-FR/0927<br>HALAMAN 01 / DRAF</span></div><p class="forensic-paperline">SALINAN PEMERIKSAAN TEKNIS · 27 SEPTEMBER 2018</p>';
+ (letterhead||title).insertAdjacentElement('beforebegin',paper);
+ if(letterhead)letterhead.remove();
+ paper.appendChild(title);
+ paper.appendChild(meta);
+ paper.appendChild(report);
+ const note=[...root.querySelectorAll('p.small')].find(x=>x.textContent.includes('karya fiksi'));
+ if(note)paper.appendChild(note);
+ root.classList.add('forensic-paper-host');
+}
 function paperLayoutCustody(root){
  const report=root.querySelector('.custody-report');
  const title=root.querySelector('h2');
@@ -210,6 +228,6 @@ window.openDocument=function(id){
  priorOpen(id);
  if(!original[id])return;
  const root=document.querySelector('#modalBody .modalcontent');
- if(root){root.classList.add('archive-v94');if(id==='structuralForensic')formatStructuralReport(root);if(id==='clinicalCustody'){formatClinicalCustody(root);paperLayoutCustody(root);}if(id==='card5172')formatCard5172(root);}
+ if(root){root.classList.add('archive-v94');if(id==='structuralForensic'){formatStructuralReport(root);paperLayoutForensic(root);}if(id==='clinicalCustody'){formatClinicalCustody(root);paperLayoutCustody(root);}if(id==='card5172')formatCard5172(root);}
 };
 })();
