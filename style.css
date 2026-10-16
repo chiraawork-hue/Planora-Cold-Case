@@ -307,3 +307,5 @@
 .archive-v94.structural-document .access-card-report .acr-draft small{display:block;font-size:8px}
 .archive-v94.structural-document .access-card-report .acr-footnote{font-size:10px!important;color:#5b5b51;margin:14px 0!important}
 @media(max-width:700px){.archive-v94.structural-document .access-card-report .acr-bottom{grid-template-columns:1fr}.archive-v94.structural-document .access-card-report .acr-ledger,.archive-v94.structural-document .access-card-report .acr-events{font-size:9px!important}.archive-v94.structural-document .access-card-report .acr-ledger td,.archive-v94.structural-document .access-card-report .acr-events td{padding:4px!important}}
+
+.access-card-report .acr-choice{display:inline-flex;align-items:center;gap:7px;margin-right:16px}.access-card-report .acr-box{display:inline-flex;width:19px;height:19px;align-items:center;justify-content:center;border:2px solid #69736c;background:#fff;box-sizing:border-box}.access-card-report .acr-box-checked{border-color:#a83f35;color:#a83f35;font:bold 18px Arial}
