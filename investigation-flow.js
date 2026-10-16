@@ -222,7 +222,7 @@ const rows=[
 ['01:38:22','AUDIT-SVC','TASK_HOLD','SESSION 6F2 / VX17-AUDIT','QUEUED'],
 ['01:38:27','AUDIT-SVC','QUEUE_ACK','JOB-118','OK'],
 ['01:41:06','FS-SVC','FILE_ACCESS','VX17/RAW','OK'],
-['01:46:10','SYS-AUTH','SESSION_IDLE','WS-DIR-02','ACTIVE'],
+['01:46:10','SYS-AUTH','SESSION_IDLE','WS-CLN-02','ACTIVE'],
 ['02:04:18','AUDIT-SVC','REMOTE_REQ','SESSION 6F2 / JOB-118','PENDING'],
 ['02:09:31','SYS-AUTH','SESSION_END','CLN-AUDIT / WS-CLN-02','OK']];
 const table='<div class="rawdata-scroll"><table class="rawtable" style="min-width:720px"><thead><tr><th>TIME (WIB)</th><th>SERVICE</th><th>EVENT</th><th>PROCESS / REFERENCE</th><th>STATE</th></tr></thead><tbody>'+rows.map(row=>'<tr>'+row.map(v=>'<td>'+v+'</td>').join('')+'</tr>').join('')+'</tbody></table></div>';
