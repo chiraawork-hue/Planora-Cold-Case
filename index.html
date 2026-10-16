@@ -1434,7 +1434,7 @@ PERTANYAAN LANJUTAN:"></textarea>
       if (!paragraph || paragraph.tagName !== "P") return;
       const section = document.createElement("section");
       section.className = "maintenance-section";
-      const lines = paragraph.textContent.split(/\\r?\\n/).map(x=>x.trim()).filter(Boolean);
+      const lines = paragraph.textContent.split(/\r?\n/).map(x=>x.trim()).filter(Boolean);
       const rows = lines.map(line=>line.split("|").map(x=>x.trim()));
       // Source documents may be serialized with literal backslash-n separators.
       // Keep every field in its own table cell, especially event log columns.
@@ -1465,7 +1465,7 @@ PERTANYAAN LANJUTAN:"></textarea>
       heading.before(section);
       section.append(heading,table);
       paragraph.remove();
-    });;
+    });
   }
 
   document.addEventListener("DOMContentLoaded", () => {
