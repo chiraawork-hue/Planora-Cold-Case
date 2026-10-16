@@ -1191,123 +1191,7 @@ PERTANYAAN LANJUTAN:"></textarea>
           if(!win){alert("Izinkan pop-up untuk mencetak sertifikat.");return}
           const printable=sheet.cloneNode(true);
           printable.querySelectorAll("button").forEach(b=>b.remove());
-          win.document.write('<!doctype html><html lang="id"><head><meta charset="utf-8"><title>CASE 001 — Case Resolved</title><style>body{font:14px/1.7 Arial,sans-serif;color:#19332e;padding:30px;max-width:800px;margin:auto}h1,h2{color:#214a3f}article{box-shadow:none!important;border:0!important;max-height:none!important;overflow:visible!important;width:100%!important;padding:0!important}</style></head><body>'+printable.outerHTML+'</body><style>
-/* v163: document-style tabular maintenance register */
-.maintenance-report{background:#f2ecdf!important;border:1px solid #bcb8a9;padding:clamp(16px,3vw,30px)!important}
-.maintenance-report .letterhead{border:0!important;border-bottom:2px solid #677b71!important;border-radius:0!important;background:transparent!important;padding:0 0 14px!important}
-.maintenance-report>h2{background:transparent!important;border:0!important;border-bottom:1px solid #aeb4a9!important;border-radius:0!important;padding:16px 0!important;margin:0 0 12px!important;text-align:center;font-size:clamp(19px,3vw,24px)!important}
-.maintenance-report>.meta{background:transparent!important;border:0!important;border-bottom:1px solid #aeb4a9!important;padding:8px 0 13px!important;font:11px/1.8 ui-monospace,Consolas,monospace!important}
-.maintenance-report .maintenance-section{background:transparent!important;border:0!important;border-radius:0!important;margin:22px 0!important;overflow:visible!important}
-.maintenance-report .maintenance-section>h3{background:transparent!important;border:0!important;border-bottom:1px solid #9daea4!important;padding:0 0 9px!important;margin:0 0 12px!important;font-size:13px!important;letter-spacing:.045em}
-.maintenance-table163{width:100%;border-collapse:collapse;table-layout:auto;font:11px/1.65 ui-monospace,Consolas,monospace;color:#243a34}
-.maintenance-table163 th,.maintenance-table163 td{border:1px solid #b9b7a9;padding:10px 9px;text-align:left;vertical-align:top;overflow-wrap:anywhere}
-.maintenance-table163 th{background:#e1dfd5;font-weight:700}
-.maintenance-table163 tr:nth-child(even) td{background:#eae7de}
-.maintenance-table163 tr:nth-child(odd) td{background:#f7f3e9}
-.maintenance-table163 tr:hover td{background:#e4ede5}
-@media(max-width:600px){.maintenance-report{padding:12px!important}.maintenance-section{overflow-x:auto!important}.maintenance-table163{font-size:10px;min-width:530px}.maintenance-table163 th,.maintenance-table163 td{padding:8px 7px}.maintenance-report .maintenance-section:not(:has(tr:first-child>th:nth-child(3))) .maintenance-table163{min-width:0}}
-</style>
-<style>
-/* v164: larger legible maintenance reconciliation tables */
-.maintenance-report .maintenance-section{background:#f9f7f1!important;border:1px solid #c4c8bf!important;border-radius:8px!important;overflow:hidden!important}
-.maintenance-report .maintenance-section>h3{background:#e8eee8!important;padding:13px 16px!important;margin:0!important;border-bottom:1px solid #b4c2b7!important;color:#204a40!important;font-size:14px!important}
-.maintenance-report .maintenance-table163{width:100%!important;min-width:0!important;border-collapse:collapse!important;table-layout:auto!important;font:13px/1.7 Arial,sans-serif!important;color:#20352f!important}
-.maintenance-report .maintenance-table163 th,.maintenance-report .maintenance-table163 td{border:1px solid #c3c7bf!important;padding:12px 13px!important;text-align:left!important;vertical-align:top!important;overflow-wrap:anywhere!important;white-space:normal!important}
-.maintenance-report .maintenance-table163 tr:first-child th{background:#dfe7df!important;font-size:12px!important;text-transform:uppercase!important;letter-spacing:.035em!important}
-.maintenance-report .maintenance-table163 tr:nth-child(even) td{background:#fffefa!important}
-.maintenance-report .maintenance-table163 tr:nth-child(odd) td{background:#f1f0e9!important}
-.maintenance-report .maintenance-table163 tr:not(:first-child) th{background:#e9ede7!important;width:32%!important}
-.maintenance-report .maintenance-table163 td{font-weight:400!important}
-@media(max-width:680px){.maintenance-report .maintenance-section{overflow-x:auto!important}.maintenance-report .maintenance-table163{min-width:570px!important;font-size:12px!important}.maintenance-report .maintenance-table163 th,.maintenance-report .maintenance-table163 td{padding:10px!important}}
-</style>
-<style>
-/* v168 — distinct archival sheet, like the AR-03 access-log document */
-.maintenance-report{background:transparent!important;border:0!important;padding:20px 26px 30px!important;box-shadow:none!important}
-.maintenance-report>.backfile{margin:0 0 15px!important}
-.maintenance-report .maintenance-sheet168{
-  background:#f4efe3!important;
-  border:1px solid #b8b3a6!important;
-  padding:clamp(19px,3.2vw,34px)!important;
-  box-shadow:0 1px 4px #30291a0c!important;
-  color:#1c302c!important;
-  min-height:700px;
-}
-.maintenance-report .maintenance-sheet168>.letterhead{
-  display:flex!important;
-  align-items:center!important;
-  border:0!important;
-  border-bottom:2px solid #76847b!important;
-  padding:0 0 15px!important;
-  margin:0!important;
-  background:transparent!important;
-}
-.maintenance-report .maintenance-sheet168>.letterhead b{
-  font:700 12px/1.4 Arial,Helvetica,sans-serif!important;
-  letter-spacing:.07em!important;
-}
-.maintenance-report .maintenance-sheet168>.letterhead small{
-  margin-top:4px!important;
-  font:10px/1.4 Arial,Helvetica,sans-serif!important;
-  letter-spacing:.035em!important;
-}
-.maintenance-report .maintenance-internal168{
-  transform:none!important;
-  border:0!important;
-  color:#263c35!important;
-  font:400 13px Arial,Helvetica,sans-serif!important;
-  letter-spacing:0!important;
-}
-.maintenance-report .maintenance-sheet168>h2{
-  text-align:center!important;
-  border:0!important;
-  border-bottom:1px solid #b9b6a9!important;
-  background:transparent!important;
-  border-radius:0!important;
-  padding:20px 0!important;
-  margin:0!important;
-  font:700 clamp(18px,2.4vw,23px)/1.4 Arial,Helvetica,sans-serif!important;
-}
-.maintenance-report .maintenance-sheet168>.meta{
-  border:0!important;
-  border-bottom:1px solid #b9b6a9!important;
-  background:transparent!important;
-  padding:12px 0!important;
-  margin:0 0 24px!important;
-  font:12px/1.8 Arial,Helvetica,sans-serif!important;
-}
-.maintenance-report .maintenance-sheet168 .maintenance-section{
-  border:0!important;
-  background:transparent!important;
-  border-radius:0!important;
-  margin:24px 0 26px!important;
-  overflow:visible!important;
-}
-.maintenance-report .maintenance-sheet168 .maintenance-section>h3{
-  background:transparent!important;
-  border:0!important;
-  border-bottom:1px solid #b9b6a9!important;
-  color:#233831!important;
-  padding:0 0 9px!important;
-  margin:0 0 10px!important;
-  font:700 15px/1.5 Arial,Helvetica,sans-serif!important;
-  letter-spacing:0!important;
-}
-.maintenance-report .maintenance-sheet168 .maintenance-table163{font:13px/1.55 Arial,Helvetica,sans-serif!important}
-.maintenance-report .maintenance-sheet168 .maintenance-table163 th,
-.maintenance-report .maintenance-sheet168 .maintenance-table163 td{padding:10px 11px!important}
-.maintenance-report .maintenance-sheet168 .maintenance-table163 tr:first-child th,
-.maintenance-report .maintenance-sheet168 .maintenance-table163 tr:not(:first-child) th{background:#ded9cb!important}
-@media(max-width:650px){
- .maintenance-report{padding:12px!important}
- .maintenance-report .maintenance-sheet168{padding:15px!important}
- .maintenance-report .maintenance-sheet168 .maintenance-section{overflow-x:auto!important}
-}
-</style>
-<style>
-/* v169: retire the duplicate legacy final report; keep VX-17 verification separate */
-#finalReportForm90{display:none!important}
-</style>
-</html>');
+          win.document.write('<!doctype html><html lang="id"><head><meta charset="utf-8"><title>CASE 001 — Case Resolved</title><style>body{font:14px/1.7 Arial,sans-serif;color:#19332e;padding:30px;max-width:800px;margin:auto}h1,h2{color:#214a3f}article{box-shadow:none!important;border:0!important;max-height:none!important;overflow:visible!important;width:100%!important;padding:0!important}</style></head><body>'+printable.outerHTML+'</body></html>');
           win.document.close();win.focus();win.print();
         };
         try{localStorage.setItem("cc_case_resolved151","yes")}catch(e){}
@@ -1627,4 +1511,121 @@ PERTANYAAN LANJUTAN:"></textarea>
   .maintenance-report .maintenance-section:nth-of-type(4) .maintenance-table163{min-width:0!important}
 }
 </style>
+<style>
+/* v163: document-style tabular maintenance register */
+.maintenance-report{background:#f2ecdf!important;border:1px solid #bcb8a9;padding:clamp(16px,3vw,30px)!important}
+.maintenance-report .letterhead{border:0!important;border-bottom:2px solid #677b71!important;border-radius:0!important;background:transparent!important;padding:0 0 14px!important}
+.maintenance-report>h2{background:transparent!important;border:0!important;border-bottom:1px solid #aeb4a9!important;border-radius:0!important;padding:16px 0!important;margin:0 0 12px!important;text-align:center;font-size:clamp(19px,3vw,24px)!important}
+.maintenance-report>.meta{background:transparent!important;border:0!important;border-bottom:1px solid #aeb4a9!important;padding:8px 0 13px!important;font:11px/1.8 ui-monospace,Consolas,monospace!important}
+.maintenance-report .maintenance-section{background:transparent!important;border:0!important;border-radius:0!important;margin:22px 0!important;overflow:visible!important}
+.maintenance-report .maintenance-section>h3{background:transparent!important;border:0!important;border-bottom:1px solid #9daea4!important;padding:0 0 9px!important;margin:0 0 12px!important;font-size:13px!important;letter-spacing:.045em}
+.maintenance-table163{width:100%;border-collapse:collapse;table-layout:auto;font:11px/1.65 ui-monospace,Consolas,monospace;color:#243a34}
+.maintenance-table163 th,.maintenance-table163 td{border:1px solid #b9b7a9;padding:10px 9px;text-align:left;vertical-align:top;overflow-wrap:anywhere}
+.maintenance-table163 th{background:#e1dfd5;font-weight:700}
+.maintenance-table163 tr:nth-child(even) td{background:#eae7de}
+.maintenance-table163 tr:nth-child(odd) td{background:#f7f3e9}
+.maintenance-table163 tr:hover td{background:#e4ede5}
+@media(max-width:600px){.maintenance-report{padding:12px!important}.maintenance-section{overflow-x:auto!important}.maintenance-table163{font-size:10px;min-width:530px}.maintenance-table163 th,.maintenance-table163 td{padding:8px 7px}.maintenance-report .maintenance-section:not(:has(tr:first-child>th:nth-child(3))) .maintenance-table163{min-width:0}}
+</style>
+<style>
+/* v164: larger legible maintenance reconciliation tables */
+.maintenance-report .maintenance-section{background:#f9f7f1!important;border:1px solid #c4c8bf!important;border-radius:8px!important;overflow:hidden!important}
+.maintenance-report .maintenance-section>h3{background:#e8eee8!important;padding:13px 16px!important;margin:0!important;border-bottom:1px solid #b4c2b7!important;color:#204a40!important;font-size:14px!important}
+.maintenance-report .maintenance-table163{width:100%!important;min-width:0!important;border-collapse:collapse!important;table-layout:auto!important;font:13px/1.7 Arial,sans-serif!important;color:#20352f!important}
+.maintenance-report .maintenance-table163 th,.maintenance-report .maintenance-table163 td{border:1px solid #c3c7bf!important;padding:12px 13px!important;text-align:left!important;vertical-align:top!important;overflow-wrap:anywhere!important;white-space:normal!important}
+.maintenance-report .maintenance-table163 tr:first-child th{background:#dfe7df!important;font-size:12px!important;text-transform:uppercase!important;letter-spacing:.035em!important}
+.maintenance-report .maintenance-table163 tr:nth-child(even) td{background:#fffefa!important}
+.maintenance-report .maintenance-table163 tr:nth-child(odd) td{background:#f1f0e9!important}
+.maintenance-report .maintenance-table163 tr:not(:first-child) th{background:#e9ede7!important;width:32%!important}
+.maintenance-report .maintenance-table163 td{font-weight:400!important}
+@media(max-width:680px){.maintenance-report .maintenance-section{overflow-x:auto!important}.maintenance-report .maintenance-table163{min-width:570px!important;font-size:12px!important}.maintenance-report .maintenance-table163 th,.maintenance-report .maintenance-table163 td{padding:10px!important}}
+</style>
+<style>
+/* v168 — distinct archival sheet, like the AR-03 access-log document */
+.maintenance-report{background:transparent!important;border:0!important;padding:20px 26px 30px!important;box-shadow:none!important}
+.maintenance-report>.backfile{margin:0 0 15px!important}
+.maintenance-report .maintenance-sheet168{
+  background:#f4efe3!important;
+  border:1px solid #b8b3a6!important;
+  padding:clamp(19px,3.2vw,34px)!important;
+  box-shadow:0 1px 4px #30291a0c!important;
+  color:#1c302c!important;
+  min-height:700px;
+}
+.maintenance-report .maintenance-sheet168>.letterhead{
+  display:flex!important;
+  align-items:center!important;
+  border:0!important;
+  border-bottom:2px solid #76847b!important;
+  padding:0 0 15px!important;
+  margin:0!important;
+  background:transparent!important;
+}
+.maintenance-report .maintenance-sheet168>.letterhead b{
+  font:700 12px/1.4 Arial,Helvetica,sans-serif!important;
+  letter-spacing:.07em!important;
+}
+.maintenance-report .maintenance-sheet168>.letterhead small{
+  margin-top:4px!important;
+  font:10px/1.4 Arial,Helvetica,sans-serif!important;
+  letter-spacing:.035em!important;
+}
+.maintenance-report .maintenance-internal168{
+  transform:none!important;
+  border:0!important;
+  color:#263c35!important;
+  font:400 13px Arial,Helvetica,sans-serif!important;
+  letter-spacing:0!important;
+}
+.maintenance-report .maintenance-sheet168>h2{
+  text-align:center!important;
+  border:0!important;
+  border-bottom:1px solid #b9b6a9!important;
+  background:transparent!important;
+  border-radius:0!important;
+  padding:20px 0!important;
+  margin:0!important;
+  font:700 clamp(18px,2.4vw,23px)/1.4 Arial,Helvetica,sans-serif!important;
+}
+.maintenance-report .maintenance-sheet168>.meta{
+  border:0!important;
+  border-bottom:1px solid #b9b6a9!important;
+  background:transparent!important;
+  padding:12px 0!important;
+  margin:0 0 24px!important;
+  font:12px/1.8 Arial,Helvetica,sans-serif!important;
+}
+.maintenance-report .maintenance-sheet168 .maintenance-section{
+  border:0!important;
+  background:transparent!important;
+  border-radius:0!important;
+  margin:24px 0 26px!important;
+  overflow:visible!important;
+}
+.maintenance-report .maintenance-sheet168 .maintenance-section>h3{
+  background:transparent!important;
+  border:0!important;
+  border-bottom:1px solid #b9b6a9!important;
+  color:#233831!important;
+  padding:0 0 9px!important;
+  margin:0 0 10px!important;
+  font:700 15px/1.5 Arial,Helvetica,sans-serif!important;
+  letter-spacing:0!important;
+}
+.maintenance-report .maintenance-sheet168 .maintenance-table163{font:13px/1.55 Arial,Helvetica,sans-serif!important}
+.maintenance-report .maintenance-sheet168 .maintenance-table163 th,
+.maintenance-report .maintenance-sheet168 .maintenance-table163 td{padding:10px 11px!important}
+.maintenance-report .maintenance-sheet168 .maintenance-table163 tr:first-child th,
+.maintenance-report .maintenance-sheet168 .maintenance-table163 tr:not(:first-child) th{background:#ded9cb!important}
+@media(max-width:650px){
+ .maintenance-report{padding:12px!important}
+ .maintenance-report .maintenance-sheet168{padding:15px!important}
+ .maintenance-report .maintenance-sheet168 .maintenance-section{overflow-x:auto!important}
+}
+</style>
+<style>
+/* v169: retire the duplicate legacy final report; keep VX-17 verification separate */
+#finalReportForm90{display:none!important}
+</style>
+
 </html>
