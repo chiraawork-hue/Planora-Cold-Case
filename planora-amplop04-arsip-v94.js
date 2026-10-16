@@ -106,7 +106,7 @@ function formatStructuralReport(root){
  <p><b>Kesimpulan sementara:</b> diperlukan rekonstruksi mekanisme kegagalan dan verifikasi riwayat penanganan peringatan struktur. Dokumen ini tidak menetapkan pihak yang bertanggung jawab atas keputusan operasional.</p>
  <h3>VI. Pemeriksaan lanjutan dan pengesahan</h3>
  <p>Foto dan fragmen C7 perlu diamankan, pengukuran prakejadian diverifikasi, dan dokumen pemeliharaan serta disposisi direkonsiliasi. Pengujian material dan rekonstruksi mekanisme kegagalan masih tertunda.</p>
- <div class="sr-sign"><div><span>Disusun oleh</span><b>Pemeriksa Struktur</b><i>______________________</i></div><div><span>Ditinjau oleh</span><b>Peninjau Teknis</b><i>______________________</i></div></div>
+ <div class="sr-sign"><div><span>Disusun oleh · Unit Rekayasa Struktur</span><b>Pemeriksa teknis: belum dicantumkan pada salinan</b><i>Paraf: ______________________</i></div><div><span>Peninjauan · Pengendalian Mutu Teknik</span><b>Peninjau: belum ditetapkan</b><i>Paraf: ______________________</i></div></div>
  <p class="sr-status">STATUS: DRAF PEMERIKSAAN · BELUM MERUPAKAN KESIMPULAN AKHIR</p>`;
  let node=first;
  while(node){const next=node.nextElementSibling;node.remove();if(node===end)break;node=next;}
