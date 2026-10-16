@@ -849,7 +849,7 @@ openDocument=function(id){
  if(id!=='messages')return previousMessages88(id);
  if(!state.seen.includes(id))state.seen.push(id);persist();render();
  const entries=[
- ['01:37:58','MSG-1841','DIR-ADMIN','AUDIT-OPS','Stop audit.','DELIVERED','VX17-AUDIT'],
+ ['01:37:58','MSG-1841','CLN-AUDIT','AUDIT-OPS','Stop audit.','DELIVERED','VX17-AUDIT'],
  ['01:39:04','MSG-1842','AUDIT-OPS','DIR-ADMIN','Perintah diterima. Mohon nomor otorisasi penghentian.','TIDAK TERSEDIA','RE: VX17-AUDIT'],
  ['01:43:16','MSG-1843','DIR-ADMIN','AUDIT-OPS','Tunda distribusi berkas sampai pemeriksaan selesai.','TIDAK TERSEDIA','RE: VX17-AUDIT']
  ];
