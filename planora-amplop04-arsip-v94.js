@@ -246,6 +246,6 @@ window.openDocument=function(id){
  priorOpen(id);
  if(!original[id])return;
  const root=document.querySelector('#modalBody .modalcontent');
- if(root){root.classList.add('archive-v94');if(id==='structuralForensic'){formatStructuralReport(root);paperLayoutForensic(root);}if(id==='clinicalCustody'){formatClinicalCustody(root);paperLayoutCustody(root);}if(id==='card5172'){formatCard5172(root);paperLayoutCard5172(root);}}
+ if(root){root.classList.add('archive-v94');if(id==='structuralForensic'){formatStructuralReport(root);paperLayoutForensic(root);}if(id==='clinicalCustody'){formatClinicalCustody(root);paperLayoutCustody(root);}if(id==='card5172'){formatCard5172(root);paperLayoutCard5172(root);}if(id==='maintenanceCross'&&window.formatMaintenanceReport)window.formatMaintenanceReport(root);}
 };
 })();
