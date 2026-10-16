@@ -1202,6 +1202,19 @@ PERTANYAAN LANJUTAN:"></textarea>
 .maintenance-table163 tr:hover td{background:#e4ede5}
 @media(max-width:600px){.maintenance-report{padding:12px!important}.maintenance-section{overflow-x:auto!important}.maintenance-table163{font-size:10px;min-width:530px}.maintenance-table163 th,.maintenance-table163 td{padding:8px 7px}.maintenance-report .maintenance-section:not(:has(tr:first-child>th:nth-child(3))) .maintenance-table163{min-width:0}}
 </style>
+<style>
+/* v164: larger legible maintenance reconciliation tables */
+.maintenance-report .maintenance-section{background:#f9f7f1!important;border:1px solid #c4c8bf!important;border-radius:8px!important;overflow:hidden!important}
+.maintenance-report .maintenance-section>h3{background:#e8eee8!important;padding:13px 16px!important;margin:0!important;border-bottom:1px solid #b4c2b7!important;color:#204a40!important;font-size:14px!important}
+.maintenance-report .maintenance-table163{width:100%!important;min-width:0!important;border-collapse:collapse!important;table-layout:auto!important;font:13px/1.7 Arial,sans-serif!important;color:#20352f!important}
+.maintenance-report .maintenance-table163 th,.maintenance-report .maintenance-table163 td{border:1px solid #c3c7bf!important;padding:12px 13px!important;text-align:left!important;vertical-align:top!important;overflow-wrap:anywhere!important;white-space:normal!important}
+.maintenance-report .maintenance-table163 tr:first-child th{background:#dfe7df!important;font-size:12px!important;text-transform:uppercase!important;letter-spacing:.035em!important}
+.maintenance-report .maintenance-table163 tr:nth-child(even) td{background:#fffefa!important}
+.maintenance-report .maintenance-table163 tr:nth-child(odd) td{background:#f1f0e9!important}
+.maintenance-report .maintenance-table163 tr:not(:first-child) th{background:#e9ede7!important;width:32%!important}
+.maintenance-report .maintenance-table163 td{font-weight:400!important}
+@media(max-width:680px){.maintenance-report .maintenance-section{overflow-x:auto!important}.maintenance-report .maintenance-table163{min-width:570px!important;font-size:12px!important}.maintenance-report .maintenance-table163 th,.maintenance-report .maintenance-table163 td{padding:10px!important}}
+</style>
 </html>');
           win.document.close();win.focus();win.print();
         };
@@ -1423,6 +1436,8 @@ PERTANYAAN LANJUTAN:"></textarea>
       section.className = "maintenance-section";
       const lines = paragraph.textContent.split(/\\r?\\n/).map(x=>x.trim()).filter(Boolean);
       const rows = lines.map(line=>line.split("|").map(x=>x.trim()));
+      // Source documents may be serialized with literal backslash-n separators.
+      // Keep every field in its own table cell, especially event log columns.
       const table = document.createElement("table");
       table.className = "maintenance-table163";
       const isEvent = /EKSPOR PERISTIWA/i.test(heading.textContent);
