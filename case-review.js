@@ -138,7 +138,7 @@ function closeReviewPopup(){document.getElementById('reviewPopupOverlay')?.remov
    if(!box)return;
    const opened=localStorage.getItem('cc_phone91')==='open';
    if(!state.verdict&&!opened){box.style.display='none';return}
-   if(!opened){box.style.display='none';return}
+   if(!opened){box.style.display='';return}
    box.style.display='';
    box.querySelector('h3').textContent='BARANG BUKTI DIPERIKSA · DEVICE-01';
    box.querySelector('p').textContent='Ekstrak percakapan telah tersedia dalam arsip penyelidikan.';
