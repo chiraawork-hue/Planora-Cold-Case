@@ -309,3 +309,19 @@
 @media(max-width:700px){.archive-v94.structural-document .access-card-report .acr-bottom{grid-template-columns:1fr}.archive-v94.structural-document .access-card-report .acr-ledger,.archive-v94.structural-document .access-card-report .acr-events{font-size:9px!important}.archive-v94.structural-document .access-card-report .acr-ledger td,.archive-v94.structural-document .access-card-report .acr-events td{padding:4px!important}}
 
 .access-card-report .acr-choice{display:inline-flex;align-items:center;gap:7px;margin-right:16px}.access-card-report .acr-box{display:inline-flex;width:19px;height:19px;align-items:center;justify-content:center;border:2px solid #69736c;background:#fff;box-sizing:border-box}.access-card-report .acr-box-checked{border-color:#a83f35;color:#a83f35;font:bold 18px Arial}
+
+/* v128 forensic sheet matching VX-17 risk register */
+.archive-v94.structural-document:has(.forensic-sheet){background:#e9e3d2!important;color:#242c2b}
+.archive-v94.structural-document .forensic-sheet{background:#f6f1e5!important;border:1px solid #c8c0ad!important;padding:26px 27px!important;margin:18px 0!important;color:#222c2b!important;font:13px/1.7 Arial,sans-serif!important}
+.archive-v94.structural-document .forensic-sheet .sr-banner{border-bottom:2px solid #4e655e!important;padding:0 0 14px!important;display:flex!important;justify-content:space-between!important;gap:20px!important;color:#253b36!important;font-size:10px!important;letter-spacing:0!important}
+.archive-v94.structural-document .forensic-sheet .sr-banner strong{font-weight:400!important;text-align:right!important}
+.archive-v94.structural-document .forensic-sheet h3{font:700 14px/1.5 Arial,sans-serif!important;color:#1c2826!important;letter-spacing:0!important;text-transform:none!important;border:0!important;padding:0!important;margin:25px 0 13px!important}
+.archive-v94.structural-document .forensic-sheet p{font:13px/1.85 Arial,sans-serif!important;background:none!important;border:0!important;padding:0!important;margin:13px 0 18px!important;color:#202b29!important}
+.archive-v94.structural-document .forensic-sheet table{width:100%!important;border-collapse:collapse!important;margin:16px 0 22px!important;font:12px/1.55 Arial,sans-serif!important;color:#202b29!important}
+.archive-v94.structural-document .forensic-sheet th,.archive-v94.structural-document .forensic-sheet td{border:1px solid #bcb4a5!important;padding:9px 10px!important;text-align:left!important;vertical-align:top!important;background:transparent!important}
+.archive-v94.structural-document .forensic-sheet thead th{background:#ddd4c1!important;font-weight:700!important}
+.archive-v94.structural-document .forensic-sheet tbody th{background:#eee8da!important;font-weight:700!important}
+.archive-v94.structural-document .forensic-sheet .sr-note{background:#f1eadb!important;border-left:3px solid #9a907e!important;padding:11px 14px!important}
+.archive-v94.structural-document .forensic-sheet .sr-sign{display:grid!important;grid-template-columns:1fr 1fr!important;gap:24px!important;margin:28px 0!important}
+.archive-v94.structural-document .forensic-sheet .sr-status{border-top:1px solid #bdb4a2!important;padding-top:13px!important;color:#5d5a50!important;font-size:10px!important}
+@media(max-width:600px){.archive-v94.structural-document .forensic-sheet{padding:17px 13px!important}.archive-v94.structural-document .forensic-sheet table{font-size:11px!important}.archive-v94.structural-document .forensic-sheet th,.archive-v94.structural-document .forensic-sheet td{padding:6px!important}}
