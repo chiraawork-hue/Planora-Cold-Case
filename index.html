@@ -1298,6 +1298,10 @@ PERTANYAAN LANJUTAN:"></textarea>
  .maintenance-report .maintenance-sheet168 .maintenance-section{overflow-x:auto!important}
 }
 </style>
+<style>
+/* v169: retire the duplicate legacy final report; keep VX-17 verification separate */
+#finalReportForm90{display:none!important}
+</style>
 </html>');
           win.document.close();win.focus();win.print();
         };
@@ -1319,14 +1323,12 @@ PERTANYAAN LANJUTAN:"></textarea>
   window.showVerdict = function () {
     previousShowVerdict140();
 
-    if (!reportAvailable()) return;
+    // Legacy report is superseded by the three-case paper investigation.
+    // Hide it regardless of whether the new report has been unlocked.
+    const form = document.getElementById("finalReportForm90");
+    if (form) form.style.display = "none";
 
-    const form =
-      document.getElementById("finalReportForm90");
-
-    if (!form) return;
-
-    form.style.display = "none";
+    if (!reportAvailable() || !form) return;
 
     if (document.getElementById("paperInvite140")) {
       return;
