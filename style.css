@@ -325,3 +325,16 @@
 .archive-v94.structural-document .forensic-sheet .sr-sign{display:grid!important;grid-template-columns:1fr 1fr!important;gap:24px!important;margin:28px 0!important}
 .archive-v94.structural-document .forensic-sheet .sr-status{border-top:1px solid #bdb4a2!important;padding-top:13px!important;color:#5d5a50!important;font-size:10px!important}
 @media(max-width:600px){.archive-v94.structural-document .forensic-sheet{padding:17px 13px!important}.archive-v94.structural-document .forensic-sheet table{font-size:11px!important}.archive-v94.structural-document .forensic-sheet th,.archive-v94.structural-document .forensic-sheet td{padding:6px!important}}
+
+/* v129: VX-17 custody register uses the same visual system as card 5172 */
+.archive-v94.structural-document .custody-report{font-family:Arial,sans-serif!important;font-size:12px!important;line-height:1.6!important;color:#26322d!important}
+.archive-v94.structural-document .custody-report h3{background:#344e49!important;color:#fff!important;border:1px solid #344e49!important;padding:9px 12px!important;margin:23px 0 0!important;font:700 13px/1.4 Arial,sans-serif!important;letter-spacing:0!important;text-transform:none!important}
+.archive-v94.structural-document .custody-report table{width:100%!important;border-collapse:collapse!important;margin:0 0 13px!important;font:12px/1.5 Arial,sans-serif!important}
+.archive-v94.structural-document .custody-report th,.archive-v94.structural-document .custody-report td{border:1px solid #c2bdae!important;padding:10px 11px!important;text-align:left!important;vertical-align:middle!important;background:transparent!important}
+.archive-v94.structural-document .custody-report thead th{background:#ddd8ca!important;text-align:center!important;font-weight:700!important}
+.archive-v94.structural-document .custody-report tbody th{background:#eae7dc!important;font-weight:700!important}
+.archive-v94.structural-document .custody-report .sr-banner{border-bottom:2px solid #344e49!important;padding:11px 0!important;letter-spacing:.04em!important}
+.archive-v94.structural-document .custody-report .sr-intro{background:#f3efe5!important;border-left:3px solid #617b6e!important;padding:11px 13px!important;margin:15px 0 18px!important}
+.archive-v94.structural-document .custody-report .sr-sign{display:grid!important;grid-template-columns:1fr 1fr!important;gap:18px!important;margin:22px 0!important}
+.archive-v94.structural-document .custody-report .sr-status{display:inline-block!important;border:2px solid #a94b40!important;color:#a94b40!important;padding:7px 12px!important;transform:rotate(-2deg);font-weight:700!important}
+@media(max-width:600px){.archive-v94.structural-document .custody-report th,.archive-v94.structural-document .custody-report td{padding:7px!important}.archive-v94.structural-document .custody-report table{font-size:11px!important}}
