@@ -407,6 +407,9 @@ bapFarhan:{name:'BAP_FM_0919.pdf',person:'FARHAN MAHENDRA',age:'33',role:'Teknis
 ['Apa fungsi kejadian SYNC PULSE?','Itu penanda pengujian yang dapat muncul pada lebih dari satu sistem.'],
 ['Apakah gambar CCTV cukup untuk mengenali wajah?','Tidak pada semua kondisi. Sudut dan mutu gambar membatasi identifikasi.'],
 ['Apakah Anda dapat mengetahui siapa membawa kartu 4418?','Tidak hanya dari log pembaca kartu.'],
+['Dalam log ada SESSION 6F2 / VX17-AUDIT. Apa maksudnya?','6F2 adalah penanda sesi sistem, bukan nama orang. VX17-AUDIT merujuk pada tugas audit. Untuk mengetahui akun yang terhubung, perlu mencocokkan log autentikasi; status antrean sendiri tidak membuktikan tugas dijalankan.'],
+['Apa arti CHANNEL 01 dan CHANNEL 02 dalam kronologi?','Nomor kanal harus dibaca bersama kode perangkatnya. CHANNEL 01 pada STR-C04 berkaitan dengan pembacaan getaran struktur; CHANNEL 02 pada GZ-C02 berkaitan dengan detektor gas Zona C. Angka kanal saja tidak cukup untuk menentukan jenis sensor.'],
+['Apa perbedaan RAISED dan ACTIVE?','RAISED menandai peringatan yang baru dipicu; ACTIVE berarti statusnya masih tercatat aktif. Dua baris itu tidak otomatis berarti dua peristiwa terpisah.'],
 ['Apakah Anda mengubah rekaman asli setelah kejadian?','Saya tidak mencatat perubahan terhadap sumber asli dalam pekerjaan pemeriksaan awal saya. Pernyataan ini dapat diperiksa terhadap log pekerjaan.']
 ]}
 };
