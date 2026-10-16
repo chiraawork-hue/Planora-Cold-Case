@@ -625,6 +625,7 @@ bapElena:{name:'BAP_EP_0919.pdf',person:'ELENA PRAMESWARI',age:'',role:'Kepala K
 ['Siapa yang dapat memeriksa aktivitas kerja Saudara?','Register dokumen keuangan dan log perangkat kantor yang dipakai.'],
 ['Apakah Saudara mengakses AR-03?','Tidak ada kunjungan ke ruang itu yang saya ingat pada malam tersebut.']]}
 };
+for(const w of Object.values(bapTambahan))w.qa.push(...pertanyaanWaktuBAP);
 for(const [id,w] of Object.entries(bapTambahan)){
  docs[id]={name:w.name,title:'BERITA ACARA PEMERIKSAAN — '+w.person,meta:'UNIT INVESTIGASI INTERNAL / 19 SEP 2018',sections:[],callout:''};
  if(!envelopes[2].items.includes(id))envelopes[2].items.push(id);
