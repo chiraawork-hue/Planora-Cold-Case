@@ -113,11 +113,46 @@ function formatStructuralReport(root){
  const meta=root.querySelector('.meta');if(meta)meta.insertAdjacentElement('afterend',report);else root.appendChild(report);
  root.classList.add('structural-document');
 }
+function formatClinicalCustody(root){
+ const headings=[...root.querySelectorAll('h3')];
+ const first=headings.find(h=>h.textContent.trim()==='IDENTITAS REGISTER');
+ const last=headings.find(h=>h.textContent.trim()==='REKONSILIASI 2026');
+ if(!first||!last||!last.nextElementSibling)return;
+ const end=last.nextElementSibling;
+ const report=document.createElement('div');
+ report.className='structural-report custody-report';
+ report.innerHTML=`<div class="sr-banner"><span>VEYRA RESEARCH CENTER / CLINICAL QUALITY ASSURANCE</span><strong>REGISTER PENGENDALIAN DOKUMEN · REVISI 02</strong></div>
+ <p class="sr-intro">Register ini digunakan untuk mencatat lokasi penyimpanan, status pemeriksaan, dan pergerakan dokumen sumber penelitian VX-17. Catatan lokasi berkas tidak dengan sendirinya mengidentifikasi orang yang memindahkannya.</p>
+ <h3>I. Identitas register</h3>
+ <table><tbody><tr><th>Nomor register</th><td>QA-RC/17-0918</td><th>Unit</th><td>Clinical Quality Assurance</td></tr><tr><th>Lokasi induk</th><td>AR-03 / Zona C</td><th>Lokasi salinan</th><td>QA-B/17</td></tr><tr><th>Versi dokumen</th><td>Revisi 02</td><th>Status</th><td>Rekonsiliasi belum selesai</td></tr></tbody></table>
+ <h3>II. Daftar kendali berkas</h3>
+ <p>Daftar berikut menunjukkan berkas yang tercatat pada sistem pengendalian salinan. Status tersedia atau tercatat tidak selalu berarti isi berkas telah diverifikasi.</p>
+ <table><thead><tr><th>Kode berkas</th><th>Deskripsi</th><th>Lokasi register</th><th>Status</th></tr></thead><tbody>
+ <tr><td>VX17-PUB/03</td><td>Map laporan distribusi</td><td>AR-03</td><td>Tersedia</td></tr>
+ <tr><td>VX17-SRC/17</td><td>Lampiran data sumber</td><td>QA-B/17</td><td>Verifikasi tertunda</td></tr>
+ <tr><td>VX17-QA/02</td><td>Dokumen rekonsiliasi</td><td>Clinical QA</td><td>Tercatat</td></tr></tbody></table>
+ <h3>III. Riwayat pemeriksaan dan akses</h3>
+ <table><thead><tr><th>Waktu (WIB)</th><th>Referensi</th><th>Peristiwa tercatat</th></tr></thead><tbody>
+ <tr><td>17 Sep · 16.20</td><td>QA-CHK/0917</td><td>Pemisahan map laporan dan lampiran sumber dicatat dalam pemeriksaan.</td></tr>
+ <tr><td>18 Sep · 01.46</td><td>INV-AR03/18</td><td>Map tersedia, tetapi lampiran tidak ditemukan pada rak yang diperiksa.</td></tr>
+ <tr><td>18 Sep · 02.06</td><td>SEC-AR03/4418</td><td>Pembaca pintu AR-03 menerima akses kartu 4418; identitas pengguna fisik memerlukan verifikasi.</td></tr></tbody></table>
+ <h3>IV. Rekonsiliasi arsip perkara tahun 2026</h3>
+ <table><tbody><tr><th>Referensi pembukaan ulang</th><td>REOPEN/CASE001/QA-04</td></tr><tr><th>Salinan data</th><td>40 entri peserta anonim</td></tr><tr><th>Asal penyimpanan</th><td>Belum terverifikasi</td></tr><tr><th>Identitas pemindah</th><td>Tidak tercatat</td></tr></tbody></table>
+ <h3>V. Catatan pengendalian dan pengesahan</h3>
+ <p>Ketidaksesuaian antara lokasi berkas yang tercatat dan kondisi rak perlu ditelusuri melalui daftar peminjaman, akses ruangan, serta berita acara serah terima. Register ini tidak dapat digunakan sendirian untuk menentukan identitas pengambil dokumen.</p>
+ <div class="sr-sign"><div><span>Petugas rekonsiliasi</span><b>Nama belum dicantumkan pada salinan</b><i>Paraf: __________________</i></div><div><span>Peninjau QA</span><b>Verifikasi belum selesai</b><i>Paraf: __________________</i></div></div>
+ <p class="sr-status">STATUS: REKONSILIASI TERTUNDA · SALINAN ARSIP PERKARA</p>`;
+ let node=first;
+ while(node){const next=node.nextElementSibling;node.remove();if(node===end)break;node=next;}
+ const meta=root.querySelector('.meta');
+ if(meta)meta.insertAdjacentElement('afterend',report);else root.appendChild(report);
+ root.classList.add('structural-document');
+}
 const priorOpen=window.openDocument;
 window.openDocument=function(id){
  priorOpen(id);
  if(!original[id])return;
  const root=document.querySelector('#modalBody .modalcontent');
- if(root){root.classList.add('archive-v94');if(id==='structuralForensic')formatStructuralReport(root);}
+ if(root){root.classList.add('archive-v94');if(id==='structuralForensic')formatStructuralReport(root);if(id==='clinicalCustody')formatClinicalCustody(root);}
 };
 })();
