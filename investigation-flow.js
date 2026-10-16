@@ -445,7 +445,7 @@ show('DENAH_AKSES.pdf','<div class="modalcontent"><button class="backfile" oncli
 };
 
 /* v48 — departmental master reference register, not an investigator's explanation */
-docs.personnelIndex={name:'VRC_MASTER_REFERENCE_REGISTER_REV03.pdf',title:'REGISTER REFERENSI UNIT & PROYEK',meta:'ARSIP CONTROL / REV.03 / 17 SEP 2018',sections:[],callout:''};
+docs.personnelIndex={name:'VRC_MASTER_REFERENCE_REGISTER_REV03.pdf',title:'REGISTER REFERENSI UNIT & PROYEK',meta:'PENGENDALIAN ARSIP / REV.03 / 17 SEP 2018',sections:[],callout:''};
 const previousMasterRegisterOpen=openDocument;
 openDocument=function(id){
 if(id!=='personnelIndex'){previousMasterRegisterOpen(id);return;}
@@ -458,7 +458,7 @@ const records=[
 ['ENG/STR/07','BERKAS','Pemeriksaan elemen struktur','TEKNIK','TERBATAS','16/09/18'],
 ['CLN','KLINIS','Penelitian Klinis','PENELITIAN','AKTIF','01/09/18'],
 ['CLN/VX17','STUDI','Studi pemulihan saraf','KLINIS','AKTIF','04/09/18'],
-['CLN/VX09','ARSIP','Studi pendahulu','KLINIS','ARSIPD','30/08/18'],
+['CLN/VX09','ARSIP','Studi pendahuluan','KLINIS','DIARSIPKAN','30/08/18'],
 ['CLN/RAW/17','BERKAS','Register data primer','KLINIS','TERBATAS','04/09/18'],
 ['OPS','OPERASIONAL','Operasional Fasilitas','OPERASIONAL','AKTIF','01/09/18'],
 ['SEC','KEAMANAN','Operasional Keamanan','KEAMANAN','AKTIF','01/09/18'],
@@ -468,7 +468,7 @@ const records=[
 ['FIN','KEUANGAN','Keuangan & Pengadaan','KEUANGAN','AKTIF','01/09/18']
 ];
 const rows=records.map((r,i)=>'<tr><td>'+String(i+1).padStart(2,'0')+'</td>'+r.map(v=>'<td>'+v+'</td>').join('')+'</tr>').join('');
-const html='<div class="modalcontent"><button class="backfile" onclick="backModal()">← KEMBALI KE BERKAS SEBELUMNYA</button><article class="master-register"><header><strong>VEYRA PENELITIAN CENTER / ARSIP CONTROL</strong><span>SALINAN TERKENDALI · RC-MR-03</span></header><h2>REGISTER REFERENSI UNIT & PROYEK</h2><div class="master-meta"><span>REVISI: 03</span><span>BERLAKU: 17 SEP 2018</span><span>HALAMAN: 01 / 01</span></div><div class="master-scroll"><table><thead><tr><th>NO.</th><th>KODE</th><th>JENIS</th><th>REFERENSI</th><th>UNIT PENANGGUNG JAWAB</th><th>STATUS</th><th>TGL. REVISI</th></tr></thead><tbody>'+rows+'</tbody></table></div><div class="master-approval"><span>DISUSUN OLEH: ARSIP CONTROL</span><span>DISETUJUI: RC / 17 SEP 2018</span></div><footer>VRC / RC-MR-03 / REGISTER REFERENSI TERKENDALI<br>Rekonstruksi fiktif untuk Planora Cold Case.</footer></article></div>';
+const html='<div class="modalcontent"><button class="backfile" onclick="backModal()">← KEMBALI KE BERKAS SEBELUMNYA</button><article class="master-register"><header><strong>VEYRA RESEARCH CENTER / PENGENDALIAN ARSIP</strong><span>SALINAN TERKENDALI · RC-MR-03</span></header><h2>REGISTER REFERENSI UNIT & PROYEK</h2><p class="small">Keterangan status: AKTIF = masih berlaku; RUTIN = pemantauan berkala; TINDAK LANJUT = memerlukan pemeriksaan lanjutan; TERBATAS = akses hanya bagi personel berwenang; DIARSIPKAN = tidak lagi aktif dan disimpan sebagai arsip.</p><div class="master-meta"><span>REVISI: 03</span><span>BERLAKU: 17 SEP 2018</span><span>HALAMAN: 01 / 01</span></div><div class="master-scroll"><table><thead><tr><th>NO.</th><th>KODE</th><th>JENIS</th><th>REFERENSI</th><th>UNIT PENANGGUNG JAWAB</th><th>STATUS</th><th>TGL. REVISI</th></tr></thead><tbody>'+rows+'</tbody></table></div><div class="master-approval"><span>DISUSUN OLEH: PENGENDALIAN ARSIP</span><span>DISETUJUI: RC / 17 SEP 2018</span></div><footer>VRC / RC-MR-03 / REGISTER REFERENSI TERKENDALI<br>Rekonstruksi fiktif untuk Planora Cold Case.</footer></article></div>';
 show('VRC_MASTER_REFERENCE_REGISTER_REV03.pdf',html);
 };
 
