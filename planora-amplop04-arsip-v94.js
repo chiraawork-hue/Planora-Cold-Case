@@ -162,16 +162,25 @@ function formatCard5172(root){
  <div class="acr-identity"><table><tbody><tr><th>Nomor kartu</th><td><b>5172</b></td></tr><tr><th>Jenis akses</th><td>Sementara (temporary)</td></tr><tr><th>Area</th><td>AR-03 / ruang arsip Zona C</td></tr><tr><th>Tiket rujukan</th><td>IT-MNT/0917-04</td></tr><tr><th>Status pengembalian</th><td>Belum tercatat</td></tr></tbody></table>
  <figure><img src="./kartu.png" alt="Dokumentasi kartu akses sementara 5172" loading="lazy"><figcaption>Gambar 1. Dokumentasi kartu akses sementara 5172 (lampiran register).</figcaption></figure></div>
  <h3>2. Buku serah terima</h3>
- <table><thead><tr><th>Tanggal / waktu</th><th>Pemohon tercetak</th><th>Paraf penerima</th><th>Pengembalian</th></tr></thead><tbody><tr><td>17 Sep 2018<br>19:12 WIB</td><td>F. Mahendra</td><td>Tidak terbaca</td><td><b>Belum tercatat</b></td></tr></tbody></table>
- <p class="sr-note">Nama pada kolom pemohon merupakan catatan administratif. Register ini belum memastikan siapa yang memegang kartu secara fisik ketika pintu diakses.</p>
- <h3>3. Ekspor pembaca pintu AR-03</h3>
- <table><thead><tr><th>Waktu server</th><th>Kartu</th><th>Peristiwa</th><th>Status</th></tr></thead><tbody><tr><td>18 Sep · 01:41:26</td><td>5172</td><td>ACCESS_GRANTED</td><td>VALID</td></tr><tr><td>18 Sep · 01:41:29</td><td>—</td><td>CONTACT_OPEN</td><td>OK</td></tr><tr><td>18 Sep · 01:41:46</td><td>—</td><td>CONTACT_CLOSED</td><td>OK</td></tr></tbody></table>
- <p>Ketiga peristiwa berasal dari pencatatan server pembaca pintu. Event CONTACT_OPEN dan CONTACT_CLOSED menunjukkan status kontak pintu, bukan identitas orang yang melintas.</p>
- <h3>4. Rekonsiliasi kartu</h3>
- <table><tbody><tr><th>Pengembalian</th><td>☐ Ya &nbsp;&nbsp; ☒ Belum tercatat</td></tr><tr><th>Pemegang fisik saat akses</th><td>Belum terverifikasi</td></tr><tr><th>Tindak lanjut</th><td>Periksa buku jaga, serah terima kartu, dan rekaman area terkait.</td></tr></tbody></table>
- <h3>5. Pemeriksaan dan pengesahan</h3>
- <div class="sr-sign"><div><span>Petugas Security Control</span><b>Nama: __________________</b><i>Paraf: __________________</i></div><div><span>Peninjau operasional</span><b>Nama: __________________</b><i>Paraf: __________________</i></div></div>
- <p class="sr-status">DRAF REKONSILIASI · BELUM DISAHKAN</p>`;
+ <table class="acr-ledger"><thead><tr><th>Tanggal</th><th>Jam</th><th>Kegiatan</th><th>Pemohon / petugas</th><th>Paraf</th><th>Keterangan</th></tr></thead><tbody>
+ <tr><td>17 Sep 2018</td><td>19:12</td><td>Penerbitan kartu akses sementara</td><td>F. Mahendra<br><small>(Security Control)</small></td><td class="acr-paraf">Tidak terbaca</td><td>Tidak tercatat<br>(penulisan lisan)</td></tr>
+ <tr><td>19 Sep 2018</td><td>—</td><td>Pengembalian kartu akses</td><td>—</td><td>—</td><td><span class="acr-warning">BELUM TERCATAT</span></td></tr>
+ </tbody></table>
+ <h3>3. Log ekspor pembaca pintu (access log)</h3>
+ <table class="acr-events"><thead><tr><th>Tanggal</th><th>Jam</th><th>Kartu</th><th>Event</th><th>Lokasi</th><th>Status</th></tr></thead><tbody>
+ <tr><td>18 Sep 2018</td><td>01:41:26</td><td>5172</td><td>ACCESS_GRANTED</td><td>AR-03 (Pintu Utara)</td><td><span class="acr-ok">VALID</span></td></tr>
+ <tr><td>18 Sep 2018</td><td>01:41:29</td><td>5172</td><td>CONTACT_OPEN</td><td>AR-03 (Pintu Utara)</td><td><span class="acr-ok">OK</span></td></tr>
+ <tr><td>18 Sep 2018</td><td>01:41:46</td><td>5172</td><td>CONTACT_CLOSED</td><td>AR-03 (Pintu Utara)</td><td><span class="acr-ok">OK</span></td></tr>
+ </tbody></table>
+ <div class="acr-bottom">
+ <section><h3>4. Rekonsiliasi kartu</h3><table class="acr-reconcile"><tbody>
+ <tr><th>Kartu dikembalikan</th><td><span class="acr-checkbox">□</span> Ya &nbsp;&nbsp; <span class="acr-check-no">☑</span> Belum tercatat</td></tr>
+ <tr><th>Kondisi fisik</th><td>—</td></tr>
+ <tr><th>Catatan</th><td>Tidak ditemukan catatan pengembalian pada buku serah terima maupun sistem inventaris. Perlu verifikasi lebih lanjut melalui rekaman CCTV dan laporan petugas jaga.</td></tr>
+ </tbody></table></section>
+ <section><h3>5. Pengesahan</h3><table class="acr-approval"><thead><tr><th>Petugas Security Control</th><th>Peninjau operasional</th></tr></thead><tbody><tr><td><div class="acr-signline"></div>Nama : __________________<br>Jabatan : __________________<br>Tanggal : __________________</td><td><div class="acr-signline"></div>Nama : __________________<br>Jabatan : __________________<br>Tanggal : __________________</td></tr></tbody></table><span class="acr-draft">DRAFT<small>BELUM DISAHKAN</small></span></section>
+ </div>
+ <p class="acr-footnote">Catatan: nomor kartu dan peristiwa pembaca pintu tidak memastikan identitas pemegang fisik. Waktu mengikuti server akses.</p>`;
  let node=first;
  while(node){const next=node.nextElementSibling;node.remove();if(node===end)break;node=next;}
  const meta=root.querySelector('.meta');
