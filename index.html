@@ -801,7 +801,12 @@ PERTANYAAN LANJUTAN:"></textarea>
   };
 
   window.openInvestigationPaper140 = function () {
-    if (!reportAvailable()) return;
+    // The report is the next step after opening Final Verdict.
+    // Do not silently block its button because an older phone flag is missing.
+    if (typeof state === "undefined" || state.unlocked < 4) {
+      alert("Buka keempat amplop terlebih dahulu.");
+      return;
+    }
 
     const data = readReport();
 
