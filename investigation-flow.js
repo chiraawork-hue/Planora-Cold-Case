@@ -850,7 +850,7 @@ openDocument=function(id){
  if(!state.seen.includes(id))state.seen.push(id);persist();render();
  const entries=[
  ['01:37:58','MSG-1841','CLN-AUDIT','AUDIT-OPS','Stop audit.','DELIVERED','VX17-AUDIT'],
- ['01:39:04','MSG-1842','AUDIT-OPS','DIR-ADMIN','Perintah diterima. Mohon nomor otorisasi penghentian.','TIDAK TERSEDIA','RE: VX17-AUDIT'],
+ ['01:39:04','MSG-1842','AUDIT-OPS','CLN-AUDIT','Perintah diterima. Mohon nomor otorisasi penghentian.','TIDAK TERSEDIA','RE: VX17-AUDIT'],
  ['01:43:16','MSG-1843','DIR-ADMIN','AUDIT-OPS','Tunda distribusi berkas sampai pemeriksaan selesai.','TIDAK TERSEDIA','RE: VX17-AUDIT']
  ];
  const item=e=>'<div style="display:flex;justify-content:'+(e[2]==='DIR-ADMIN'?'flex-end':'flex-start')+';margin:15px 0"><article style="box-sizing:border-box;max-width:83%;min-width:260px;padding:13px 16px;border:1px solid #b9b2a2;border-radius:8px;background:'+(e[2]==='DIR-ADMIN'?'#dce8df':'#fcf8ef')+';color:#29332e"><div style="display:flex;justify-content:space-between;gap:18px;font-size:11px"><b>'+e[2]+'</b><span>'+e[0]+' WIB</span></div><p style="margin:13px 0;font-size:15px">'+e[4]+'</p><div style="border-top:1px solid #bcb8a9;padding-top:8px;font-size:10px;line-height:1.6">'+e[1]+' · '+e[2]+' → '+e[3]+'<br>'+e[6]+' · '+e[5]+'</div></article></div>';
