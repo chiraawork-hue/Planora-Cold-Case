@@ -105,7 +105,7 @@ docs.gasTelemetry={name:'GAS_DETECTOR_RAW_0918.csv',title:'REKAMAN DETEKTOR GAS 
 docs.auditTerminal={name:'AUDIT_TERMINAL_EVENTS.log',title:'AKTIVITAS TERMINAL AUDIT',meta:'IDENTITY & ACCESS SERVICE / EXTRACT',sections:[['Sistem','Catatan berikut merekam akun dan perangkat, bukan verifikasi biometrik pengguna.'],['Validasi','Untuk menetapkan identitas operator, perlu membandingkan terminal, kartu akses, dan kesaksian.']],callout:'Akun milik seseorang tidak membuktikan orang tersebut sedang mengoperasikannya.'};
 envelopes[0].items.push('gasTelemetry','auditTerminal');
 const facilityEvents=[
-['01:32:14','SYS-AUTH','SESSION_OPEN','DIR-ADMIN / WS-DIR-02','OK'],
+['01:32:14','SYS-AUTH','SESSION_OPEN','CLN-AUDIT / WS-CLN-02','OK'],
 ['01:38:22','AUDIT-SVC','TASK_HOLD','SESSION 6F2 / VX17-AUDIT','QUEUED'],
 ['01:46:10','STR-C04','HEALTH_CHECK','ZONE-C / CHANNEL 01','OK'],
 ['01:57:03','GZ-C02','HEALTH_CHECK','ZONE-C / CHANNEL 02','OK'],
@@ -217,7 +217,7 @@ openDocument=function(id){
 if(id!=='auditTerminal'){previousAuditTerminalDocument(id);return;}
 if(!state.seen.includes(id))state.seen.push(id);persist();render();
 const rows=[
-['01:32:14','SYS-AUTH','SESSION_OPEN','DIR-ADMIN / WS-DIR-02','OK'],
+['01:32:14','SYS-AUTH','SESSION_OPEN','CLN-AUDIT / WS-CLN-02','OK'],
 ['01:34:09','FS-SVC','FILE_ACCESS','VX17/REV-04','OK'],
 ['01:38:22','AUDIT-SVC','TASK_HOLD','SESSION 6F2 / VX17-AUDIT','QUEUED'],
 ['01:38:27','AUDIT-SVC','QUEUE_ACK','JOB-118','OK'],
