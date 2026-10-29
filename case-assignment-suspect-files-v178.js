@@ -1,0 +1,48 @@
+/* Planora Cold Case v178 — opening assignment + distributed suspect evidence */
+(function(){
+'use strict';
+const evidence={
+ adrian:{name:'DIR-ADMIN_AUDIT_HOLD_2018.pdf',title:'REGISTER OTORISASI DIREKSI DAN PENAHANAN AUDIT',meta:'EXECUTIVE CONTROL / 18 SEP 2018',rows:[['01:37:58','DIR-ADMIN','AUDIT_HOLD_REQUEST','QUEUE'],['01:38:22','SESSION 6F2','TASK_HOLD','ACCEPTED'],['01:38:27','JOB-118','QUEUE_ACK','RECORDED'],['01:39:04','AUDIT-OPS','AUTHORIZATION_QUERY','NO RESPONSE IN EXPORT']],note:'Ekspor sistem mencatat akun dan peristiwa; tidak memuat identitas fisik operator.'},
+ nadia:{name:'CLINICAL_QA_REVISION_2018.pdf',title:'LEMBAR REVISI DAN DISTRIBUSI LAPORAN VX-17',meta:'CLINICAL QA / REVISION CONTROL',rows:[['REV-02','PUBLIC SUMMARY','30 SUBJECTS','DISTRIBUTED'],['SRC-17','RAW APPENDIX','40 SUBJECTS','LOCATION UNCONFIRMED'],['SIGN-OFF','N. SANTOSO','REVISION ACKNOWLEDGEMENT','SIGNATURE ON FILE'],['QA-CHK','SOURCE COMPARISON','NOT ATTACHED','PENDING']],note:'Tanda tangan membuktikan persetujuan pada lembar tersebut, bukan dengan sendirinya siapa yang mengubah data.'},
+ raka:{name:'OPS_MAINTENANCE_AUTH_2018.pdf',title:'REGISTER OTORISASI OPERASIONAL DAN WORK ORDER',meta:'OPERATIONS / FACILITY CONTROL',rows:[['IT-MNT/0917-04','AR-03 reader/network','OPS access recorded','STRUCTURE WORK ORDER NOT ATTACHED'],['C7','STRUCTURAL WORK','NO MATCHING WORK ORDER','CHECK LOGBOOK'],['RAW VX-17','RETENTION REQUEST','DELETION REQUEST DISPUTED','SOURCE EMAIL REQUIRED'],['SHIFT LOG','17–18 SEP','HANDOVER INCOMPLETE','OPEN']],note:'Ketiadaan dokumen pada bundel ini belum membuktikan bahwa pekerjaan atau komunikasi tidak pernah terjadi.'},
+ dimas:{name:'C7_INSPECTION_AND_EVACUATION_2018.pdf',title:'REGISTER INSPEKSI STRUKTUR DAN REKOMENDASI EVAKUASI',meta:'ENGINEERING / STR-C7',rows:[['12 SEP','C7','CRACK RECORDED','2.8 mm'],['16 SEP','C7','TEMPORARY EVACUATION RECOMMENDED','SIGNED D. ARGA'],['17 SEP','DIRECTOR REVIEW','RECOMMENDATION NOT APPROVED','DECISION RECORDED'],['18 SEP 02:13','STR-C-04','VIBRATION ALERT','RAW TRACE REQUIRED']],note:'Ukuran retakan dan rekomendasi menunjukkan kondisi yang perlu dinilai, tetapi tidak sendirian menetapkan mekanisme keruntuhan.'},
+ siska:{name:'SECURITY_SHIFT_AND_CCTV_AUDIT_2018.csv',title:'BUKU JAGA DAN REKONSILIASI CCTV',meta:'SECURITY / CAM-AR03',rows:[['CAM-AR03','CLOCK OFFSET','-00:07','CORRECTION REQUIRED'],['01:59 CAMERA','DOOR EVENT','SERVER 02:06','MATCH AFTER OFFSET'],['SEC-POST-2','SHIFT HANDOVER','SIGNATURE MISSING','VERIFY DUTY ROSTER'],['AR03-RDR','CARD EVENT','ACCESS GRANTED','NO FACE ID']],note:'Jam kamera dan log pintu berasal dari sistem berbeda. Rekaman yang tersedia tidak selalu menetapkan identitas orang.'},
+ maya:{name:'VX17_PUBLICATION_APPROVAL_2018.pdf',title:'REGISTER PERSETUJUAN LAPORAN KLINIS VX-17',meta:'CLINICAL TRIALS / REGULATORY SUBMISSION',rows:[['PUB-03','PUBLIC SUMMARY','30 SUBJECTS','APPROVED'],['SRC-17','RAW SUBJECT REGISTER','40 SUBJECTS','APPENDIX NOT IN PACKET'],['SAE SUMMARY','PUBLIC COPY','2 EVENTS','DISTRIBUTED'],['SAE SOURCE','RAW REGISTER','10 EVENTS','RECONCILIATION REQUIRED'],['SIGN-OFF','M. KIRANA','FINAL REPORT APPROVAL','17 SEP 2018']],note:'Perbedaan antarversi memerlukan pemeriksaan riwayat revisi dan distribusi untuk menetapkan siapa yang mengetahui perbedaan tersebut.'},
+ farhan:{name:'IT_DEVICE_MAINTENANCE_LOG_2018.csv',title:'EKSPOR LOG PEMELIHARAAN PERANGKAT DAN AKSES ARSIP',meta:'IT SYSTEMS / IT-MNT-0917-04',rows:[['01:30–02:10','MAINTENANCE WINDOW','AR-03 network/reader','SCHEDULED'],['01:41:26','CARD 5172','ACCESS_GRANTED','READER LOG'],['01:41:29','AR03-RDR','CONTACT_OPEN','DOOR SENSOR'],['02:13','STR-C-04','VIBRATION ABNORMAL','ENGINEERING SENSOR'],['DEVICE ID','NETWORK SESSION','OPERATOR MAPPING','UNRESOLVED']],note:'Tiket mengaitkan nama pemohon dengan jadwal kerja. Log ini belum mengidentifikasi operator fisik pada setiap peristiwa.'},
+ elena:{name:'FACILITY_VENDOR_PAYMENT_RECON_2018.csv',title:'REKONSILIASI PEMBAYARAN VENDOR DAN PEKERJAAN FASILITAS',meta:'FINANCE CONTROL / SEP 2018',rows:[['PO-441','C7 INSPECTION','INVOICE REGISTERED','SITE SIGN-OFF TO CHECK'],['PO-447','NETWORK READER','PAYMENT POSTED','MATCH IT-MNT/0917-04'],['PO-452','EMERGENCY REPAIR','DELIVERY RECEIPT MISSING','PENDING'],['FIN-REV','VENDOR CONFIRMATION','NOT ATTACHED','FOLLOW-UP']],note:'Entri pembayaran bukan bukti otomatis adanya penyelewengan; cocokkan faktur, persetujuan, dan bukti pekerjaan.'}
+};
+const h=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+Object.keys(evidence).forEach(id=>{
+ const e=evidence[id],docId='suspectEvidence_'+id;
+ docs[docId]={name:e.name,title:e.title,meta:e.meta,sections:[['REKAP DATA',e.rows.map(r=>r.join(' | ')).join('\n')],['CATATAN REGISTER',e.note]]};
+});
+const oldOpenSuspect=window.openSuspect;
+window.openSuspect=function(id){
+ oldOpenSuspect(id);
+ const root=document.querySelector('#modalBody .personnel-dossier');
+ if(!root||!evidence[id])return;
+ const e=evidence[id];
+ const panel=document.createElement('section');panel.className='suspect-evidence-index';
+ panel.innerHTML='<div class="archive-rule"></div><div class="overline">LAMPIRAN TERKAIT PERSONEL / DISTRIBUSI BUKTI</div><h3>BERKAS YANG TERKAIT</h3><p>Dokumen berikut terhubung dengan tugas, akses, keputusan, atau catatan administrasi personel ini. Hubungan dokumen tidak otomatis membuktikan kesalahan.</p><button class="suspect-evidence-open" onclick="openDocument(\''+'suspectEvidence_'+id+'\')">BUKA '+h(e.name)+'</button><div class="suspect-evidence-ref">REF: HR/PER • EVIDENCE LINK: '+h(id.toUpperCase())+'</div>';
+ root.appendChild(panel);
+};
+function showAssignment(){
+ if(state.firstOpened||state.assignmentSeen)return;
+ state.assignmentSeen=true;persist();
+ show('SURAT_TUGAS_CASE001',`<div class="modalcontent assignment-letter">
+ <div class="assignment-head"><div class="overline">VEYRA RESEARCH CENTER / UNIT INVESTIGASI KHUSUS</div><h2>SURAT TUGAS PENYIDIK</h2><div>CASE 001 — THE COLLAPSE</div><span class="assignment-stamp">INVESTIGASI AKTIF</span></div>
+ <div class="assignment-meta"><span>NOMOR: VRC/INV/001-2026</span><span>KLASIFIKASI: TERBATAS</span></div>
+ <h3>PERIHAL: KERUNTUHAN ZONA C — 18 SEPTEMBER 2018</h3>
+ <p>Sebelas orang meninggal dalam insiden di Veyra Research Center. Laporan awal menyebut alarm gas, sementara catatan struktur, akses arsip, dan dokumen penelitian VX-17 memunculkan pertanyaan yang belum terjawab. Anda ditugaskan meninjau ulang bukti dan menyusun rekonstruksi yang dapat dipertanggungjawabkan.</p>
+ <h3>LINGKUP PENUGASAN</h3><ol><li>Periksa setiap amplop dan catat fakta yang dapat diverifikasi.</li><li>Susun kronologi dengan mencocokkan waktu kamera, log pintu, sensor, dan catatan sistem.</li><li>Periksa berkas semua tersangka: akses, keputusan, kepentingan, alibi, dan kontradiksi.</li><li>Telusuri perbedaan antara data mentah VX-17 dan laporan yang diedarkan.</li><li>Dalam laporan akhir, pisahkan temuan terverifikasi, inferensi, dan pertanyaan yang belum terjawab.</li></ol>
+ <div class="assignment-warning"><b>PROSEDUR PEMBUKTIAN</b><br>Motif bukan bukti tindakan. Akses bukan bukti kehadiran. Korelasi waktu bukan bukti sebab-akibat. Kesimpulan yang belum dapat dipastikan harus dinyatakan demikian.</div>
+ <div class="assignment-signature">DITUGASKAN OLEH: UNIT INVESTIGASI KHUSUS<br>STATUS: AKTIF / CASE 001</div>
+ <button class="assignment-start" onclick="closeModal();openEnvelope(0)">TERIMA SURAT TUGAS & MULAI INVESTIGASI →</button></div>`);
+}
+const oldRender=window.render;
+window.render=function(){oldRender();if(!state.firstOpened&&!state.assignmentSeen)showAssignment();};
+const oldOpenEnvelope=window.openEnvelope;
+window.openEnvelope=function(i){if(i===0&&!state.firstOpened&& !state.assignmentAccepted){state.assignmentAccepted=true;persist();}oldOpenEnvelope(i);};
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>{if(!state.firstOpened&&!state.assignmentSeen)showAssignment()},{once:true});
+else if(!state.firstOpened&&!state.assignmentSeen)showAssignment();
+})();
